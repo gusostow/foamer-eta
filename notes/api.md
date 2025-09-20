@@ -1,4 +1,4 @@
-Need to select a [GTFS (general transit feed specification)[https://gtfs.org/getting-started/what-is-GTFS/]
+Need to select a [GTFS (general transit feed specification)](https://gtfs.org/getting-started/what-is-GTFS/)
 service to supply data.
 
 GTFS supports schedule data and realtime. Do these need to be integrated on the client side?
@@ -24,9 +24,8 @@ I emailed them begging for more access.
 
 https://api-portal.ridemetro.org/
 
-Free but Houston only. Not sure about it's accuracy compared to Transit App.
-
-I subscribed. API key in uncomitted `.envrc.local`.
+Free but Houston only. Not sure about it's accuracy compared to Transit App. I subscribed.
+API key in uncomitted `.envrc.local`.
 
 Static GTFS data https://metro.resourcespace.com/pages/search.php?search=%21collection241.
 
