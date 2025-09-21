@@ -1,0 +1,403 @@
+# Example trip update from https://api.ridemetro.org/GtfsRealtime/TripUpdates 
+
+TripUpdate {
+    trip: TripDescriptor {
+        trip_id: Some(
+            "11437185",
+        ),
+        route_id: Some(
+            "433",
+        ),
+        direction_id: Some(
+            0,
+        ),
+        start_time: Some(
+            "14:20:00",
+        ),
+        start_date: Some(
+            "20250921",
+        ),
+        schedule_relationship: Some(
+            Scheduled,
+        ),
+        modified_trip: None,
+    },
+    vehicle: Some(
+        VehicleDescriptor {
+            id: Some(
+                "51",
+            ),
+            label: Some(
+                "51",
+            ),
+            license_plate: None,
+            wheelchair_accessible: None,
+        },
+    ),
+    stop_time_update: [
+        StopTimeUpdate {
+            stop_sequence: Some(
+                1,
+            ),
+            stop_id: Some(
+                "50017",
+            ),
+            arrival: Some(
+                StopTimeEvent {
+                    delay: Some(
+                        0,
+                    ),
+                    time: Some(
+                        1758482400,
+                    ),
+                    uncertainty: None,
+                    scheduled_time: None,
+                },
+            ),
+            departure: Some(
+                StopTimeEvent {
+                    delay: Some(
+                        0,
+                    ),
+                    time: Some(
+                        1758482400,
+                    ),
+                    uncertainty: None,
+                    scheduled_time: None,
+                },
+            ),
+            departure_occupancy_status: None,
+            schedule_relationship: Some(
+                Scheduled,
+            ),
+            stop_time_properties: None,
+        },
+        StopTimeUpdate {
+            stop_sequence: Some(
+                2,
+            ),
+            stop_id: Some(
+                "50015",
+            ),
+            arrival: Some(
+                StopTimeEvent {
+                    delay: Some(
+                        -66,
+                    ),
+                    time: Some(
+                        1758482694,
+                    ),
+                    uncertainty: None,
+                    scheduled_time: None,
+                },
+            ),
+            departure: Some(
+                StopTimeEvent {
+                    delay: Some(
+                        -66,
+                    ),
+                    time: Some(
+                        1758482694,
+                    ),
+                    uncertainty: None,
+                    scheduled_time: None,
+                },
+            ),
+            departure_occupancy_status: None,
+            schedule_relationship: Some(
+                Scheduled,
+            ),
+            stop_time_properties: None,
+        },
+        StopTimeUpdate {
+            stop_sequence: Some(
+                3,
+            ),
+            stop_id: Some(
+                "50000",
+            ),
+            arrival: Some(
+                StopTimeEvent {
+                    delay: Some(
+                        -3,
+                    ),
+                    time: Some(
+                        1758482877,
+                    ),
+                    uncertainty: None,
+                    scheduled_time: None,
+                },
+            ),
+            departure: Some(
+                StopTimeEvent {
+                    delay: Some(
+                        -3,
+                    ),
+                    time: Some(
+                        1758482877,
+                    ),
+                    uncertainty: None,
+                    scheduled_time: None,
+                },
+            ),
+            departure_occupancy_status: None,
+            schedule_relationship: Some(
+                Scheduled,
+            ),
+            stop_time_properties: None,
+        },
+        StopTimeUpdate {
+            stop_sequence: Some(
+                4,
+            ),
+            stop_id: Some(
+                "50002",
+            ),
+            arrival: Some(
+                StopTimeEvent {
+                    delay: Some(
+                        9,
+                    ),
+                    time: Some(
+                        1758483009,
+                    ),
+                    uncertainty: None,
+                    scheduled_time: None,
+                },
+            ),
+            departure: Some(
+                StopTimeEvent {
+                    delay: Some(
+                        9,
+                    ),
+                    time: Some(
+                        1758483009,
+                    ),
+                    uncertainty: None,
+                    scheduled_time: None,
+                },
+            ),
+            departure_occupancy_status: None,
+            schedule_relationship: Some(
+                Scheduled,
+            ),
+            stop_time_properties: None,
+        },
+        StopTimeUpdate {
+            stop_sequence: Some(
+                5,
+            ),
+            stop_id: Some(
+                "50004",
+            ),
+            arrival: Some(
+                StopTimeEvent {
+                    delay: Some(
+                        6,
+                    ),
+                    time: Some(
+                        1758483126,
+                    ),
+                    uncertainty: None,
+                    scheduled_time: None,
+                },
+            ),
+            departure: Some(
+                StopTimeEvent {
+                    delay: Some(
+                        6,
+                    ),
+                    time: Some(
+                        1758483126,
+                    ),
+                    uncertainty: None,
+                    scheduled_time: None,
+                },
+            ),
+            departure_occupancy_status: None,
+            schedule_relationship: Some(
+                Scheduled,
+            ),
+            stop_time_properties: None,
+        },
+        StopTimeUpdate {
+            stop_sequence: Some(
+                6,
+            ),
+            stop_id: Some(
+                "50006",
+            ),
+            arrival: Some(
+                StopTimeEvent {
+                    delay: Some(
+                        10,
+                    ),
+                    time: Some(
+                        1758483190,
+                    ),
+                    uncertainty: None,
+                    scheduled_time: None,
+                },
+            ),
+            departure: Some(
+                StopTimeEvent {
+                    delay: Some(
+                        10,
+                    ),
+                    time: Some(
+                        1758483190,
+                    ),
+                    uncertainty: None,
+                    scheduled_time: None,
+                },
+            ),
+            departure_occupancy_status: None,
+            schedule_relationship: Some(
+                Scheduled,
+            ),
+            stop_time_properties: None,
+        },
+        StopTimeUpdate {
+            stop_sequence: Some(
+                7,
+            ),
+            stop_id: Some(
+                "50008",
+            ),
+            arrival: Some(
+                StopTimeEvent {
+                    delay: Some(
+                        3,
+                    ),
+                    time: Some(
+                        1758483303,
+                    ),
+                    uncertainty: None,
+                    scheduled_time: None,
+                },
+            ),
+            departure: Some(
+                StopTimeEvent {
+                    delay: Some(
+                        3,
+                    ),
+                    time: Some(
+                        1758483303,
+                    ),
+                    uncertainty: None,
+                    scheduled_time: None,
+                },
+            ),
+            departure_occupancy_status: None,
+            schedule_relationship: Some(
+                Scheduled,
+            ),
+            stop_time_properties: None,
+        },
+        StopTimeUpdate {
+            stop_sequence: Some(
+                8,
+            ),
+            stop_id: Some(
+                "50010",
+            ),
+            arrival: Some(
+                StopTimeEvent {
+                    delay: Some(
+                        -12,
+                    ),
+                    time: Some(
+                        1758483348,
+                    ),
+                    uncertainty: None,
+                    scheduled_time: None,
+                },
+            ),
+            departure: Some(
+                StopTimeEvent {
+                    delay: Some(
+                        -12,
+                    ),
+                    time: Some(
+                        1758483348,
+                    ),
+                    uncertainty: None,
+                    scheduled_time: None,
+                },
+            ),
+            departure_occupancy_status: None,
+            schedule_relationship: Some(
+                Scheduled,
+            ),
+            stop_time_properties: None,
+        },
+        StopTimeUpdate {
+            stop_sequence: Some(
+                9,
+            ),
+            stop_id: Some(
+                "50012",
+            ),
+            arrival: Some(
+                StopTimeEvent {
+                    delay: Some(
+                        6,
+                    ),
+                    time: Some(
+                        1758483426,
+                    ),
+                    uncertainty: None,
+                    scheduled_time: None,
+                },
+            ),
+            departure: Some(
+                StopTimeEvent {
+                    delay: Some(
+                        6,
+                    ),
+                    time: Some(
+                        1758483426,
+                    ),
+                    uncertainty: None,
+                    scheduled_time: None,
+                },
+            ),
+            departure_occupancy_status: None,
+            schedule_relationship: Some(
+                Scheduled,
+            ),
+            stop_time_properties: None,
+        },
+        StopTimeUpdate {
+            stop_sequence: Some(
+                10,
+            ),
+            stop_id: Some(
+                "13170",
+            ),
+            arrival: Some(
+                StopTimeEvent {
+                    delay: Some(
+                        -66,
+                    ),
+                    time: Some(
+                        1758483714,
+                    ),
+                    uncertainty: None,
+                    scheduled_time: None,
+                },
+            ),
+            departure: None,
+            departure_occupancy_status: None,
+            schedule_relationship: Some(
+                Scheduled,
+            ),
+            stop_time_properties: None,
+        },
+    ],
+    timestamp: Some(
+        1758481566,
+    ),
+    delay: None,
+    trip_properties: None,
+}
