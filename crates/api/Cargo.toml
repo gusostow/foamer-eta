@@ -1,6 +1,11 @@
 [package]
 name = "api"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
 
 [dependencies]
+prost = "0.14"
+prost-types = "0.14"
+
+[build-dependencies]
+prost-build = "0.14"
