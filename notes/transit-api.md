@@ -1,0 +1,58 @@
+https://api-doc.transitapp.com/
+
+I emailed Transit and they removed the monthly limit from my API key (saved in .envrc.local).
+
+This looks substantially easier to work with than ride-metro.
+- Server-side filtering
+- Tell you nearby stops directly
+- JSON
+
+Logic
+
+- `/public/nearby_stops` Refresh nearby stops only when booted, or when reconnected to network?
+- Poll `public/stop_departures`
+  - What data needs to be included, starting with less obvious
+    - `is_real_time`
+    - `route_color`
+    - Alert granularity?
+  - What data needs to be join in for the display. My departure time endpoint should be
+    - It seems like this has pretty much everything!
+  denormalized but as minimal as possible otherwise.
+
+
+Example call to nearby stops
+
+```
+curl -H "apiKey: $TRANSIT_KEY" https://external.transitapp.com/v3/public/nearby_stops -G -d "max_distance=1000&lat=40.68716&lon=-73.97465"| jq
+```
+
+Then taking an example stop at random from the output
+```json
+{
+  "city_name": "",
+  "distance": 354,
+  "global_stop_id": "MTAS:18774",
+  "location_type": 0,
+  "parent_station": {
+    "city_name": "",
+    "global_stop_id": "MTAS:17558",
+    "location_type": 1,
+    "rt_stop_id": "235",
+    "station_code": "",
+    "station_name": "Atlantic Av-Barclays Ctr"
+  },
+  "parent_station_global_stop_id": "MTAS:17558",
+  "route_type": 1,
+  "rt_stop_id": "D24S",
+  "stop_code": "",
+  "stop_lat": 40.68446057580319,
+  "stop_lon": -73.9768857083957,
+  "stop_name": "Atlantic Av-Barclays Ctr",
+  "wheelchair_boarding": 1
+}
+```
+
+Then get departures with 
+```
+curl -H "apiKey: $TRANSIT_KEY" https://external.transitapp.com/v3/public/stop_departures -G -d "global_stop_id=MTAS:18774"| jq > static/stop-departures-example.json
+```
