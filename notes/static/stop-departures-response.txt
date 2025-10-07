@@ -1,0 +1,1003 @@
+StopDeparturesResponse {
+    route_departures: [
+        Route {
+            global_route_id: "MTAS:2245",
+            itineraries: [
+                Itinerary {
+                    direction_id: 0,
+                    headsign: "96 St",
+                    schedule_items: [
+                        ScheduleItem {
+                            departure_time: 1759835113,
+                            is_cancelled: false,
+                            is_real_time: true,
+                            scheduled_departure_time: 1759834800,
+                            rt_trip_id: Some(
+                                "038900_Q..N",
+                            ),
+                            wheelchair_accessible: Some(
+                                1,
+                            ),
+                            trip_search_key: Some(
+                                "MTAS:49752343:252:1:7",
+                            ),
+                        },
+                        ScheduleItem {
+                            departure_time: 1759835293,
+                            is_cancelled: false,
+                            is_real_time: true,
+                            scheduled_departure_time: 1759835280,
+                            rt_trip_id: Some(
+                                "039700_Q..N",
+                            ),
+                            wheelchair_accessible: Some(
+                                1,
+                            ),
+                            trip_search_key: Some(
+                                "MTAS:49752343:252:1:8",
+                            ),
+                        },
+                        ScheduleItem {
+                            departure_time: 1759835593,
+                            is_cancelled: false,
+                            is_real_time: true,
+                            scheduled_departure_time: 1759835700,
+                            rt_trip_id: Some(
+                                "040450_Q..N",
+                            ),
+                            wheelchair_accessible: Some(
+                                1,
+                            ),
+                            trip_search_key: Some(
+                                "MTAS:49752343:252:1:9",
+                            ),
+                        },
+                    ],
+                    direction_headsign: Some(
+                        "Manhattan",
+                    ),
+                    merged_headsign: Some(
+                        "96 St",
+                    ),
+                    branch_code: Some(
+                        "",
+                    ),
+                    closest_stop: None,
+                    stops: None,
+                },
+                Itinerary {
+                    direction_id: 1,
+                    headsign: "Coney Island-Stillwell Av",
+                    schedule_items: [
+                        ScheduleItem {
+                            departure_time: 1759834723,
+                            is_cancelled: false,
+                            is_real_time: true,
+                            scheduled_departure_time: 1759834860,
+                            rt_trip_id: Some(
+                                "039150_Q..S",
+                            ),
+                            wheelchair_accessible: Some(
+                                1,
+                            ),
+                            trip_search_key: Some(
+                                "MTAS:49752343:253:1:5",
+                            ),
+                        },
+                        ScheduleItem {
+                            departure_time: 1759835352,
+                            is_cancelled: false,
+                            is_real_time: true,
+                            scheduled_departure_time: 1759835460,
+                            rt_trip_id: Some(
+                                "040150_Q..S",
+                            ),
+                            wheelchair_accessible: Some(
+                                1,
+                            ),
+                            trip_search_key: Some(
+                                "MTAS:49752343:253:1:6",
+                            ),
+                        },
+                        ScheduleItem {
+                            departure_time: 1759835982,
+                            is_cancelled: false,
+                            is_real_time: true,
+                            scheduled_departure_time: 1759836060,
+                            rt_trip_id: Some(
+                                "041150_Q..S",
+                            ),
+                            wheelchair_accessible: Some(
+                                1,
+                            ),
+                            trip_search_key: Some(
+                                "MTAS:49752343:253:1:7",
+                            ),
+                        },
+                    ],
+                    direction_headsign: Some(
+                        "Brooklyn",
+                    ),
+                    merged_headsign: Some(
+                        "Coney Island-Stillwell Av",
+                    ),
+                    branch_code: Some(
+                        "",
+                    ),
+                    closest_stop: None,
+                    stops: None,
+                },
+            ],
+            route_long_name: "Broadway Express",
+            route_short_name: "Q",
+            route_type: 1,
+            route_color: "fccc0a",
+            route_text_color: "000000",
+            alerts: Some(
+                [
+                    ServiceAlert {
+                        effect: "ACCESSIBILITY_ISSUE",
+                        severity: "Warning",
+                        description: "Elevator outage @ DeKalb Av: mezzanine to Brighton Beach, Coney Island, and Bay Ridge-bound platform [Capital Replacement]",
+                        created_at: 1754216400,
+                        informed_entities: [
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2245",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:19643",
+                                ),
+                                rt_trip_id: None,
+                            },
+                        ],
+                        title: Some(
+                            "",
+                        ),
+                    },
+                    ServiceAlert {
+                        effect: "ACCESSIBILITY_ISSUE",
+                        severity: "Warning",
+                        description: "Elevator outage @ DeKalb Av: mezzanine to Manhattan-bound platform [Capital Replacement]",
+                        created_at: 1754216400,
+                        informed_entities: [
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2245",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:19681",
+                                ),
+                                rt_trip_id: None,
+                            },
+                        ],
+                        title: Some(
+                            "",
+                        ),
+                    },
+                    ServiceAlert {
+                        effect: "MODIFIED_SERVICE",
+                        severity: "Info",
+                        description: "<image|mta-subway-q|(Q)|14|1|E6B41E/E5B300> service runs in two sections:\n1. Between 96 St and Atlantic Av-Barclays Ctr [D <image|mta-subway-n|(N)|14|1|E6B41E/E5B300><image|mta-subway-r|(R)|14|1|E6B41E/E5B300> platform)\n2. Between Atlantic Av-Barclays Ctr and Coney Island-Stillwell Av\nTransfer at Atlantic Av-Barclays Ctr to continue your trip\nNote: All trains at 7 Av and Prospect Park board from the Coney Island-bound platform.\n\nWhat's happening?\nWe're replacing tracks\n\n[♿\u{fe0f}] This service change affects one or more ADA accessible stations and these travel alternatives may not be fully accessible. Please contact 511 to plan your trip.",
+                        created_at: 1759741260,
+                        informed_entities: [
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2245",
+                                ),
+                                global_stop_id: None,
+                                rt_trip_id: None,
+                            },
+                        ],
+                        title: Some(
+                            "[Q] runs every 30 minutes between Atlantic Av-Barclays Ctr and Coney Island-Stillwell Av",
+                        ),
+                    },
+                    ServiceAlert {
+                        effect: "ACCESSIBILITY_ISSUE",
+                        severity: "Warning",
+                        description: "Elevator outage @ Times Sq-42 St: 7th Ave & 42 St (SE corner) to mezzanine for service in both directions on all lines [Repair]",
+                        created_at: 1759766640,
+                        informed_entities: [
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2245",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:19598",
+                                ),
+                                rt_trip_id: None,
+                            },
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2245",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:19635",
+                                ),
+                                rt_trip_id: None,
+                            },
+                        ],
+                        title: Some(
+                            "",
+                        ),
+                    },
+                    ServiceAlert {
+                        effect: "ACCESSIBILITY_ISSUE",
+                        severity: "Warning",
+                        description: "Elevator outage @ Atlantic Av-Barclays Ctr: Brooklyn-bound 2/3 platform to mezzanine for access to rest of complex [Capital Replacement]",
+                        created_at: 1759511640,
+                        informed_entities: [
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2245",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:19680",
+                                ),
+                                rt_trip_id: None,
+                            },
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2245",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:19644",
+                                ),
+                                rt_trip_id: None,
+                            },
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2245",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:19594",
+                                ),
+                                rt_trip_id: None,
+                            },
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2245",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:19962",
+                                ),
+                                rt_trip_id: None,
+                            },
+                        ],
+                        title: Some(
+                            "",
+                        ),
+                    },
+                    ServiceAlert {
+                        effect: "ACCESSIBILITY_ISSUE",
+                        severity: "Warning",
+                        description: "Elevator outage @ 14 St-Union Sq: 4th Ave & 14 St (NE corner) to mezzanine for L/N/Q/R/W service in both directions [Capital Replacement]",
+                        created_at: 1758592920,
+                        informed_entities: [
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2245",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:19596",
+                                ),
+                                rt_trip_id: None,
+                            },
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2245",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:19639",
+                                ),
+                                rt_trip_id: None,
+                            },
+                        ],
+                        title: Some(
+                            "",
+                        ),
+                    },
+                    ServiceAlert {
+                        effect: "ACCESSIBILITY_ISSUE",
+                        severity: "Warning",
+                        description: "Elevator outage @ 57 St-7 Av: Mezzanine to platform for southbound NQRW service [Repair]",
+                        created_at: 1759829100,
+                        informed_entities: [
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2245",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:19633",
+                                ),
+                                rt_trip_id: None,
+                            },
+                        ],
+                        title: Some(
+                            "",
+                        ),
+                    },
+                    ServiceAlert {
+                        effect: "ACCESSIBILITY_ISSUE",
+                        severity: "Warning",
+                        description: "Elevator outage @ Coney Island-Stillwell Av: D platform to overpass for access to mezzanine via N platform [Capital Replacement]",
+                        created_at: 1754216400,
+                        informed_entities: [
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2245",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:19582",
+                                ),
+                                rt_trip_id: None,
+                            },
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2245",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:19662",
+                                ),
+                                rt_trip_id: None,
+                            },
+                        ],
+                        title: Some(
+                            "",
+                        ),
+                    },
+                    ServiceAlert {
+                        effect: "ACCESSIBILITY_ISSUE",
+                        severity: "Warning",
+                        description: "Elevator outage @ DeKalb Av: Dekalb Ave & Flatbush Ave (SW corner) and mezzanine for service in both directions [Capital Replacement]",
+                        created_at: 1754216400,
+                        informed_entities: [
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2245",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:19681",
+                                ),
+                                rt_trip_id: None,
+                            },
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2245",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:19643",
+                                ),
+                                rt_trip_id: None,
+                            },
+                        ],
+                        title: Some(
+                            "",
+                        ),
+                    },
+                    ServiceAlert {
+                        effect: "ACCESSIBILITY_ISSUE",
+                        severity: "Warning",
+                        description: "Elevator outage @ Times Sq-42 St: mezzanine to downtown N/Q/R/W platform [Capital Replacement]",
+                        created_at: 1754216400,
+                        informed_entities: [
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2245",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:19635",
+                                ),
+                                rt_trip_id: None,
+                            },
+                        ],
+                        title: Some(
+                            "",
+                        ),
+                    },
+                ],
+            ),
+            route_timezone: Some(
+                "America/New_York",
+            ),
+            route_display_short_name: Some(
+                DisplayShortName {
+                    elements: [
+                        Some(
+                            "mta-subway-q",
+                        ),
+                        Some(
+                            "",
+                        ),
+                        None,
+                    ],
+                    route_name_redundancy: false,
+                    boxed_text: "",
+                },
+            ),
+            compact_display_short_name: Some(
+                DisplayShortName {
+                    elements: [
+                        Some(
+                            "mta-subway-q",
+                        ),
+                        Some(
+                            "",
+                        ),
+                        None,
+                    ],
+                    route_name_redundancy: false,
+                    boxed_text: "",
+                },
+            ),
+            fares: Some(
+                [
+                    Fare {
+                        fare_media_type: 3,
+                        price_min: Price {
+                            currency_code: "HID",
+                            symbol: "$",
+                            text: "$\u{202f}0.00",
+                            value: 0.0,
+                        },
+                        price_max: Price {
+                            currency_code: "HID",
+                            symbol: "$",
+                            text: "$\u{202f}0.00",
+                            value: 0.0,
+                        },
+                    },
+                ],
+            ),
+            route_network_name: Some(
+                "NYC Subway",
+            ),
+            route_network_id: Some(
+                "NYC Subway|NYC",
+            ),
+            tts_long_name: Some(
+                "Broadway Express",
+            ),
+            tts_short_name: Some(
+                "Q train",
+            ),
+            sorting_key: Some(
+                "N1",
+            ),
+            mode_name: Some(
+                "Subway",
+            ),
+            real_time_route_id: Some(
+                "Q",
+            ),
+            vehicle: Some(
+                Vehicle {
+                    name: Some(
+                        "train",
+                    ),
+                    name_inflection: Some(
+                        "n",
+                    ),
+                    image: Some(
+                        "vehicle-rail-r46",
+                    ),
+                },
+            ),
+        },
+        Route {
+            global_route_id: "MTAS:2235",
+            itineraries: [
+                Itinerary {
+                    direction_id: 0,
+                    headsign: "Bedford Park Blvd",
+                    schedule_items: [
+                        ScheduleItem {
+                            departure_time: 1759835023,
+                            is_cancelled: false,
+                            is_real_time: true,
+                            scheduled_departure_time: 1759835040,
+                            rt_trip_id: Some(
+                                "040350_B..N",
+                            ),
+                            wheelchair_accessible: Some(
+                                1,
+                            ),
+                            trip_search_key: Some(
+                                "MTAS:49752343:171:1:5",
+                            ),
+                        },
+                        ScheduleItem {
+                            departure_time: 1759835405,
+                            is_cancelled: false,
+                            is_real_time: true,
+                            scheduled_departure_time: 1759835520,
+                            rt_trip_id: Some(
+                                "041100_B..N",
+                            ),
+                            wheelchair_accessible: Some(
+                                1,
+                            ),
+                            trip_search_key: Some(
+                                "MTAS:49752343:171:1:6",
+                            ),
+                        },
+                        ScheduleItem {
+                            departure_time: 1759835970,
+                            is_cancelled: false,
+                            is_real_time: true,
+                            scheduled_departure_time: 1759836000,
+                            rt_trip_id: Some(
+                                "041900_B..N",
+                            ),
+                            wheelchair_accessible: Some(
+                                1,
+                            ),
+                            trip_search_key: Some(
+                                "MTAS:49752343:171:1:7",
+                            ),
+                        },
+                    ],
+                    direction_headsign: Some(
+                        "The Bronx",
+                    ),
+                    merged_headsign: Some(
+                        "Bedford Park Blvd",
+                    ),
+                    branch_code: Some(
+                        "",
+                    ),
+                    closest_stop: None,
+                    stops: None,
+                },
+                Itinerary {
+                    direction_id: 1,
+                    headsign: "Brighton Beach",
+                    schedule_items: [
+                        ScheduleItem {
+                            departure_time: 1759835032,
+                            is_cancelled: false,
+                            is_real_time: true,
+                            scheduled_departure_time: 1759834320,
+                            rt_trip_id: Some(
+                                "035500_B..S",
+                            ),
+                            wheelchair_accessible: Some(
+                                1,
+                            ),
+                            trip_search_key: Some(
+                                "MTAS:49752343:170:1:3",
+                            ),
+                        },
+                        ScheduleItem {
+                            departure_time: 1759835790,
+                            is_cancelled: false,
+                            is_real_time: true,
+                            scheduled_departure_time: 1759834920,
+                            rt_trip_id: Some(
+                                "036600_B..S",
+                            ),
+                            wheelchair_accessible: Some(
+                                1,
+                            ),
+                            trip_search_key: Some(
+                                "MTAS:49752343:170:1:4",
+                            ),
+                        },
+                        ScheduleItem {
+                            departure_time: 1759836283,
+                            is_cancelled: false,
+                            is_real_time: true,
+                            scheduled_departure_time: 1759835520,
+                            rt_trip_id: Some(
+                                "037500_B..S",
+                            ),
+                            wheelchair_accessible: Some(
+                                1,
+                            ),
+                            trip_search_key: Some(
+                                "MTAS:49752343:170:1:5",
+                            ),
+                        },
+                    ],
+                    direction_headsign: Some(
+                        "Brooklyn",
+                    ),
+                    merged_headsign: Some(
+                        "Brighton Beach",
+                    ),
+                    branch_code: Some(
+                        "",
+                    ),
+                    closest_stop: None,
+                    stops: None,
+                },
+            ],
+            route_long_name: "6 Avenue Express",
+            route_short_name: "B",
+            route_type: 1,
+            route_color: "ff6319",
+            route_text_color: "ffffff",
+            alerts: Some(
+                [
+                    ServiceAlert {
+                        effect: "ACCESSIBILITY_ISSUE",
+                        severity: "Warning",
+                        description: "Elevator outage @ 161 St-Yankee Stadium: mezzanine to Manhattan-bound B/D platform [Capital Replacement]",
+                        created_at: 1754216400,
+                        informed_entities: [
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2235",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:18753",
+                                ),
+                                rt_trip_id: None,
+                            },
+                        ],
+                        title: Some(
+                            "",
+                        ),
+                    },
+                    ServiceAlert {
+                        effect: "SIGNIFICANT_DELAYS",
+                        severity: "Warning",
+                        description: "Downtown [B][C] trains are running with delays while we address a signal problem at 72 St.",
+                        created_at: 1759833060,
+                        informed_entities: [
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2235",
+                                ),
+                                global_stop_id: None,
+                                rt_trip_id: None,
+                            },
+                        ],
+                        title: Some(
+                            "Significant Delays",
+                        ),
+                    },
+                    ServiceAlert {
+                        effect: "UNKNOWN_EFFECT",
+                        severity: "Warning",
+                        description: "<image|mta-subway-b|(B)|14|1|D96200/D96200> service operates weekday rush hours, middays and evenings.",
+                        created_at: 1759741260,
+                        informed_entities: [
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2235",
+                                ),
+                                global_stop_id: None,
+                                rt_trip_id: None,
+                            },
+                        ],
+                        title: Some(
+                            "Take the [A][C][D][Q] instead",
+                        ),
+                    },
+                    ServiceAlert {
+                        effect: "ACCESSIBILITY_ISSUE",
+                        severity: "Warning",
+                        description: "Elevator outage @ 161 St-Yankee Stadium: 161 St & River Ave (NE corner) to mezzanine to reach 4/B/D service in both directions [Capital Replacement]",
+                        created_at: 1754216400,
+                        informed_entities: [
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2235",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:18810",
+                                ),
+                                rt_trip_id: None,
+                            },
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2235",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:18753",
+                                ),
+                                rt_trip_id: None,
+                            },
+                        ],
+                        title: Some(
+                            "",
+                        ),
+                    },
+                    ServiceAlert {
+                        effect: "ACCESSIBILITY_ISSUE",
+                        severity: "Warning",
+                        description: "Elevator outage @ 161 St-Yankee Stadium: mezzanine to B/D platform for Bedford Pk Blvd and Norwood 205 St-bound service [Capital Replacement]",
+                        created_at: 1754216400,
+                        informed_entities: [
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2235",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:18810",
+                                ),
+                                rt_trip_id: None,
+                            },
+                        ],
+                        title: Some(
+                            "",
+                        ),
+                    },
+                    ServiceAlert {
+                        effect: "ACCESSIBILITY_ISSUE",
+                        severity: "Warning",
+                        description: "Elevator outage @ DeKalb Av: mezzanine to Manhattan-bound platform [Capital Replacement]",
+                        created_at: 1754216400,
+                        informed_entities: [
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2235",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:18790",
+                                ),
+                                rt_trip_id: None,
+                            },
+                        ],
+                        title: Some(
+                            "",
+                        ),
+                    },
+                    ServiceAlert {
+                        effect: "ACCESSIBILITY_ISSUE",
+                        severity: "Warning",
+                        description: "Elevator outage @ W 4 St-Wash Sq: uptown A/C/E platform to transfer mezzanine and uptown B/D/F/M platform [Capital Replacement]",
+                        created_at: 1759197660,
+                        informed_entities: [
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2235",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:18793",
+                                ),
+                                rt_trip_id: None,
+                            },
+                        ],
+                        title: Some(
+                            "",
+                        ),
+                    },
+                    ServiceAlert {
+                        effect: "ACCESSIBILITY_ISSUE",
+                        severity: "Warning",
+                        description: "Elevator outage @ Atlantic Av-Barclays Ctr: Brooklyn-bound 2/3 platform to mezzanine for access to rest of complex [Capital Replacement]",
+                        created_at: 1754216400,
+                        informed_entities: [
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2235",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:18789",
+                                ),
+                                rt_trip_id: None,
+                            },
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2235",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:18774",
+                                ),
+                                rt_trip_id: None,
+                            },
+                        ],
+                        title: Some(
+                            "",
+                        ),
+                    },
+                    ServiceAlert {
+                        effect: "ACCESSIBILITY_ISSUE",
+                        severity: "Warning",
+                        description: "Elevator outage @ DeKalb Av: Dekalb Ave & Flatbush Ave (SW corner) and mezzanine for service in both directions [Capital Replacement]",
+                        created_at: 1754216400,
+                        informed_entities: [
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2235",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:18790",
+                                ),
+                                rt_trip_id: None,
+                            },
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2235",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:18773",
+                                ),
+                                rt_trip_id: None,
+                            },
+                        ],
+                        title: Some(
+                            "",
+                        ),
+                    },
+                    ServiceAlert {
+                        effect: "ACCESSIBILITY_ISSUE",
+                        severity: "Warning",
+                        description: "Elevator outage @ W 4 St-Wash Sq: W 3rd St & 6th Ave (NE corner) to mezzanine for A/C/E service and access to B/D/F/M service [Capital Replacement]",
+                        created_at: 1754216400,
+                        informed_entities: [
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2235",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:18793",
+                                ),
+                                rt_trip_id: None,
+                            },
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2235",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:18770",
+                                ),
+                                rt_trip_id: None,
+                            },
+                        ],
+                        title: Some(
+                            "",
+                        ),
+                    },
+                    ServiceAlert {
+                        effect: "ACCESSIBILITY_ISSUE",
+                        severity: "Warning",
+                        description: "Elevator outage @ 125 St: mezzanine to uptown platform [Capital Replacement]",
+                        created_at: 1754216400,
+                        informed_entities: [
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2235",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:18806",
+                                ),
+                                rt_trip_id: None,
+                            },
+                        ],
+                        title: Some(
+                            "",
+                        ),
+                    },
+                    ServiceAlert {
+                        effect: "ACCESSIBILITY_ISSUE",
+                        severity: "Warning",
+                        description: "Elevator outage @ DeKalb Av: mezzanine to Brighton Beach, Coney Island, and Bay Ridge-bound platform [Capital Replacement]",
+                        created_at: 1754216400,
+                        informed_entities: [
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2235",
+                                ),
+                                global_stop_id: Some(
+                                    "MTAS:18773",
+                                ),
+                                rt_trip_id: None,
+                            },
+                        ],
+                        title: Some(
+                            "",
+                        ),
+                    },
+                    ServiceAlert {
+                        effect: "UNKNOWN_EFFECT",
+                        severity: "Warning",
+                        description: "Please listen carefully to announcements and check the destination displayed on the train before boarding.\n\nWhat's happening?\nWe're replacing tracks",
+                        created_at: 1759741260,
+                        informed_entities: [
+                            InformedEntity {
+                                global_route_id: Some(
+                                    "MTAS:2235",
+                                ),
+                                global_stop_id: None,
+                                rt_trip_id: None,
+                            },
+                        ],
+                        title: Some(
+                            "In Brooklyn, all [B] trains at Brighton Beach board from the Stillwell Av-bound platform",
+                        ),
+                    },
+                ],
+            ),
+            route_timezone: Some(
+                "America/New_York",
+            ),
+            route_display_short_name: Some(
+                DisplayShortName {
+                    elements: [
+                        Some(
+                            "mta-subway-b",
+                        ),
+                        Some(
+                            "",
+                        ),
+                        None,
+                    ],
+                    route_name_redundancy: false,
+                    boxed_text: "",
+                },
+            ),
+            compact_display_short_name: Some(
+                DisplayShortName {
+                    elements: [
+                        Some(
+                            "mta-subway-b",
+                        ),
+                        Some(
+                            "",
+                        ),
+                        None,
+                    ],
+                    route_name_redundancy: false,
+                    boxed_text: "",
+                },
+            ),
+            fares: Some(
+                [
+                    Fare {
+                        fare_media_type: 3,
+                        price_min: Price {
+                            currency_code: "HID",
+                            symbol: "$",
+                            text: "$\u{202f}0.00",
+                            value: 0.0,
+                        },
+                        price_max: Price {
+                            currency_code: "HID",
+                            symbol: "$",
+                            text: "$\u{202f}0.00",
+                            value: 0.0,
+                        },
+                    },
+                ],
+            ),
+            route_network_name: Some(
+                "NYC Subway",
+            ),
+            route_network_id: Some(
+                "NYC Subway|NYC",
+            ),
+            tts_long_name: Some(
+                "6 Avenue Express",
+            ),
+            tts_short_name: Some(
+                "B train",
+            ),
+            sorting_key: Some(
+                "B0",
+            ),
+            mode_name: Some(
+                "Subway",
+            ),
+            real_time_route_id: Some(
+                "B",
+            ),
+            vehicle: Some(
+                Vehicle {
+                    name: Some(
+                        "train",
+                    ),
+                    name_inflection: Some(
+                        "n",
+                    ),
+                    image: Some(
+                        "vehicle-rail-r211",
+                    ),
+                },
+            ),
+        },
+    ],
+}
