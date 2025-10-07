@@ -34,3 +34,56 @@ async fn test_nearby_stops() {
         );
     }
 }
+
+#[tokio::test]
+async fn test_stop_departures() {
+    let client = TransitClient::from_env().expect("Failed to create client from environment");
+
+    // Using global_stop_id from notes/transit-api.md example
+    let result = client.stop_departures("MTAS:18774").await;
+
+    assert!(result.is_ok(), "Request should succeed: {:?}", result.err());
+
+    let response = result.unwrap();
+
+    // Should return at least one route departure
+    assert!(
+        !response.route_departures.is_empty(),
+        "Should have at least one route departure"
+    );
+
+    // Check first route has required fields
+    let first_route = &response.route_departures[0];
+    assert!(!first_route.global_route_id.is_empty(), "Route should have a global_route_id");
+    assert!(!first_route.route_long_name.is_empty(), "Route should have a long name");
+    assert!(!first_route.route_short_name.is_empty(), "Route should have a short name");
+    assert!(!first_route.route_color.is_empty(), "Route should have a color");
+    assert!(!first_route.route_text_color.is_empty(), "Route should have a text color");
+
+    // Check route has itineraries
+    assert!(
+        !first_route.itineraries.is_empty(),
+        "Route should have at least one itinerary"
+    );
+
+    // Check first itinerary has required fields
+    let first_itinerary = &first_route.itineraries[0];
+    assert!(!first_itinerary.headsign.is_empty(), "Itinerary should have a headsign");
+
+    // Check itinerary has schedule items
+    assert!(
+        !first_itinerary.schedule_items.is_empty(),
+        "Itinerary should have at least one schedule item"
+    );
+
+    // Check first schedule item has valid departure times
+    let first_schedule_item = &first_itinerary.schedule_items[0];
+    assert!(
+        first_schedule_item.departure_time > 0,
+        "Schedule item should have a valid departure time"
+    );
+    assert!(
+        first_schedule_item.scheduled_departure_time > 0,
+        "Schedule item should have a valid scheduled departure time"
+    );
+}
