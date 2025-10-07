@@ -52,7 +52,33 @@ Then taking an example stop at random from the output
 }
 ```
 
-Then get departures with 
+Then get departures with
 ```
 curl -H "apiKey: $TRANSIT_KEY" https://external.transitapp.com/v3/public/stop_departures -G -d "global_stop_id=MTAS:18774"| jq > static/stop-departures-example.json
 ```
+
+## StopDeparturesResponse Data Structures
+
+### Main Response Structure
+- **`StopDeparturesResponse`** - Top-level response containing an array of route departures
+
+### Route-related Structs
+- **`Route`** - Represents a transit route with all its properties (color, name, type, network info, itineraries)
+- **`DisplayShortName`** - Visual identity for route display (boxed_text, elements, route_name_redundancy)
+- **`Fare`** - Fare information for a route (fare_media_type, price_min, price_max)
+- **`Price`** - Price details (currency_code, symbol, text, value)
+- **`Vehicle`** - Vehicle information (image, name, name_inflection)
+- **`ServiceAlert`** - Service alerts affecting routes (effect, severity, description, etc.)
+
+### Itinerary-related Structs
+- **`Itinerary`** - Group of trips with same stop pattern and direction (headsign, direction_id, schedule_items, branch_code)
+- **`ScheduleItem`** - Individual departure time with real-time info (departure_time, is_real_time, is_cancelled, rt_trip_id, wheelchair_accessible, trip_search_key)
+
+### Supporting Structs (some already exist)
+- **`Stop`** - Already defined, represents a transit stop
+- **`ParentStation`** - Already defined, station containing a stop
+
+### ID/Reference Types
+- **`GlobalRouteId`** - String type for global route identifiers
+- **`TripSearchKey`** - String type for trip search keys
+- **`DirectionId`** - Integer representing direction (0 or 1)

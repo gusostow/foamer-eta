@@ -2,7 +2,7 @@
 - [x] Set up GTFS protobuf build
 - [x] Call Ride Metro GTFS Realtime from Rust
 - [x] Transit API client boilerplate
-- [ ] Finish Transit API client crate
+- [x] Finish Transit API client crate
 - [ ] Investigate PE local transit to inform parameters / mock-up 
 - [ ] Mock-up
 - [ ] Purchase ESP32-C3 dev board
