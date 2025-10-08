@@ -22,3 +22,6 @@ target
 
 # Environment variables
 .envrc.local
+
+# MacOS
+.DS_STORE
