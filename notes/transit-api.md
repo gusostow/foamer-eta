@@ -54,7 +54,14 @@ Then taking an example stop at random from the output
 
 Then get departures with
 ```
-curl -H "apiKey: $TRANSIT_KEY" https://external.transitapp.com/v3/public/stop_departures -G -d "global_stop_id=MTAS:18774"| jq > static/stop-departures-example.json
+curl -H "apiKey: $TRANSIT_KEY" https://external.transitapp.com/v3/public/stop_departures -G -d "global_stop_id=MTAS:18774"| jq > notes/static/stop-departures-example.json
+```
+
+
+Another option is `/v3/public/nearby_routes` which does both of these in one call.
+
+```
+curl -H "apiKey: $TRANSIT_KEY" https://external.transitapp.com/v3/public/nearby_routes -G -d "max_distance=900&lat=29.72134736791465&lon=-95.38383198936232" | jq > notes/static/nearby-routes-example.json
 ```
 
 ## StopDeparturesResponse Data Structures
@@ -82,3 +89,13 @@ curl -H "apiKey: $TRANSIT_KEY" https://external.transitapp.com/v3/public/stop_de
 - **`GlobalRouteId`** - String type for global route identifiers
 - **`TripSearchKey`** - String type for trip search keys
 - **`DirectionId`** - Integer representing direction (0 or 1)
+
+
+
+Actually scratch a lot of the above; there is a `/v3/public/nearby_routes` endpoint that
+can cut out the need to query nearby_stops and stop_departures.
+
+I'm pretty sure this is new...
+
+I'm going to need to rewrite the client unless there's some reason not to use it. Looks
+pretty good.

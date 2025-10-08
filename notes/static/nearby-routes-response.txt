@@ -1,0 +1,2663 @@
+Ok(
+    NearbyRoutesResponse {
+        routes: [
+            Route {
+                global_route_id: "MTAHC:154571",
+                itineraries: [
+                    Itinerary {
+                        direction_id: 0,
+                        headsign: "Fannin South",
+                        schedule_items: [
+                            ScheduleItem {
+                                departure_time: 1759918200,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759918200,
+                                arrival_time: Some(
+                                    1759918200,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759918200,
+                                ),
+                                rt_trip_id: Some(
+                                    "11442080",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:292:3:3",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759918560,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759918560,
+                                arrival_time: Some(
+                                    1759918560,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759918560,
+                                ),
+                                rt_trip_id: Some(
+                                    "11442153",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:292:3:4",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759918920,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759918920,
+                                arrival_time: Some(
+                                    1759918920,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759918920,
+                                ),
+                                rt_trip_id: Some(
+                                    "11442081",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:292:3:5",
+                                ),
+                            },
+                        ],
+                        direction_headsign: Some(
+                            "Southbound",
+                        ),
+                        merged_headsign: Some(
+                            "South to Fannin South",
+                        ),
+                        branch_code: Some(
+                            "",
+                        ),
+                        closest_stop: Some(
+                            Stop {
+                                city_name: "",
+                                distance: None,
+                                global_stop_id: "MTAHC:62528",
+                                location_type: 0,
+                                parent_station: None,
+                                parent_station_global_stop_id: None,
+                                route_type: 0,
+                                rt_stop_id: "25016",
+                                stop_code: "25016",
+                                stop_lat: 29.72474042286203,
+                                stop_lon: -95.38909135865332,
+                                stop_name: "Museum District Station SB",
+                                wheelchair_boarding: 1,
+                            },
+                        ),
+                        stops: None,
+                    },
+                    Itinerary {
+                        direction_id: 1,
+                        headsign: "North Line TC",
+                        schedule_items: [
+                            ScheduleItem {
+                                departure_time: 1759918080,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759918080,
+                                arrival_time: Some(
+                                    1759918080,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759918080,
+                                ),
+                                rt_trip_id: Some(
+                                    "11442333",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:293:3:14",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759918440,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759918440,
+                                arrival_time: Some(
+                                    1759918440,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759918440,
+                                ),
+                                rt_trip_id: Some(
+                                    "11442256",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:293:3:15",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759918800,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759918800,
+                                arrival_time: Some(
+                                    1759918800,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759918800,
+                                ),
+                                rt_trip_id: Some(
+                                    "11442334",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:293:3:16",
+                                ),
+                            },
+                        ],
+                        direction_headsign: Some(
+                            "Northbound",
+                        ),
+                        merged_headsign: Some(
+                            "North to North Line TC",
+                        ),
+                        branch_code: Some(
+                            "",
+                        ),
+                        closest_stop: Some(
+                            Stop {
+                                city_name: "",
+                                distance: None,
+                                global_stop_id: "MTAHC:62543",
+                                location_type: 0,
+                                parent_station: None,
+                                parent_station_global_stop_id: None,
+                                route_type: 0,
+                                rt_stop_id: "25015",
+                                stop_code: "25015",
+                                stop_lat: 29.7243267355077,
+                                stop_lon: -95.38816505870776,
+                                stop_name: "Museum District Station NB",
+                                wheelchair_boarding: 1,
+                            },
+                        ),
+                        stops: None,
+                    },
+                ],
+                route_long_name: "Metrorail Red Line",
+                route_short_name: "Red",
+                route_type: 0,
+                route_color: "e41937",
+                route_text_color: "ffffff",
+                alerts: Some(
+                    [
+                        ServiceAlert {
+                            effect: "UNKNOWN_EFFECT",
+                            severity: "Warning",
+                            description: "METRORail Purple and Green Line maintenance is ahead of schedule! Both lines will be running normally by 8 p.m. before the UH game ends. Red Line shutdown continues as planned for work outside Downtown. Thanks for your patience as we keep Houston moving.",
+                            created_at: 1759624260,
+                            informed_entities: [
+                                InformedEntity {
+                                    global_route_id: Some(
+                                        "MTAHC:154571",
+                                    ),
+                                    global_stop_id: None,
+                                    rt_trip_id: None,
+                                },
+                            ],
+                            title: Some(
+                                "Maintenance",
+                            ),
+                        },
+                    ],
+                ),
+                route_timezone: Some(
+                    "America/Chicago",
+                ),
+                route_display_short_name: Some(
+                    DisplayShortName {
+                        elements: [
+                            Some(
+                                "houston-metro-roundel",
+                            ),
+                            Some(
+                                "",
+                            ),
+                            None,
+                        ],
+                        route_name_redundancy: false,
+                        boxed_text: "",
+                    },
+                ),
+                compact_display_short_name: Some(
+                    DisplayShortName {
+                        elements: [
+                            Some(
+                                "dot",
+                            ),
+                            Some(
+                                "",
+                            ),
+                            None,
+                        ],
+                        route_name_redundancy: false,
+                        boxed_text: "",
+                    },
+                ),
+                fares: Some(
+                    [],
+                ),
+                route_network_name: Some(
+                    "METRO",
+                ),
+                route_network_id: Some(
+                    "METRO|Houston",
+                ),
+                tts_long_name: Some(
+                    "Metrorail Red Line",
+                ),
+                tts_short_name: Some(
+                    "red line",
+                ),
+                sorting_key: Some(
+                    "Red",
+                ),
+                mode_name: Some(
+                    "METRORail",
+                ),
+                real_time_route_id: Some(
+                    "700",
+                ),
+                vehicle: Some(
+                    Vehicle {
+                        name: Some(
+                            "vehicle",
+                        ),
+                        name_inflection: Some(
+                            "n",
+                        ),
+                        image: Some(
+                            "trimet",
+                        ),
+                    },
+                ),
+                route_image: Some(
+                    "dot",
+                ),
+            },
+            Route {
+                global_route_id: "MTAHC:5445",
+                itineraries: [
+                    Itinerary {
+                        direction_id: 0,
+                        headsign: "Richey St",
+                        schedule_items: [
+                            ScheduleItem {
+                                departure_time: 1759918080,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759918080,
+                                arrival_time: Some(
+                                    1759918080,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759918080,
+                                ),
+                                rt_trip_id: Some(
+                                    "11417513",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:6:3:0",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759921140,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759921140,
+                                arrival_time: Some(
+                                    1759921140,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759921140,
+                                ),
+                                rt_trip_id: Some(
+                                    "11417514",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:6:3:1",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759922940,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759922940,
+                                arrival_time: Some(
+                                    1759922940,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759922940,
+                                ),
+                                rt_trip_id: Some(
+                                    "11417515",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:6:3:2",
+                                ),
+                            },
+                        ],
+                        direction_headsign: Some(
+                            "Eastbound",
+                        ),
+                        merged_headsign: Some(
+                            "East to Richey St",
+                        ),
+                        branch_code: Some(
+                            "",
+                        ),
+                        closest_stop: Some(
+                            Stop {
+                                city_name: "",
+                                distance: None,
+                                global_stop_id: "MTAHC:64291",
+                                location_type: 0,
+                                parent_station: None,
+                                parent_station_global_stop_id: None,
+                                route_type: 3,
+                                rt_stop_id: "12720",
+                                stop_code: "12720",
+                                stop_lat: 29.72244715600652,
+                                stop_lon: -95.38419006282489,
+                                stop_name: "Binz St / Crawford St",
+                                wheelchair_boarding: 0,
+                            },
+                        ),
+                        stops: None,
+                    },
+                    Itinerary {
+                        direction_id: 1,
+                        headsign: "Wheeler TC",
+                        schedule_items: [
+                            ScheduleItem {
+                                departure_time: 1759919763,
+                                is_cancelled: false,
+                                is_real_time: true,
+                                scheduled_departure_time: 1759919760,
+                                arrival_time: Some(
+                                    1759919763,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759919760,
+                                ),
+                                rt_trip_id: Some(
+                                    "11417563",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:7:3:0",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759922520,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759922520,
+                                arrival_time: Some(
+                                    1759922520,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759922520,
+                                ),
+                                rt_trip_id: Some(
+                                    "11417539",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:7:3:1",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759925460,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759925460,
+                                arrival_time: Some(
+                                    1759925460,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759925460,
+                                ),
+                                rt_trip_id: Some(
+                                    "11417540",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:7:3:2",
+                                ),
+                            },
+                        ],
+                        direction_headsign: Some(
+                            "Westbound",
+                        ),
+                        merged_headsign: Some(
+                            "West to Wheeler TC",
+                        ),
+                        branch_code: Some(
+                            "",
+                        ),
+                        closest_stop: Some(
+                            Stop {
+                                city_name: "",
+                                distance: None,
+                                global_stop_id: "MTAHC:52345",
+                                location_type: 0,
+                                parent_station: None,
+                                parent_station_global_stop_id: None,
+                                route_type: 3,
+                                rt_stop_id: "12721",
+                                stop_code: "12721",
+                                stop_lat: 29.72260903366691,
+                                stop_lon: -95.38418106962152,
+                                stop_name: "Binz St / Crawford St",
+                                wheelchair_boarding: 0,
+                            },
+                        ),
+                        stops: None,
+                    },
+                ],
+                route_long_name: "Southmore",
+                route_short_name: "5",
+                route_type: 3,
+                route_color: "2da646",
+                route_text_color: "ffffff",
+                alerts: Some(
+                    [
+                        ServiceAlert {
+                            effect: "DETOUR",
+                            severity: "Warning",
+                            description: "5 Southmore E/B – Via Hwy. 288 N/B Service Rd., Left Binz, Right Almeda, Right Southmore to regular route.",
+                            created_at: 1755543540,
+                            informed_entities: [
+                                InformedEntity {
+                                    global_route_id: Some(
+                                        "MTAHC:5445",
+                                    ),
+                                    global_stop_id: None,
+                                    rt_trip_id: None,
+                                },
+                            ],
+                            title: Some(
+                                "Route 005 Southmore detoured beginning Sun Dec 15 due to construction.",
+                            ),
+                        },
+                        ServiceAlert {
+                            effect: "DETOUR",
+                            severity: "Warning",
+                            description: "5 Southmore E/B\n\nVia Hwy. 288 N/B Service Rd.,\nL – Binz St\nR – Almeda Rd\nR – Southmore Blvd\nto regular route.",
+                            created_at: 1757943000,
+                            informed_entities: [
+                                InformedEntity {
+                                    global_route_id: Some(
+                                        "MTAHC:5445",
+                                    ),
+                                    global_stop_id: None,
+                                    rt_trip_id: None,
+                                },
+                            ],
+                            title: Some(
+                                "Route 005 Southmore detoured due to construction at 288 Fwy & Binz St",
+                            ),
+                        },
+                    ],
+                ),
+                route_timezone: Some(
+                    "America/Chicago",
+                ),
+                route_display_short_name: Some(
+                    DisplayShortName {
+                        elements: [
+                            None,
+                            Some(
+                                "5",
+                            ),
+                            None,
+                        ],
+                        route_name_redundancy: false,
+                        boxed_text: "",
+                    },
+                ),
+                compact_display_short_name: Some(
+                    DisplayShortName {
+                        elements: [
+                            None,
+                            Some(
+                                "5",
+                            ),
+                            None,
+                        ],
+                        route_name_redundancy: false,
+                        boxed_text: "",
+                    },
+                ),
+                fares: Some(
+                    [],
+                ),
+                route_network_name: Some(
+                    "METRO",
+                ),
+                route_network_id: Some(
+                    "METRO|Houston",
+                ),
+                tts_long_name: Some(
+                    "Southmore",
+                ),
+                tts_short_name: Some(
+                    "5",
+                ),
+                sorting_key: Some(
+                    "5",
+                ),
+                mode_name: Some(
+                    "Bus",
+                ),
+                real_time_route_id: Some(
+                    "005",
+                ),
+                vehicle: Some(
+                    Vehicle {
+                        name: Some(
+                            "bus",
+                        ),
+                        name_inflection: Some(
+                            "n",
+                        ),
+                        image: Some(
+                            "bus-new",
+                        ),
+                    },
+                ),
+                route_image: Some(
+                    "",
+                ),
+            },
+            Route {
+                global_route_id: "MTAHC:5450",
+                itineraries: [
+                    Itinerary {
+                        direction_id: 0,
+                        headsign: "Gellhorn / 610",
+                        schedule_items: [
+                            ScheduleItem {
+                                departure_time: 1759918395,
+                                is_cancelled: false,
+                                is_real_time: true,
+                                scheduled_departure_time: 1759918080,
+                                arrival_time: Some(
+                                    1759918395,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759918080,
+                                ),
+                                rt_trip_id: Some(
+                                    "11418839",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:18:3:1",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759919790,
+                                is_cancelled: false,
+                                is_real_time: true,
+                                scheduled_departure_time: 1759919880,
+                                arrival_time: Some(
+                                    1759919790,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759919880,
+                                ),
+                                rt_trip_id: Some(
+                                    "11418800",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:18:3:2",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759921680,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759921680,
+                                arrival_time: Some(
+                                    1759921680,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759921680,
+                                ),
+                                rt_trip_id: Some(
+                                    "11418801",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:18:3:3",
+                                ),
+                            },
+                        ],
+                        direction_headsign: Some(
+                            "Northbound",
+                        ),
+                        merged_headsign: Some(
+                            "North to Gellhorn & 610",
+                        ),
+                        branch_code: Some(
+                            "",
+                        ),
+                        closest_stop: Some(
+                            Stop {
+                                city_name: "",
+                                distance: None,
+                                global_stop_id: "MTAHC:53097",
+                                location_type: 0,
+                                parent_station: None,
+                                parent_station_global_stop_id: None,
+                                route_type: 3,
+                                rt_stop_id: "10036",
+                                stop_code: "10036",
+                                stop_lat: 29.71961429694972,
+                                stop_lon: -95.3797564135709,
+                                stop_name: "Almeda Rd / Binz St",
+                                wheelchair_boarding: 0,
+                            },
+                        ),
+                        stops: None,
+                    },
+                    Itinerary {
+                        direction_id: 1,
+                        headsign: "Hiram Clarke TC",
+                        schedule_items: [
+                            ScheduleItem {
+                                departure_time: 1759917954,
+                                is_cancelled: false,
+                                is_real_time: true,
+                                scheduled_departure_time: 1759917960,
+                                arrival_time: Some(
+                                    1759917954,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759917960,
+                                ),
+                                rt_trip_id: Some(
+                                    "11418841",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:19:3:1",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759919934,
+                                is_cancelled: false,
+                                is_real_time: true,
+                                scheduled_departure_time: 1759919760,
+                                arrival_time: Some(
+                                    1759919934,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759919760,
+                                ),
+                                rt_trip_id: Some(
+                                    "11418842",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:19:3:2",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759921620,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759921620,
+                                arrival_time: Some(
+                                    1759921620,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759921620,
+                                ),
+                                rt_trip_id: Some(
+                                    "11418843",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:19:3:3",
+                                ),
+                            },
+                        ],
+                        direction_headsign: Some(
+                            "Southbound",
+                        ),
+                        merged_headsign: Some(
+                            "South to Hiram Clarke TC",
+                        ),
+                        branch_code: Some(
+                            "",
+                        ),
+                        closest_stop: Some(
+                            Stop {
+                                city_name: "",
+                                distance: None,
+                                global_stop_id: "MTAHC:53230",
+                                location_type: 0,
+                                parent_station: None,
+                                parent_station_global_stop_id: None,
+                                route_type: 3,
+                                rt_stop_id: "9889",
+                                stop_code: "9889",
+                                stop_lat: 29.71771673104183,
+                                stop_lon: -95.38060177468628,
+                                stop_name: "Almeda Rd / Hermann Dr",
+                                wheelchair_boarding: 0,
+                            },
+                        ),
+                        stops: None,
+                    },
+                ],
+                route_long_name: "Almeda / Lyons",
+                route_short_name: "11",
+                route_type: 3,
+                route_color: "045bae",
+                route_text_color: "ffffff",
+                alerts: Some(
+                    [],
+                ),
+                route_timezone: Some(
+                    "America/Chicago",
+                ),
+                route_display_short_name: Some(
+                    DisplayShortName {
+                        elements: [
+                            None,
+                            Some(
+                                "11",
+                            ),
+                            None,
+                        ],
+                        route_name_redundancy: false,
+                        boxed_text: "",
+                    },
+                ),
+                compact_display_short_name: Some(
+                    DisplayShortName {
+                        elements: [
+                            None,
+                            Some(
+                                "11",
+                            ),
+                            None,
+                        ],
+                        route_name_redundancy: false,
+                        boxed_text: "",
+                    },
+                ),
+                fares: Some(
+                    [],
+                ),
+                route_network_name: Some(
+                    "METRO",
+                ),
+                route_network_id: Some(
+                    "METRO|Houston",
+                ),
+                tts_long_name: Some(
+                    "Almeda / Lyons",
+                ),
+                tts_short_name: Some(
+                    "11",
+                ),
+                sorting_key: Some(
+                    "11",
+                ),
+                mode_name: Some(
+                    "Bus",
+                ),
+                real_time_route_id: Some(
+                    "011",
+                ),
+                vehicle: Some(
+                    Vehicle {
+                        name: Some(
+                            "bus",
+                        ),
+                        name_inflection: Some(
+                            "n",
+                        ),
+                        image: Some(
+                            "bus-new",
+                        ),
+                    },
+                ),
+                route_image: Some(
+                    "",
+                ),
+            },
+            Route {
+                global_route_id: "MTAHC:5540",
+                itineraries: [
+                    Itinerary {
+                        direction_id: 0,
+                        headsign: "West Bellfort / Westwood via Westpark / Lower Uptown TC",
+                        schedule_items: [
+                            ScheduleItem {
+                                departure_time: 1759954680,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759954680,
+                                arrival_time: Some(
+                                    1759954680,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759954680,
+                                ),
+                                rt_trip_id: Some(
+                                    "11435345",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:257:3:0",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759955880,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759955880,
+                                arrival_time: Some(
+                                    1759955880,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759955880,
+                                ),
+                                rt_trip_id: Some(
+                                    "11435346",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:257:3:1",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759956780,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759956780,
+                                arrival_time: Some(
+                                    1759956780,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759956780,
+                                ),
+                                rt_trip_id: Some(
+                                    "11435347",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:257:3:2",
+                                ),
+                            },
+                        ],
+                        direction_headsign: Some(
+                            "Outbound",
+                        ),
+                        merged_headsign: Some(
+                            "Outbound to West Bellfort / Lower Uptown TC",
+                        ),
+                        branch_code: Some(
+                            "",
+                        ),
+                        closest_stop: Some(
+                            Stop {
+                                city_name: "",
+                                distance: None,
+                                global_stop_id: "MTAHC:63154",
+                                location_type: 0,
+                                parent_station: None,
+                                parent_station_global_stop_id: None,
+                                route_type: 3,
+                                rt_stop_id: "10203",
+                                stop_code: "10203",
+                                stop_lat: 29.7256037703841,
+                                stop_lon: -95.38962195765126,
+                                stop_name: "Main St / Binz St",
+                                wheelchair_boarding: 0,
+                            },
+                        ),
+                        stops: None,
+                    },
+                    Itinerary {
+                        direction_id: 1,
+                        headsign: "TMC TC via Westpark / Lower Uptown TC",
+                        schedule_items: [
+                            ScheduleItem {
+                                departure_time: 1759919700,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759919700,
+                                arrival_time: Some(
+                                    1759919700,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759919700,
+                                ),
+                                rt_trip_id: Some(
+                                    "11435361",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:258:3:0",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759921200,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759921200,
+                                arrival_time: Some(
+                                    1759921200,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759921200,
+                                ),
+                                rt_trip_id: Some(
+                                    "11435362",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:258:3:1",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759922160,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759922160,
+                                arrival_time: Some(
+                                    1759922160,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759922160,
+                                ),
+                                rt_trip_id: Some(
+                                    "11435363",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:258:3:2",
+                                ),
+                            },
+                        ],
+                        direction_headsign: Some(
+                            "Inbound",
+                        ),
+                        merged_headsign: Some(
+                            "Inbound to TMC TC via Westpark / Lower Uptown TC",
+                        ),
+                        branch_code: Some(
+                            "",
+                        ),
+                        closest_stop: Some(
+                            Stop {
+                                city_name: "",
+                                distance: None,
+                                global_stop_id: "MTAHC:58371",
+                                location_type: 0,
+                                parent_station: None,
+                                parent_station_global_stop_id: None,
+                                route_type: 3,
+                                rt_stop_id: "11245",
+                                stop_code: "11245",
+                                stop_lat: 29.72618832860217,
+                                stop_lon: -95.3894151139741,
+                                stop_name: "Main St / Bissonnet St",
+                                wheelchair_boarding: 0,
+                            },
+                        ),
+                        stops: None,
+                    },
+                ],
+                route_long_name: "Southwest Freeway / TMC P&R",
+                route_short_name: "292",
+                route_type: 3,
+                route_color: "e28800",
+                route_text_color: "ffffff",
+                alerts: Some(
+                    [
+                        ServiceAlert {
+                            effect: "DETOUR",
+                            severity: "Warning",
+                            description: "Affected direction: Inbound\n292 West Bellfort/Westwood/TMC I/B – Continue Pressler and enter T.M.C./T.C. through Entrance # 1 to regular route.",
+                            created_at: 1755543540,
+                            informed_entities: [
+                                InformedEntity {
+                                    global_route_id: Some(
+                                        "MTAHC:5540",
+                                    ),
+                                    global_stop_id: None,
+                                    rt_trip_id: None,
+                                },
+                            ],
+                            title: Some(
+                                "Route 292 Southwest Freeway / TMC P&R detoured beginning Mon Jun 2 due to construction",
+                            ),
+                        },
+                    ],
+                ),
+                route_timezone: Some(
+                    "America/Chicago",
+                ),
+                route_display_short_name: Some(
+                    DisplayShortName {
+                        elements: [
+                            None,
+                            Some(
+                                "292",
+                            ),
+                            None,
+                        ],
+                        route_name_redundancy: false,
+                        boxed_text: "",
+                    },
+                ),
+                compact_display_short_name: Some(
+                    DisplayShortName {
+                        elements: [
+                            None,
+                            Some(
+                                "292",
+                            ),
+                            None,
+                        ],
+                        route_name_redundancy: false,
+                        boxed_text: "",
+                    },
+                ),
+                fares: Some(
+                    [],
+                ),
+                route_network_name: Some(
+                    "Park & Ride",
+                ),
+                route_network_id: Some(
+                    "Park & Ride|Houston",
+                ),
+                tts_long_name: Some(
+                    "Southwest Freeway / TMC P&R",
+                ),
+                tts_short_name: Some(
+                    "2 92 ",
+                ),
+                sorting_key: Some(
+                    "292",
+                ),
+                mode_name: Some(
+                    "Bus",
+                ),
+                real_time_route_id: Some(
+                    "292",
+                ),
+                vehicle: Some(
+                    Vehicle {
+                        name: Some(
+                            "bus",
+                        ),
+                        name_inflection: Some(
+                            "n",
+                        ),
+                        image: Some(
+                            "bus-new",
+                        ),
+                    },
+                ),
+                route_image: Some(
+                    "",
+                ),
+            },
+            Route {
+                global_route_id: "MTAHC:5480",
+                itineraries: [
+                    Itinerary {
+                        direction_id: 0,
+                        headsign: "Greenspoint TC",
+                        schedule_items: [
+                            ScheduleItem {
+                                departure_time: 1759919400,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759919400,
+                                arrival_time: Some(
+                                    1759919400,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759919400,
+                                ),
+                                rt_trip_id: Some(
+                                    "11426192",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:82:3:2",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759920600,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759920600,
+                                arrival_time: Some(
+                                    1759920600,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759920600,
+                                ),
+                                rt_trip_id: Some(
+                                    "11426095",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:82:3:3",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759921800,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759921800,
+                                arrival_time: Some(
+                                    1759921800,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759921800,
+                                ),
+                                rt_trip_id: Some(
+                                    "11426145",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:82:3:4",
+                                ),
+                            },
+                        ],
+                        direction_headsign: Some(
+                            "Northbound",
+                        ),
+                        merged_headsign: Some(
+                            "North to Greenspoint TC",
+                        ),
+                        branch_code: Some(
+                            "",
+                        ),
+                        closest_stop: Some(
+                            Stop {
+                                city_name: "",
+                                distance: None,
+                                global_stop_id: "MTAHC:57511",
+                                location_type: 0,
+                                parent_station: None,
+                                parent_station_global_stop_id: None,
+                                route_type: 3,
+                                rt_stop_id: "2670",
+                                stop_code: "2670",
+                                stop_lat: 29.72597249172165,
+                                stop_lon: -95.39092597213772,
+                                stop_name: "Montrose Blvd / Bissonnet St",
+                                wheelchair_boarding: 0,
+                            },
+                        ),
+                        stops: None,
+                    },
+                    Itinerary {
+                        direction_id: 1,
+                        headsign: "TMC TC",
+                        schedule_items: [
+                            ScheduleItem {
+                                departure_time: 1759919760,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759919760,
+                                arrival_time: Some(
+                                    1759919760,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759919760,
+                                ),
+                                rt_trip_id: Some(
+                                    "11426296",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:84:3:1",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759922160,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759922160,
+                                arrival_time: Some(
+                                    1759922160,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759922160,
+                                ),
+                                rt_trip_id: Some(
+                                    "11426294",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:84:3:2",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759923360,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759923360,
+                                arrival_time: Some(
+                                    1759923360,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759923360,
+                                ),
+                                rt_trip_id: Some(
+                                    "11426196",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:84:3:3",
+                                ),
+                            },
+                        ],
+                        direction_headsign: Some(
+                            "Southbound",
+                        ),
+                        merged_headsign: Some(
+                            "South to TMC TC",
+                        ),
+                        branch_code: Some(
+                            "",
+                        ),
+                        closest_stop: Some(
+                            Stop {
+                                city_name: "",
+                                distance: None,
+                                global_stop_id: "MTAHC:57741",
+                                location_type: 0,
+                                parent_station: None,
+                                parent_station_global_stop_id: None,
+                                route_type: 3,
+                                rt_stop_id: "2504",
+                                stop_code: "2504",
+                                stop_lat: 29.72334647634201,
+                                stop_lon: -95.39164542840612,
+                                stop_name: "Main St / Remington Ln",
+                                wheelchair_boarding: 0,
+                            },
+                        ),
+                        stops: None,
+                    },
+                ],
+                route_long_name: "Airline / Montrose",
+                route_short_name: "56",
+                route_type: 3,
+                route_color: "d94b3d",
+                route_text_color: "ffffff",
+                alerts: Some(
+                    [
+                        ServiceAlert {
+                            effect: "SIGNIFICANT_DELAYS",
+                            severity: "Warning",
+                            description: "(SB) via Main (L)Holcombe stay on top of bridge (R)Fannin (R)TMC",
+                            created_at: 1759502520,
+                            informed_entities: [
+                                InformedEntity {
+                                    global_route_id: Some(
+                                        "MTAHC:5480",
+                                    ),
+                                    global_stop_id: None,
+                                    rt_trip_id: None,
+                                },
+                            ],
+                            title: Some(
+                                "Route 056 Airline / Montrose experiencing information southbound delays due to construction at Holcombe @ Pressler",
+                            ),
+                        },
+                    ],
+                ),
+                route_timezone: Some(
+                    "America/Chicago",
+                ),
+                route_display_short_name: Some(
+                    DisplayShortName {
+                        elements: [
+                            None,
+                            Some(
+                                "56",
+                            ),
+                            None,
+                        ],
+                        route_name_redundancy: false,
+                        boxed_text: "",
+                    },
+                ),
+                compact_display_short_name: Some(
+                    DisplayShortName {
+                        elements: [
+                            None,
+                            Some(
+                                "56",
+                            ),
+                            None,
+                        ],
+                        route_name_redundancy: false,
+                        boxed_text: "",
+                    },
+                ),
+                fares: Some(
+                    [],
+                ),
+                route_network_name: Some(
+                    "METRO",
+                ),
+                route_network_id: Some(
+                    "METRO|Houston",
+                ),
+                tts_long_name: Some(
+                    "Airline / Montrose",
+                ),
+                tts_short_name: Some(
+                    "56",
+                ),
+                sorting_key: Some(
+                    "56",
+                ),
+                mode_name: Some(
+                    "Bus",
+                ),
+                real_time_route_id: Some(
+                    "056",
+                ),
+                vehicle: Some(
+                    Vehicle {
+                        name: Some(
+                            "bus",
+                        ),
+                        name_inflection: Some(
+                            "n",
+                        ),
+                        image: Some(
+                            "bus-new",
+                        ),
+                    },
+                ),
+                route_image: Some(
+                    "",
+                ),
+            },
+            Route {
+                global_route_id: "MTAHC:5542",
+                itineraries: [
+                    Itinerary {
+                        direction_id: 0,
+                        headsign: "TMC TC",
+                        schedule_items: [
+                            ScheduleItem {
+                                departure_time: 1759919821,
+                                is_cancelled: false,
+                                is_real_time: true,
+                                scheduled_departure_time: 1759919880,
+                                arrival_time: Some(
+                                    1759919821,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759919880,
+                                ),
+                                rt_trip_id: Some(
+                                    "11435459",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:264:3:0",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759920603,
+                                is_cancelled: false,
+                                is_real_time: true,
+                                scheduled_departure_time: 1759920480,
+                                arrival_time: Some(
+                                    1759920603,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759920480,
+                                ),
+                                rt_trip_id: Some(
+                                    "11435432",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:264:3:1",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759921200,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759921200,
+                                arrival_time: Some(
+                                    1759921200,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759921200,
+                                ),
+                                rt_trip_id: Some(
+                                    "11435440",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:264:3:2",
+                                ),
+                            },
+                        ],
+                        direction_headsign: Some(
+                            "Inbound",
+                        ),
+                        merged_headsign: Some(
+                            "Inbound to TMC TC",
+                        ),
+                        branch_code: Some(
+                            "",
+                        ),
+                        closest_stop: Some(
+                            Stop {
+                                city_name: "",
+                                distance: None,
+                                global_stop_id: "MTAHC:57740",
+                                location_type: 0,
+                                parent_station: None,
+                                parent_station_global_stop_id: None,
+                                route_type: 3,
+                                rt_stop_id: "2669",
+                                stop_code: "2669",
+                                stop_lat: 29.7262422878223,
+                                stop_lon: -95.39112382261152,
+                                stop_name: "Montrose Blvd / Bissonnet St",
+                                wheelchair_boarding: 0,
+                            },
+                        ),
+                        stops: None,
+                    },
+                    Itinerary {
+                        direction_id: 1,
+                        headsign: "Kingsland",
+                        schedule_items: [
+                            ScheduleItem {
+                                departure_time: 1759920900,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759920900,
+                                arrival_time: Some(
+                                    1759920900,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759920900,
+                                ),
+                                rt_trip_id: Some(
+                                    "11435496",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:266:3:0",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759921500,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759921500,
+                                arrival_time: Some(
+                                    1759921500,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759921500,
+                                ),
+                                rt_trip_id: Some(
+                                    "11435493",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:266:3:1",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759922340,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759922340,
+                                arrival_time: Some(
+                                    1759922340,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759922340,
+                                ),
+                                rt_trip_id: Some(
+                                    "11435497",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:266:3:2",
+                                ),
+                            },
+                        ],
+                        direction_headsign: Some(
+                            "Outbound",
+                        ),
+                        merged_headsign: Some(
+                            "Outbound to Kingsland",
+                        ),
+                        branch_code: Some(
+                            "",
+                        ),
+                        closest_stop: Some(
+                            Stop {
+                                city_name: "",
+                                distance: None,
+                                global_stop_id: "MTAHC:57511",
+                                location_type: 0,
+                                parent_station: None,
+                                parent_station_global_stop_id: None,
+                                route_type: 3,
+                                rt_stop_id: "2670",
+                                stop_code: "2670",
+                                stop_lat: 29.72597249172165,
+                                stop_lon: -95.39092597213772,
+                                stop_name: "Montrose Blvd / Bissonnet St",
+                                wheelchair_boarding: 0,
+                            },
+                        ),
+                        stops: None,
+                    },
+                ],
+                route_long_name: "Katy Freeway / TMC P&R",
+                route_short_name: "298",
+                route_type: 3,
+                route_color: "e28800",
+                route_text_color: "ffffff",
+                alerts: Some(
+                    [
+                        ServiceAlert {
+                            effect: "DETOUR",
+                            severity: "Warning",
+                            description: "Affected direction: Outbound\n298 Kingsland/Addicks/NWTC/TMC O/B - Exit T.M.C. through Entrance # 1 to Fannin, Left Pressler to regular route.",
+                            created_at: 1755543540,
+                            informed_entities: [
+                                InformedEntity {
+                                    global_route_id: Some(
+                                        "MTAHC:5542",
+                                    ),
+                                    global_stop_id: None,
+                                    rt_trip_id: None,
+                                },
+                            ],
+                            title: Some(
+                                "Route 298 Katy Freeway / TMC P&R detoured beginning Mon Jun 2 due to BOOST 56 construction",
+                            ),
+                        },
+                    ],
+                ),
+                route_timezone: Some(
+                    "America/Chicago",
+                ),
+                route_display_short_name: Some(
+                    DisplayShortName {
+                        elements: [
+                            None,
+                            Some(
+                                "298",
+                            ),
+                            None,
+                        ],
+                        route_name_redundancy: false,
+                        boxed_text: "",
+                    },
+                ),
+                compact_display_short_name: Some(
+                    DisplayShortName {
+                        elements: [
+                            None,
+                            Some(
+                                "298",
+                            ),
+                            None,
+                        ],
+                        route_name_redundancy: false,
+                        boxed_text: "",
+                    },
+                ),
+                fares: Some(
+                    [],
+                ),
+                route_network_name: Some(
+                    "Park & Ride",
+                ),
+                route_network_id: Some(
+                    "Park & Ride|Houston",
+                ),
+                tts_long_name: Some(
+                    "Katy Freeway / TMC P&R",
+                ),
+                tts_short_name: Some(
+                    "2 98 ",
+                ),
+                sorting_key: Some(
+                    "298",
+                ),
+                mode_name: Some(
+                    "Bus",
+                ),
+                real_time_route_id: Some(
+                    "298",
+                ),
+                vehicle: Some(
+                    Vehicle {
+                        name: Some(
+                            "bus",
+                        ),
+                        name_inflection: Some(
+                            "n",
+                        ),
+                        image: Some(
+                            "bus-new",
+                        ),
+                    },
+                ),
+                route_image: Some(
+                    "",
+                ),
+            },
+            Route {
+                global_route_id: "MTAHC:5485",
+                itineraries: [
+                    Itinerary {
+                        direction_id: 0,
+                        headsign: "Wheeler TC",
+                        schedule_items: [
+                            ScheduleItem {
+                                departure_time: 1759917982,
+                                is_cancelled: false,
+                                is_real_time: true,
+                                scheduled_departure_time: 1759917960,
+                                arrival_time: Some(
+                                    1759917982,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759917960,
+                                ),
+                                rt_trip_id: Some(
+                                    "11427631",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:98:3:1",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759918907,
+                                is_cancelled: false,
+                                is_real_time: true,
+                                scheduled_departure_time: 1759918860,
+                                arrival_time: Some(
+                                    1759918907,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759918860,
+                                ),
+                                rt_trip_id: Some(
+                                    "11427630",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:98:3:2",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759919650,
+                                is_cancelled: false,
+                                is_real_time: true,
+                                scheduled_departure_time: 1759919760,
+                                arrival_time: Some(
+                                    1759919650,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759919760,
+                                ),
+                                rt_trip_id: Some(
+                                    "11427629",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:98:3:3",
+                                ),
+                            },
+                        ],
+                        direction_headsign: Some(
+                            "Eastbound",
+                        ),
+                        merged_headsign: Some(
+                            "East to Wheeler TC",
+                        ),
+                        branch_code: Some(
+                            "",
+                        ),
+                        closest_stop: Some(
+                            Stop {
+                                city_name: "",
+                                distance: None,
+                                global_stop_id: "MTAHC:64874",
+                                location_type: 0,
+                                parent_station: None,
+                                parent_station_global_stop_id: None,
+                                route_type: 3,
+                                rt_stop_id: "2674",
+                                stop_code: "2674",
+                                stop_lat: 29.72600846453507,
+                                stop_lon: -95.3905932236136,
+                                stop_name: "Bissonnet St / Montrose Blvd",
+                                wheelchair_boarding: 0,
+                            },
+                        ),
+                        stops: None,
+                    },
+                    Itinerary {
+                        direction_id: 1,
+                        headsign: "Synott Rd",
+                        schedule_items: [
+                            ScheduleItem {
+                                departure_time: 1759918680,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759918680,
+                                arrival_time: Some(
+                                    1759918680,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759918680,
+                                ),
+                                rt_trip_id: Some(
+                                    "11427722",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:99:3:3",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759919580,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759919580,
+                                arrival_time: Some(
+                                    1759919580,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759919580,
+                                ),
+                                rt_trip_id: Some(
+                                    "11427721",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:99:3:4",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759920480,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759920480,
+                                arrival_time: Some(
+                                    1759920480,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759920480,
+                                ),
+                                rt_trip_id: Some(
+                                    "11427720",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:99:3:5",
+                                ),
+                            },
+                        ],
+                        direction_headsign: Some(
+                            "Westbound",
+                        ),
+                        merged_headsign: Some(
+                            "West to Synott Rd",
+                        ),
+                        branch_code: Some(
+                            "",
+                        ),
+                        closest_stop: Some(
+                            Stop {
+                                city_name: "",
+                                distance: None,
+                                global_stop_id: "MTAHC:58371",
+                                location_type: 0,
+                                parent_station: None,
+                                parent_station_global_stop_id: None,
+                                route_type: 3,
+                                rt_stop_id: "11245",
+                                stop_code: "11245",
+                                stop_lat: 29.72618832860217,
+                                stop_lon: -95.3894151139741,
+                                stop_name: "Main St / Bissonnet St",
+                                wheelchair_boarding: 0,
+                            },
+                        ),
+                        stops: None,
+                    },
+                ],
+                route_long_name: "Bissonnet",
+                route_short_name: "65",
+                route_type: 3,
+                route_color: "005db4",
+                route_text_color: "ffffff",
+                alerts: Some(
+                    [],
+                ),
+                route_timezone: Some(
+                    "America/Chicago",
+                ),
+                route_display_short_name: Some(
+                    DisplayShortName {
+                        elements: [
+                            None,
+                            Some(
+                                "65",
+                            ),
+                            None,
+                        ],
+                        route_name_redundancy: false,
+                        boxed_text: "",
+                    },
+                ),
+                compact_display_short_name: Some(
+                    DisplayShortName {
+                        elements: [
+                            None,
+                            Some(
+                                "65",
+                            ),
+                            None,
+                        ],
+                        route_name_redundancy: false,
+                        boxed_text: "",
+                    },
+                ),
+                fares: Some(
+                    [],
+                ),
+                route_network_name: Some(
+                    "METRO",
+                ),
+                route_network_id: Some(
+                    "METRO|Houston",
+                ),
+                tts_long_name: Some(
+                    "Bissonnet",
+                ),
+                tts_short_name: Some(
+                    "65",
+                ),
+                sorting_key: Some(
+                    "65",
+                ),
+                mode_name: Some(
+                    "Bus",
+                ),
+                real_time_route_id: Some(
+                    "065",
+                ),
+                vehicle: Some(
+                    Vehicle {
+                        name: Some(
+                            "bus",
+                        ),
+                        name_inflection: Some(
+                            "n",
+                        ),
+                        image: Some(
+                            "bus-new",
+                        ),
+                    },
+                ),
+                route_image: Some(
+                    "",
+                ),
+            },
+            Route {
+                global_route_id: "MTAHC:5444",
+                itineraries: [
+                    Itinerary {
+                        direction_id: 0,
+                        headsign: "Eastwood TC",
+                        schedule_items: [
+                            ScheduleItem {
+                                departure_time: 1759920125,
+                                is_cancelled: false,
+                                is_real_time: true,
+                                scheduled_departure_time: 1759920180,
+                                arrival_time: Some(
+                                    1759920125,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759920180,
+                                ),
+                                rt_trip_id: Some(
+                                    "11417251",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:4:3:2",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759920979,
+                                is_cancelled: false,
+                                is_real_time: true,
+                                scheduled_departure_time: 1759921080,
+                                arrival_time: Some(
+                                    1759920979,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759921080,
+                                ),
+                                rt_trip_id: Some(
+                                    "11417252",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:4:3:3",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759921951,
+                                is_cancelled: false,
+                                is_real_time: true,
+                                scheduled_departure_time: 1759922100,
+                                arrival_time: Some(
+                                    1759921951,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759922100,
+                                ),
+                                rt_trip_id: Some(
+                                    "11417253",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:4:3:4",
+                                ),
+                            },
+                        ],
+                        direction_headsign: Some(
+                            "Eastbound",
+                        ),
+                        merged_headsign: Some(
+                            "East to Eastwood TC",
+                        ),
+                        branch_code: Some(
+                            "",
+                        ),
+                        closest_stop: Some(
+                            Stop {
+                                city_name: "",
+                                distance: None,
+                                global_stop_id: "MTAHC:52060",
+                                location_type: 0,
+                                parent_station: None,
+                                parent_station_global_stop_id: None,
+                                route_type: 3,
+                                rt_stop_id: "9593",
+                                stop_code: "9593",
+                                stop_lat: 29.7125546323161,
+                                stop_lon: -95.38252632020422,
+                                stop_name: "Mac Gregor Way / Almeda Rd",
+                                wheelchair_boarding: 0,
+                            },
+                        ),
+                        stops: None,
+                    },
+                    Itinerary {
+                        direction_id: 1,
+                        headsign: "Mission Bend TC",
+                        schedule_items: [
+                            ScheduleItem {
+                                departure_time: 1759918260,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759918260,
+                                arrival_time: Some(
+                                    1759918260,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759918260,
+                                ),
+                                rt_trip_id: Some(
+                                    "11417338",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:5:3:4",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759919160,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759919160,
+                                arrival_time: Some(
+                                    1759919160,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759919160,
+                                ),
+                                rt_trip_id: Some(
+                                    "11417339",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:5:3:5",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759920060,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759920060,
+                                arrival_time: Some(
+                                    1759920060,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759920060,
+                                ),
+                                rt_trip_id: Some(
+                                    "11417340",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:5:3:6",
+                                ),
+                            },
+                        ],
+                        direction_headsign: Some(
+                            "Westbound",
+                        ),
+                        merged_headsign: Some(
+                            "West to Mission Bend TC",
+                        ),
+                        branch_code: Some(
+                            "",
+                        ),
+                        closest_stop: Some(
+                            Stop {
+                                city_name: "",
+                                distance: None,
+                                global_stop_id: "MTAHC:52109",
+                                location_type: 0,
+                                parent_station: None,
+                                parent_station_global_stop_id: None,
+                                route_type: 3,
+                                rt_stop_id: "5447",
+                                stop_code: "5447",
+                                stop_lat: 29.71370576234553,
+                                stop_lon: -95.38174391151234,
+                                stop_name: "Mac Gregor Way / Almeda Rd",
+                                wheelchair_boarding: 0,
+                            },
+                        ),
+                        stops: None,
+                    },
+                ],
+                route_long_name: "Beechnut",
+                route_short_name: "4",
+                route_type: 3,
+                route_color: "d94b3d",
+                route_text_color: "ffffff",
+                alerts: Some(
+                    [
+                        ServiceAlert {
+                            effect: "DETOUR",
+                            severity: "Warning",
+                            description: "Affected direction: Westbound\n\n4 Beechnut W/B – Continue Pressler and enter T.M.C./T.C. through Entrance # 1 to regular route.",
+                            created_at: 1755543540,
+                            informed_entities: [
+                                InformedEntity {
+                                    global_route_id: Some(
+                                        "MTAHC:5444",
+                                    ),
+                                    global_stop_id: None,
+                                    rt_trip_id: None,
+                                },
+                            ],
+                            title: Some(
+                                "Route 004 Beechnut detoured beginning Mon Jun 2 due to 56 BOOST Construction",
+                            ),
+                        },
+                        ServiceAlert {
+                            effect: "DETOUR",
+                            severity: "Warning",
+                            description: "Exit TMC (L)Pressler (R)Fannin (R)Braeswood (R)Greenbriar (L)Main to regular route.\nController: A,White 498",
+                            created_at: 1759501740,
+                            informed_entities: [
+                                InformedEntity {
+                                    global_route_id: Some(
+                                        "MTAHC:5444",
+                                    ),
+                                    global_stop_id: None,
+                                    rt_trip_id: None,
+                                },
+                            ],
+                            title: Some(
+                                "Route 004 Beechnut detoured due to construction",
+                            ),
+                        },
+                    ],
+                ),
+                route_timezone: Some(
+                    "America/Chicago",
+                ),
+                route_display_short_name: Some(
+                    DisplayShortName {
+                        elements: [
+                            None,
+                            Some(
+                                "4",
+                            ),
+                            None,
+                        ],
+                        route_name_redundancy: false,
+                        boxed_text: "",
+                    },
+                ),
+                compact_display_short_name: Some(
+                    DisplayShortName {
+                        elements: [
+                            None,
+                            Some(
+                                "4",
+                            ),
+                            None,
+                        ],
+                        route_name_redundancy: false,
+                        boxed_text: "",
+                    },
+                ),
+                fares: Some(
+                    [],
+                ),
+                route_network_name: Some(
+                    "METRO",
+                ),
+                route_network_id: Some(
+                    "METRO|Houston",
+                ),
+                tts_long_name: Some(
+                    "Beechnut",
+                ),
+                tts_short_name: Some(
+                    "4",
+                ),
+                sorting_key: Some(
+                    "4",
+                ),
+                mode_name: Some(
+                    "Bus",
+                ),
+                real_time_route_id: Some(
+                    "004",
+                ),
+                vehicle: Some(
+                    Vehicle {
+                        name: Some(
+                            "bus",
+                        ),
+                        name_inflection: Some(
+                            "n",
+                        ),
+                        image: Some(
+                            "bus-new",
+                        ),
+                    },
+                ),
+                route_image: Some(
+                    "",
+                ),
+            },
+            Route {
+                global_route_id: "MTAHC:5458",
+                itineraries: [
+                    Itinerary {
+                        direction_id: 0,
+                        headsign: "Eastwood TC",
+                        schedule_items: [
+                            ScheduleItem {
+                                departure_time: 1759918110,
+                                is_cancelled: false,
+                                is_real_time: true,
+                                scheduled_departure_time: 1759918140,
+                                arrival_time: Some(
+                                    1759918110,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759918140,
+                                ),
+                                rt_trip_id: Some(
+                                    "11419977",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:27:3:1",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759919078,
+                                is_cancelled: false,
+                                is_real_time: true,
+                                scheduled_departure_time: 1759919040,
+                                arrival_time: Some(
+                                    1759919078,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759919040,
+                                ),
+                                rt_trip_id: Some(
+                                    "11419901",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:26:3:1",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759920103,
+                                is_cancelled: false,
+                                is_real_time: true,
+                                scheduled_departure_time: 1759920000,
+                                arrival_time: Some(
+                                    1759920103,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759920000,
+                                ),
+                                rt_trip_id: Some(
+                                    "11419976",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:27:3:2",
+                                ),
+                            },
+                        ],
+                        direction_headsign: Some(
+                            "Eastbound",
+                        ),
+                        merged_headsign: Some(
+                            "East to Eastwood TC",
+                        ),
+                        branch_code: Some(
+                            "",
+                        ),
+                        closest_stop: Some(
+                            Stop {
+                                city_name: "",
+                                distance: None,
+                                global_stop_id: "MTAHC:53719",
+                                location_type: 0,
+                                parent_station: None,
+                                parent_station_global_stop_id: None,
+                                route_type: 3,
+                                rt_stop_id: "12335",
+                                stop_code: "12335",
+                                stop_lat: 29.73012735167163,
+                                stop_lon: -95.37641993512622,
+                                stop_name: "Wheeler Ave / Almeda Rd",
+                                wheelchair_boarding: 0,
+                            },
+                        ),
+                        stops: None,
+                    },
+                    Itinerary {
+                        direction_id: 1,
+                        headsign: "Westchase",
+                        schedule_items: [
+                            ScheduleItem {
+                                departure_time: 1759918017,
+                                is_cancelled: false,
+                                is_real_time: true,
+                                scheduled_departure_time: 1759917960,
+                                arrival_time: Some(
+                                    1759918017,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759917960,
+                                ),
+                                rt_trip_id: Some(
+                                    "11420058",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:28:3:3",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759918860,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759918860,
+                                arrival_time: Some(
+                                    1759918860,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759918860,
+                                ),
+                                rt_trip_id: Some(
+                                    "11420057",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:29:3:2",
+                                ),
+                            },
+                            ScheduleItem {
+                                departure_time: 1759919760,
+                                is_cancelled: false,
+                                is_real_time: false,
+                                scheduled_departure_time: 1759919760,
+                                arrival_time: Some(
+                                    1759919760,
+                                ),
+                                scheduled_arrival_time: Some(
+                                    1759919760,
+                                ),
+                                rt_trip_id: Some(
+                                    "11420056",
+                                ),
+                                wheelchair_accessible: Some(
+                                    1,
+                                ),
+                                trip_search_key: Some(
+                                    "MTAHC:49747875:28:3:4",
+                                ),
+                            },
+                        ],
+                        direction_headsign: Some(
+                            "Westbound",
+                        ),
+                        merged_headsign: Some(
+                            "West to Westchase",
+                        ),
+                        branch_code: Some(
+                            "",
+                        ),
+                        closest_stop: Some(
+                            Stop {
+                                city_name: "",
+                                distance: None,
+                                global_stop_id: "MTAHC:53764",
+                                location_type: 0,
+                                parent_station: None,
+                                parent_station_global_stop_id: None,
+                                route_type: 3,
+                                rt_stop_id: "12336",
+                                stop_code: "12336",
+                                stop_lat: 29.72998346041795,
+                                stop_lon: -95.37591631573837,
+                                stop_name: "Wheeler Ave / Almeda Rd",
+                                wheelchair_boarding: 0,
+                            },
+                        ),
+                        stops: None,
+                    },
+                ],
+                route_long_name: "Richmond",
+                route_short_name: "25",
+                route_type: 3,
+                route_color: "005db4",
+                route_text_color: "ffffff",
+                alerts: Some(
+                    [
+                        ServiceAlert {
+                            effect: "DETOUR",
+                            severity: "Warning",
+                            description: "Eastbound 25 detour\nVia Wheeler\nR- Saint Emmanuel\nL-Blodgett\nL- Emancipation\nR-Wheeler to regular route\n\nWestbound\n\nVia Wheeler\nL- Emancipation\nR-Blodgett\nR-Chartres\nL-Wheeler to regular route",
+                            created_at: 1756138500,
+                            informed_entities: [
+                                InformedEntity {
+                                    global_route_id: Some(
+                                        "MTAHC:5458",
+                                    ),
+                                    global_stop_id: None,
+                                    rt_trip_id: None,
+                                },
+                            ],
+                            title: Some(
+                                "Route 025 Richmond detoured due to construction at 288 & Wheeler Ave",
+                            ),
+                        },
+                        ServiceAlert {
+                            effect: "DETOUR",
+                            severity: "Warning",
+                            description: "25 Richmond E/B\n(@ Wheeler & 288 Fwy)\n\nVia Wheeler Ave\nR – St Emanuel Street\nL – Blodgett Street\nL – Emancipation Ave\nR – Wheeler Ave\nTo regular route\nCompletion Date 12/02/2025\n\n25 Richmond W/B\n(@ Wheeler & 288 Fwy)\n\nVia Wheeler Ave\nL – Emancipation Ave\nR – Blodgett Street\nR – Chartress Street\nL – Wheeler Ave\nTo regular route",
+                            created_at: 1757943120,
+                            informed_entities: [
+                                InformedEntity {
+                                    global_route_id: Some(
+                                        "MTAHC:5458",
+                                    ),
+                                    global_stop_id: None,
+                                    rt_trip_id: None,
+                                },
+                            ],
+                            title: Some(
+                                "Route 025 Richmond detoured through Tue Dec 2 due to construction at Wheeler & 288 Fwy",
+                            ),
+                        },
+                    ],
+                ),
+                route_timezone: Some(
+                    "America/Chicago",
+                ),
+                route_display_short_name: Some(
+                    DisplayShortName {
+                        elements: [
+                            None,
+                            Some(
+                                "25",
+                            ),
+                            None,
+                        ],
+                        route_name_redundancy: false,
+                        boxed_text: "",
+                    },
+                ),
+                compact_display_short_name: Some(
+                    DisplayShortName {
+                        elements: [
+                            None,
+                            Some(
+                                "25",
+                            ),
+                            None,
+                        ],
+                        route_name_redundancy: false,
+                        boxed_text: "",
+                    },
+                ),
+                fares: Some(
+                    [],
+                ),
+                route_network_name: Some(
+                    "METRO",
+                ),
+                route_network_id: Some(
+                    "METRO|Houston",
+                ),
+                tts_long_name: Some(
+                    "Richmond",
+                ),
+                tts_short_name: Some(
+                    "25",
+                ),
+                sorting_key: Some(
+                    "25",
+                ),
+                mode_name: Some(
+                    "Bus",
+                ),
+                real_time_route_id: Some(
+                    "025",
+                ),
+                vehicle: Some(
+                    Vehicle {
+                        name: Some(
+                            "bus",
+                        ),
+                        name_inflection: Some(
+                            "n",
+                        ),
+                        image: Some(
+                            "bus-new",
+                        ),
+                    },
+                ),
+                route_image: Some(
+                    "",
+                ),
+            },
+        ],
+    },
+)
