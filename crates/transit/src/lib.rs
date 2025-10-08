@@ -64,6 +64,52 @@ impl TransitClient {
 
         Ok(response)
     }
+
+    pub async fn nearby_routes(
+        &self,
+        lat: f64,
+        lon: f64,
+        max_distance: Option<u32>,
+        should_update_realtime: Option<bool>,
+        max_num_departures: Option<u32>,
+        time: Option<u64>,
+    ) -> Result<NearbyRoutesResponse> {
+        let url = format!("{}/public/nearby_routes", BASE_URL);
+
+        let mut query_params = vec![
+            ("lat", lat.to_string()),
+            ("lon", lon.to_string()),
+        ];
+
+        if let Some(distance) = max_distance {
+            query_params.push(("max_distance", distance.to_string()));
+        }
+
+        if let Some(realtime) = should_update_realtime {
+            query_params.push(("should_update_realtime", realtime.to_string()));
+        }
+
+        if let Some(departures) = max_num_departures {
+            query_params.push(("max_num_departures", departures.to_string()));
+        }
+
+        if let Some(t) = time {
+            query_params.push(("time", t.to_string()));
+        }
+
+        let response = self
+            .client
+            .get(&url)
+            .header("apiKey", &self.api_key)
+            .query(&query_params)
+            .send()
+            .await?
+            .error_for_status()?
+            .json()
+            .await?;
+
+        Ok(response)
+    }
 }
 
 // Response types based on notes/transit-api.md
@@ -79,9 +125,14 @@ pub struct StopDeparturesResponse {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
+pub struct NearbyRoutesResponse {
+    pub routes: Vec<Route>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Stop {
     pub city_name: String,
-    pub distance: u32,
+    pub distance: Option<u32>,
     pub global_stop_id: String,
     pub location_type: u8,
     pub parent_station: Option<ParentStation>,
@@ -130,6 +181,7 @@ pub struct Route {
     pub mode_name: Option<String>,
     pub real_time_route_id: Option<String>,
     pub vehicle: Option<Vehicle>,
+    pub route_image: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -200,6 +252,8 @@ pub struct ScheduleItem {
     pub is_real_time: bool,
     pub scheduled_departure_time: u64,
     // Optional fields
+    pub arrival_time: Option<u64>,
+    pub scheduled_arrival_time: Option<u64>,
     pub rt_trip_id: Option<String>,
     pub wheelchair_accessible: Option<u8>,
     pub trip_search_key: Option<TripSearchKey>,

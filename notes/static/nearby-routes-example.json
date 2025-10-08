@@ -1,0 +1,1535 @@
+{
+  "routes": [
+    {
+      "alerts": [
+        {
+          "created_at": 1759624260,
+          "description": "METRORail Purple and Green Line maintenance is ahead of schedule! Both lines will be running normally by 8 p.m. before the UH game ends. Red Line shutdown continues as planned for work outside Downtown. Thanks for your patience as we keep Houston moving.",
+          "effect": "UNKNOWN_EFFECT",
+          "informed_entities": [
+            {
+              "global_route_id": "MTAHC:154571"
+            }
+          ],
+          "severity": "Warning",
+          "title": "Maintenance"
+        }
+      ],
+      "compact_display_short_name": {
+        "boxed_text": "",
+        "elements": [
+          "dot",
+          "",
+          null
+        ],
+        "route_name_redundancy": false
+      },
+      "fares": [],
+      "global_route_id": "MTAHC:154571",
+      "itineraries": [
+        {
+          "branch_code": "",
+          "closest_stop": {
+            "city_name": "",
+            "global_stop_id": "MTAHC:62528",
+            "location_type": 0,
+            "parent_station": null,
+            "parent_station_global_stop_id": null,
+            "route_type": 0,
+            "rt_stop_id": "25016",
+            "stop_code": "25016",
+            "stop_lat": 29.72474042286203,
+            "stop_lon": -95.38909135865332,
+            "stop_name": "Museum District Station SB",
+            "wheelchair_boarding": 1
+          },
+          "direction_headsign": "Southbound",
+          "direction_id": 0,
+          "headsign": "Fannin South",
+          "merged_headsign": "South to Fannin South",
+          "schedule_items": [
+            {
+              "arrival_time": 1759917840,
+              "departure_time": 1759917840,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11442152",
+              "scheduled_arrival_time": 1759917840,
+              "scheduled_departure_time": 1759917840,
+              "trip_search_key": "MTAHC:49747875:292:3:2",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759918200,
+              "departure_time": 1759918200,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11442080",
+              "scheduled_arrival_time": 1759918200,
+              "scheduled_departure_time": 1759918200,
+              "trip_search_key": "MTAHC:49747875:292:3:3",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759918560,
+              "departure_time": 1759918560,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11442153",
+              "scheduled_arrival_time": 1759918560,
+              "scheduled_departure_time": 1759918560,
+              "trip_search_key": "MTAHC:49747875:292:3:4",
+              "wheelchair_accessible": 1
+            }
+          ]
+        },
+        {
+          "branch_code": "",
+          "closest_stop": {
+            "city_name": "",
+            "global_stop_id": "MTAHC:62543",
+            "location_type": 0,
+            "parent_station": null,
+            "parent_station_global_stop_id": null,
+            "route_type": 0,
+            "rt_stop_id": "25015",
+            "stop_code": "25015",
+            "stop_lat": 29.7243267355077,
+            "stop_lon": -95.38816505870776,
+            "stop_name": "Museum District Station NB",
+            "wheelchair_boarding": 1
+          },
+          "direction_headsign": "Northbound",
+          "direction_id": 1,
+          "headsign": "North Line TC",
+          "merged_headsign": "North to North Line TC",
+          "schedule_items": [
+            {
+              "arrival_time": 1759917360,
+              "departure_time": 1759917360,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11442332",
+              "scheduled_arrival_time": 1759917360,
+              "scheduled_departure_time": 1759917360,
+              "trip_search_key": "MTAHC:49747875:293:3:12",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759917720,
+              "departure_time": 1759917720,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11442255",
+              "scheduled_arrival_time": 1759917720,
+              "scheduled_departure_time": 1759917720,
+              "trip_search_key": "MTAHC:49747875:293:3:13",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759918080,
+              "departure_time": 1759918080,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11442333",
+              "scheduled_arrival_time": 1759918080,
+              "scheduled_departure_time": 1759918080,
+              "trip_search_key": "MTAHC:49747875:293:3:14",
+              "wheelchair_accessible": 1
+            }
+          ]
+        }
+      ],
+      "mode_name": "METRORail",
+      "real_time_route_id": "700",
+      "route_color": "e41937",
+      "route_display_short_name": {
+        "boxed_text": "",
+        "elements": [
+          "houston-metro-roundel",
+          "",
+          null
+        ],
+        "route_name_redundancy": false
+      },
+      "route_image": "dot",
+      "route_long_name": "Metrorail Red Line",
+      "route_network_id": "METRO|Houston",
+      "route_network_name": "METRO",
+      "route_short_name": "Red",
+      "route_text_color": "ffffff",
+      "route_timezone": "America/Chicago",
+      "route_type": 0,
+      "sorting_key": "Red",
+      "tts_long_name": "Metrorail Red Line",
+      "tts_short_name": "red line",
+      "vehicle": {
+        "image": "trimet",
+        "name": "vehicle",
+        "name_inflection": "n"
+      }
+    },
+    {
+      "alerts": [
+        {
+          "created_at": 1755543540,
+          "description": "5 Southmore E/B – Via Hwy. 288 N/B Service Rd., Left Binz, Right Almeda, Right Southmore to regular route.",
+          "effect": "DETOUR",
+          "informed_entities": [
+            {
+              "global_route_id": "MTAHC:5445"
+            }
+          ],
+          "severity": "Warning",
+          "title": "Route 005 Southmore detoured beginning Sun Dec 15 due to construction."
+        },
+        {
+          "created_at": 1757943000,
+          "description": "5 Southmore E/B\n\nVia Hwy. 288 N/B Service Rd.,\nL – Binz St\nR – Almeda Rd\nR – Southmore Blvd\nto regular route.",
+          "effect": "DETOUR",
+          "informed_entities": [
+            {
+              "global_route_id": "MTAHC:5445"
+            }
+          ],
+          "severity": "Warning",
+          "title": "Route 005 Southmore detoured due to construction at 288 Fwy & Binz St"
+        }
+      ],
+      "compact_display_short_name": {
+        "boxed_text": "",
+        "elements": [
+          null,
+          "5",
+          null
+        ],
+        "route_name_redundancy": false
+      },
+      "fares": [],
+      "global_route_id": "MTAHC:5445",
+      "itineraries": [
+        {
+          "branch_code": "",
+          "closest_stop": {
+            "city_name": "",
+            "global_stop_id": "MTAHC:64291",
+            "location_type": 0,
+            "parent_station": null,
+            "parent_station_global_stop_id": null,
+            "route_type": 3,
+            "rt_stop_id": "12720",
+            "stop_code": "12720",
+            "stop_lat": 29.72244715600652,
+            "stop_lon": -95.38419006282489,
+            "stop_name": "Binz St / Crawford St",
+            "wheelchair_boarding": 0
+          },
+          "direction_headsign": "Eastbound",
+          "direction_id": 0,
+          "headsign": "Richey St",
+          "merged_headsign": "East to Richey St",
+          "schedule_items": [
+            {
+              "arrival_time": 1759918080,
+              "departure_time": 1759918080,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11417513",
+              "scheduled_arrival_time": 1759918080,
+              "scheduled_departure_time": 1759918080,
+              "trip_search_key": "MTAHC:49747875:6:3:0",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759921140,
+              "departure_time": 1759921140,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11417514",
+              "scheduled_arrival_time": 1759921140,
+              "scheduled_departure_time": 1759921140,
+              "trip_search_key": "MTAHC:49747875:6:3:1",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759922940,
+              "departure_time": 1759922940,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11417515",
+              "scheduled_arrival_time": 1759922940,
+              "scheduled_departure_time": 1759922940,
+              "trip_search_key": "MTAHC:49747875:6:3:2",
+              "wheelchair_accessible": 1
+            }
+          ]
+        },
+        {
+          "branch_code": "",
+          "closest_stop": {
+            "city_name": "",
+            "global_stop_id": "MTAHC:52345",
+            "location_type": 0,
+            "parent_station": null,
+            "parent_station_global_stop_id": null,
+            "route_type": 3,
+            "rt_stop_id": "12721",
+            "stop_code": "12721",
+            "stop_lat": 29.72260903366691,
+            "stop_lon": -95.38418106962153,
+            "stop_name": "Binz St / Crawford St",
+            "wheelchair_boarding": 0
+          },
+          "direction_headsign": "Westbound",
+          "direction_id": 1,
+          "headsign": "Wheeler TC",
+          "merged_headsign": "West to Wheeler TC",
+          "schedule_items": [
+            {
+              "arrival_time": 1759919812,
+              "departure_time": 1759919812,
+              "is_cancelled": false,
+              "is_real_time": true,
+              "rt_trip_id": "11417563",
+              "scheduled_arrival_time": 1759919760,
+              "scheduled_departure_time": 1759919760,
+              "trip_search_key": "MTAHC:49747875:7:3:0",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759922520,
+              "departure_time": 1759922520,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11417539",
+              "scheduled_arrival_time": 1759922520,
+              "scheduled_departure_time": 1759922520,
+              "trip_search_key": "MTAHC:49747875:7:3:1",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759925460,
+              "departure_time": 1759925460,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11417540",
+              "scheduled_arrival_time": 1759925460,
+              "scheduled_departure_time": 1759925460,
+              "trip_search_key": "MTAHC:49747875:7:3:2",
+              "wheelchair_accessible": 1
+            }
+          ]
+        }
+      ],
+      "mode_name": "Bus",
+      "real_time_route_id": "005",
+      "route_color": "2da646",
+      "route_display_short_name": {
+        "boxed_text": "",
+        "elements": [
+          null,
+          "5",
+          null
+        ],
+        "route_name_redundancy": false
+      },
+      "route_image": "",
+      "route_long_name": "Southmore",
+      "route_network_id": "METRO|Houston",
+      "route_network_name": "METRO",
+      "route_short_name": "5",
+      "route_text_color": "ffffff",
+      "route_timezone": "America/Chicago",
+      "route_type": 3,
+      "sorting_key": "5",
+      "tts_long_name": "Southmore",
+      "tts_short_name": "5",
+      "vehicle": {
+        "image": "bus-new",
+        "name": "bus",
+        "name_inflection": "n"
+      }
+    },
+    {
+      "alerts": [],
+      "compact_display_short_name": {
+        "boxed_text": "",
+        "elements": [
+          null,
+          "11",
+          null
+        ],
+        "route_name_redundancy": false
+      },
+      "fares": [],
+      "global_route_id": "MTAHC:5450",
+      "itineraries": [
+        {
+          "branch_code": "",
+          "closest_stop": {
+            "city_name": "",
+            "global_stop_id": "MTAHC:53097",
+            "location_type": 0,
+            "parent_station": null,
+            "parent_station_global_stop_id": null,
+            "route_type": 3,
+            "rt_stop_id": "10036",
+            "stop_code": "10036",
+            "stop_lat": 29.71961429694972,
+            "stop_lon": -95.3797564135709,
+            "stop_name": "Almeda Rd / Binz St",
+            "wheelchair_boarding": 0
+          },
+          "direction_headsign": "Northbound",
+          "direction_id": 0,
+          "headsign": "Gellhorn / 610",
+          "merged_headsign": "North to Gellhorn & 610",
+          "schedule_items": [
+            {
+              "arrival_time": 1759918114,
+              "departure_time": 1759918114,
+              "is_cancelled": false,
+              "is_real_time": true,
+              "rt_trip_id": "11418839",
+              "scheduled_arrival_time": 1759918080,
+              "scheduled_departure_time": 1759918080,
+              "trip_search_key": "MTAHC:49747875:18:3:1",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759919880,
+              "departure_time": 1759919880,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11418800",
+              "scheduled_arrival_time": 1759919880,
+              "scheduled_departure_time": 1759919880,
+              "trip_search_key": "MTAHC:49747875:18:3:2",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759921680,
+              "departure_time": 1759921680,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11418801",
+              "scheduled_arrival_time": 1759921680,
+              "scheduled_departure_time": 1759921680,
+              "trip_search_key": "MTAHC:49747875:18:3:3",
+              "wheelchair_accessible": 1
+            }
+          ]
+        },
+        {
+          "branch_code": "",
+          "closest_stop": {
+            "city_name": "",
+            "global_stop_id": "MTAHC:53230",
+            "location_type": 0,
+            "parent_station": null,
+            "parent_station_global_stop_id": null,
+            "route_type": 3,
+            "rt_stop_id": "9889",
+            "stop_code": "9889",
+            "stop_lat": 29.71771673104183,
+            "stop_lon": -95.38060177468627,
+            "stop_name": "Almeda Rd / Hermann Dr",
+            "wheelchair_boarding": 0
+          },
+          "direction_headsign": "Southbound",
+          "direction_id": 1,
+          "headsign": "Hiram Clarke TC",
+          "merged_headsign": "South to Hiram Clarke TC",
+          "schedule_items": [
+            {
+              "arrival_time": 1759917971,
+              "departure_time": 1759917971,
+              "is_cancelled": false,
+              "is_real_time": true,
+              "rt_trip_id": "11418841",
+              "scheduled_arrival_time": 1759917960,
+              "scheduled_departure_time": 1759917960,
+              "trip_search_key": "MTAHC:49747875:19:3:1",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759919760,
+              "departure_time": 1759919760,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11418842",
+              "scheduled_arrival_time": 1759919760,
+              "scheduled_departure_time": 1759919760,
+              "trip_search_key": "MTAHC:49747875:19:3:2",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759921620,
+              "departure_time": 1759921620,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11418843",
+              "scheduled_arrival_time": 1759921620,
+              "scheduled_departure_time": 1759921620,
+              "trip_search_key": "MTAHC:49747875:19:3:3",
+              "wheelchair_accessible": 1
+            }
+          ]
+        }
+      ],
+      "mode_name": "Bus",
+      "real_time_route_id": "011",
+      "route_color": "045bae",
+      "route_display_short_name": {
+        "boxed_text": "",
+        "elements": [
+          null,
+          "11",
+          null
+        ],
+        "route_name_redundancy": false
+      },
+      "route_image": "",
+      "route_long_name": "Almeda / Lyons",
+      "route_network_id": "METRO|Houston",
+      "route_network_name": "METRO",
+      "route_short_name": "11",
+      "route_text_color": "ffffff",
+      "route_timezone": "America/Chicago",
+      "route_type": 3,
+      "sorting_key": "11",
+      "tts_long_name": "Almeda / Lyons",
+      "tts_short_name": "11",
+      "vehicle": {
+        "image": "bus-new",
+        "name": "bus",
+        "name_inflection": "n"
+      }
+    },
+    {
+      "alerts": [
+        {
+          "created_at": 1755543540,
+          "description": "Affected direction: Inbound\n292 West Bellfort/Westwood/TMC I/B – Continue Pressler and enter T.M.C./T.C. through Entrance # 1 to regular route.",
+          "effect": "DETOUR",
+          "informed_entities": [
+            {
+              "global_route_id": "MTAHC:5540"
+            }
+          ],
+          "severity": "Warning",
+          "title": "Route 292 Southwest Freeway / TMC P&R detoured beginning Mon Jun 2 due to construction"
+        }
+      ],
+      "compact_display_short_name": {
+        "boxed_text": "",
+        "elements": [
+          null,
+          "292",
+          null
+        ],
+        "route_name_redundancy": false
+      },
+      "fares": [],
+      "global_route_id": "MTAHC:5540",
+      "itineraries": [
+        {
+          "branch_code": "",
+          "closest_stop": {
+            "city_name": "",
+            "global_stop_id": "MTAHC:63154",
+            "location_type": 0,
+            "parent_station": null,
+            "parent_station_global_stop_id": null,
+            "route_type": 3,
+            "rt_stop_id": "10203",
+            "stop_code": "10203",
+            "stop_lat": 29.7256037703841,
+            "stop_lon": -95.38962195765126,
+            "stop_name": "Main St / Binz St",
+            "wheelchair_boarding": 0
+          },
+          "direction_headsign": "Outbound",
+          "direction_id": 0,
+          "headsign": "West Bellfort / Westwood via Westpark / Lower Uptown TC",
+          "merged_headsign": "Outbound to West Bellfort / Lower Uptown TC",
+          "schedule_items": [
+            {
+              "arrival_time": 1759954680,
+              "departure_time": 1759954680,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11435345",
+              "scheduled_arrival_time": 1759954680,
+              "scheduled_departure_time": 1759954680,
+              "trip_search_key": "MTAHC:49747875:257:3:0",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759955880,
+              "departure_time": 1759955880,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11435346",
+              "scheduled_arrival_time": 1759955880,
+              "scheduled_departure_time": 1759955880,
+              "trip_search_key": "MTAHC:49747875:257:3:1",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759956780,
+              "departure_time": 1759956780,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11435347",
+              "scheduled_arrival_time": 1759956780,
+              "scheduled_departure_time": 1759956780,
+              "trip_search_key": "MTAHC:49747875:257:3:2",
+              "wheelchair_accessible": 1
+            }
+          ]
+        },
+        {
+          "branch_code": "",
+          "closest_stop": {
+            "city_name": "",
+            "global_stop_id": "MTAHC:58371",
+            "location_type": 0,
+            "parent_station": null,
+            "parent_station_global_stop_id": null,
+            "route_type": 3,
+            "rt_stop_id": "11245",
+            "stop_code": "11245",
+            "stop_lat": 29.72618832860217,
+            "stop_lon": -95.3894151139741,
+            "stop_name": "Main St / Bissonnet St",
+            "wheelchair_boarding": 0
+          },
+          "direction_headsign": "Inbound",
+          "direction_id": 1,
+          "headsign": "TMC TC via Westpark / Lower Uptown TC",
+          "merged_headsign": "Inbound to TMC TC via Westpark / Lower Uptown TC",
+          "schedule_items": [
+            {
+              "arrival_time": 1759919700,
+              "departure_time": 1759919700,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11435361",
+              "scheduled_arrival_time": 1759919700,
+              "scheduled_departure_time": 1759919700,
+              "trip_search_key": "MTAHC:49747875:258:3:0",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759921200,
+              "departure_time": 1759921200,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11435362",
+              "scheduled_arrival_time": 1759921200,
+              "scheduled_departure_time": 1759921200,
+              "trip_search_key": "MTAHC:49747875:258:3:1",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759922160,
+              "departure_time": 1759922160,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11435363",
+              "scheduled_arrival_time": 1759922160,
+              "scheduled_departure_time": 1759922160,
+              "trip_search_key": "MTAHC:49747875:258:3:2",
+              "wheelchair_accessible": 1
+            }
+          ]
+        }
+      ],
+      "mode_name": "Bus",
+      "real_time_route_id": "292",
+      "route_color": "e28800",
+      "route_display_short_name": {
+        "boxed_text": "",
+        "elements": [
+          null,
+          "292",
+          null
+        ],
+        "route_name_redundancy": false
+      },
+      "route_image": "",
+      "route_long_name": "Southwest Freeway / TMC P&R",
+      "route_network_id": "Park & Ride|Houston",
+      "route_network_name": "Park & Ride",
+      "route_short_name": "292",
+      "route_text_color": "ffffff",
+      "route_timezone": "America/Chicago",
+      "route_type": 3,
+      "sorting_key": "292",
+      "tts_long_name": "Southwest Freeway / TMC P&R",
+      "tts_short_name": "2 92 ",
+      "vehicle": {
+        "image": "bus-new",
+        "name": "bus",
+        "name_inflection": "n"
+      }
+    },
+    {
+      "alerts": [
+        {
+          "created_at": 1759502520,
+          "description": "(SB) via Main (L)Holcombe stay on top of bridge (R)Fannin (R)TMC",
+          "effect": "SIGNIFICANT_DELAYS",
+          "informed_entities": [
+            {
+              "global_route_id": "MTAHC:5480"
+            }
+          ],
+          "severity": "Warning",
+          "title": "Route 056 Airline / Montrose experiencing information southbound delays due to construction at Holcombe @ Pressler"
+        }
+      ],
+      "compact_display_short_name": {
+        "boxed_text": "",
+        "elements": [
+          null,
+          "56",
+          null
+        ],
+        "route_name_redundancy": false
+      },
+      "fares": [],
+      "global_route_id": "MTAHC:5480",
+      "itineraries": [
+        {
+          "branch_code": "",
+          "closest_stop": {
+            "city_name": "",
+            "global_stop_id": "MTAHC:57511",
+            "location_type": 0,
+            "parent_station": null,
+            "parent_station_global_stop_id": null,
+            "route_type": 3,
+            "rt_stop_id": "2670",
+            "stop_code": "2670",
+            "stop_lat": 29.72597249172165,
+            "stop_lon": -95.39092597213772,
+            "stop_name": "Montrose Blvd / Bissonnet St",
+            "wheelchair_boarding": 0
+          },
+          "direction_headsign": "Northbound",
+          "direction_id": 0,
+          "headsign": "Greenspoint TC",
+          "merged_headsign": "North to Greenspoint TC",
+          "schedule_items": [
+            {
+              "arrival_time": 1759919400,
+              "departure_time": 1759919400,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11426192",
+              "scheduled_arrival_time": 1759919400,
+              "scheduled_departure_time": 1759919400,
+              "trip_search_key": "MTAHC:49747875:82:3:2",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759920600,
+              "departure_time": 1759920600,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11426095",
+              "scheduled_arrival_time": 1759920600,
+              "scheduled_departure_time": 1759920600,
+              "trip_search_key": "MTAHC:49747875:82:3:3",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759921800,
+              "departure_time": 1759921800,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11426145",
+              "scheduled_arrival_time": 1759921800,
+              "scheduled_departure_time": 1759921800,
+              "trip_search_key": "MTAHC:49747875:82:3:4",
+              "wheelchair_accessible": 1
+            }
+          ]
+        },
+        {
+          "branch_code": "",
+          "closest_stop": {
+            "city_name": "",
+            "global_stop_id": "MTAHC:57741",
+            "location_type": 0,
+            "parent_station": null,
+            "parent_station_global_stop_id": null,
+            "route_type": 3,
+            "rt_stop_id": "2504",
+            "stop_code": "2504",
+            "stop_lat": 29.72334647634201,
+            "stop_lon": -95.39164542840612,
+            "stop_name": "Main St / Remington Ln",
+            "wheelchair_boarding": 0
+          },
+          "direction_headsign": "Southbound",
+          "direction_id": 1,
+          "headsign": "TMC TC",
+          "merged_headsign": "South to TMC TC",
+          "schedule_items": [
+            {
+              "arrival_time": 1759919760,
+              "departure_time": 1759919760,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11426296",
+              "scheduled_arrival_time": 1759919760,
+              "scheduled_departure_time": 1759919760,
+              "trip_search_key": "MTAHC:49747875:84:3:1",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759922160,
+              "departure_time": 1759922160,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11426294",
+              "scheduled_arrival_time": 1759922160,
+              "scheduled_departure_time": 1759922160,
+              "trip_search_key": "MTAHC:49747875:84:3:2",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759923360,
+              "departure_time": 1759923360,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11426196",
+              "scheduled_arrival_time": 1759923360,
+              "scheduled_departure_time": 1759923360,
+              "trip_search_key": "MTAHC:49747875:84:3:3",
+              "wheelchair_accessible": 1
+            }
+          ]
+        }
+      ],
+      "mode_name": "Bus",
+      "real_time_route_id": "056",
+      "route_color": "d94b3d",
+      "route_display_short_name": {
+        "boxed_text": "",
+        "elements": [
+          null,
+          "56",
+          null
+        ],
+        "route_name_redundancy": false
+      },
+      "route_image": "",
+      "route_long_name": "Airline / Montrose",
+      "route_network_id": "METRO|Houston",
+      "route_network_name": "METRO",
+      "route_short_name": "56",
+      "route_text_color": "ffffff",
+      "route_timezone": "America/Chicago",
+      "route_type": 3,
+      "sorting_key": "56",
+      "tts_long_name": "Airline / Montrose",
+      "tts_short_name": "56",
+      "vehicle": {
+        "image": "bus-new",
+        "name": "bus",
+        "name_inflection": "n"
+      }
+    },
+    {
+      "alerts": [
+        {
+          "created_at": 1755543540,
+          "description": "Affected direction: Outbound\n298 Kingsland/Addicks/NWTC/TMC O/B - Exit T.M.C. through Entrance # 1 to Fannin, Left Pressler to regular route.",
+          "effect": "DETOUR",
+          "informed_entities": [
+            {
+              "global_route_id": "MTAHC:5542"
+            }
+          ],
+          "severity": "Warning",
+          "title": "Route 298 Katy Freeway / TMC P&R detoured beginning Mon Jun 2 due to BOOST 56 construction"
+        }
+      ],
+      "compact_display_short_name": {
+        "boxed_text": "",
+        "elements": [
+          null,
+          "298",
+          null
+        ],
+        "route_name_redundancy": false
+      },
+      "fares": [],
+      "global_route_id": "MTAHC:5542",
+      "itineraries": [
+        {
+          "branch_code": "",
+          "closest_stop": {
+            "city_name": "",
+            "global_stop_id": "MTAHC:57740",
+            "location_type": 0,
+            "parent_station": null,
+            "parent_station_global_stop_id": null,
+            "route_type": 3,
+            "rt_stop_id": "2669",
+            "stop_code": "2669",
+            "stop_lat": 29.7262422878223,
+            "stop_lon": -95.39112382261153,
+            "stop_name": "Montrose Blvd / Bissonnet St",
+            "wheelchair_boarding": 0
+          },
+          "direction_headsign": "Inbound",
+          "direction_id": 0,
+          "headsign": "TMC TC",
+          "merged_headsign": "Inbound to TMC TC",
+          "schedule_items": [
+            {
+              "arrival_time": 1759919774,
+              "departure_time": 1759919774,
+              "is_cancelled": false,
+              "is_real_time": true,
+              "rt_trip_id": "11435459",
+              "scheduled_arrival_time": 1759919880,
+              "scheduled_departure_time": 1759919880,
+              "trip_search_key": "MTAHC:49747875:264:3:0",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759920480,
+              "departure_time": 1759920480,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11435432",
+              "scheduled_arrival_time": 1759920480,
+              "scheduled_departure_time": 1759920480,
+              "trip_search_key": "MTAHC:49747875:264:3:1",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759921200,
+              "departure_time": 1759921200,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11435440",
+              "scheduled_arrival_time": 1759921200,
+              "scheduled_departure_time": 1759921200,
+              "trip_search_key": "MTAHC:49747875:264:3:2",
+              "wheelchair_accessible": 1
+            }
+          ]
+        },
+        {
+          "branch_code": "",
+          "closest_stop": {
+            "city_name": "",
+            "global_stop_id": "MTAHC:57511",
+            "location_type": 0,
+            "parent_station": null,
+            "parent_station_global_stop_id": null,
+            "route_type": 3,
+            "rt_stop_id": "2670",
+            "stop_code": "2670",
+            "stop_lat": 29.72597249172165,
+            "stop_lon": -95.39092597213772,
+            "stop_name": "Montrose Blvd / Bissonnet St",
+            "wheelchair_boarding": 0
+          },
+          "direction_headsign": "Outbound",
+          "direction_id": 1,
+          "headsign": "Kingsland",
+          "merged_headsign": "Outbound to Kingsland",
+          "schedule_items": [
+            {
+              "arrival_time": 1759920900,
+              "departure_time": 1759920900,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11435496",
+              "scheduled_arrival_time": 1759920900,
+              "scheduled_departure_time": 1759920900,
+              "trip_search_key": "MTAHC:49747875:266:3:0",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759921500,
+              "departure_time": 1759921500,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11435493",
+              "scheduled_arrival_time": 1759921500,
+              "scheduled_departure_time": 1759921500,
+              "trip_search_key": "MTAHC:49747875:266:3:1",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759922340,
+              "departure_time": 1759922340,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11435497",
+              "scheduled_arrival_time": 1759922340,
+              "scheduled_departure_time": 1759922340,
+              "trip_search_key": "MTAHC:49747875:266:3:2",
+              "wheelchair_accessible": 1
+            }
+          ]
+        }
+      ],
+      "mode_name": "Bus",
+      "real_time_route_id": "298",
+      "route_color": "e28800",
+      "route_display_short_name": {
+        "boxed_text": "",
+        "elements": [
+          null,
+          "298",
+          null
+        ],
+        "route_name_redundancy": false
+      },
+      "route_image": "",
+      "route_long_name": "Katy Freeway / TMC P&R",
+      "route_network_id": "Park & Ride|Houston",
+      "route_network_name": "Park & Ride",
+      "route_short_name": "298",
+      "route_text_color": "ffffff",
+      "route_timezone": "America/Chicago",
+      "route_type": 3,
+      "sorting_key": "298",
+      "tts_long_name": "Katy Freeway / TMC P&R",
+      "tts_short_name": "2 98 ",
+      "vehicle": {
+        "image": "bus-new",
+        "name": "bus",
+        "name_inflection": "n"
+      }
+    },
+    {
+      "alerts": [],
+      "compact_display_short_name": {
+        "boxed_text": "",
+        "elements": [
+          null,
+          "65",
+          null
+        ],
+        "route_name_redundancy": false
+      },
+      "fares": [],
+      "global_route_id": "MTAHC:5485",
+      "itineraries": [
+        {
+          "branch_code": "",
+          "closest_stop": {
+            "city_name": "",
+            "global_stop_id": "MTAHC:64874",
+            "location_type": 0,
+            "parent_station": null,
+            "parent_station_global_stop_id": null,
+            "route_type": 3,
+            "rt_stop_id": "2674",
+            "stop_code": "2674",
+            "stop_lat": 29.72600846453507,
+            "stop_lon": -95.39059322361359,
+            "stop_name": "Bissonnet St / Montrose Blvd",
+            "wheelchair_boarding": 0
+          },
+          "direction_headsign": "Eastbound",
+          "direction_id": 0,
+          "headsign": "Wheeler TC",
+          "merged_headsign": "East to Wheeler TC",
+          "schedule_items": [
+            {
+              "arrival_time": 1759917913,
+              "departure_time": 1759917913,
+              "is_cancelled": false,
+              "is_real_time": true,
+              "rt_trip_id": "11427631",
+              "scheduled_arrival_time": 1759917960,
+              "scheduled_departure_time": 1759917960,
+              "trip_search_key": "MTAHC:49747875:98:3:1",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759918925,
+              "departure_time": 1759918925,
+              "is_cancelled": false,
+              "is_real_time": true,
+              "rt_trip_id": "11427630",
+              "scheduled_arrival_time": 1759918860,
+              "scheduled_departure_time": 1759918860,
+              "trip_search_key": "MTAHC:49747875:98:3:2",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759919733,
+              "departure_time": 1759919733,
+              "is_cancelled": false,
+              "is_real_time": true,
+              "rt_trip_id": "11427629",
+              "scheduled_arrival_time": 1759919760,
+              "scheduled_departure_time": 1759919760,
+              "trip_search_key": "MTAHC:49747875:98:3:3",
+              "wheelchair_accessible": 1
+            }
+          ]
+        },
+        {
+          "branch_code": "",
+          "closest_stop": {
+            "city_name": "",
+            "global_stop_id": "MTAHC:58371",
+            "location_type": 0,
+            "parent_station": null,
+            "parent_station_global_stop_id": null,
+            "route_type": 3,
+            "rt_stop_id": "11245",
+            "stop_code": "11245",
+            "stop_lat": 29.72618832860217,
+            "stop_lon": -95.3894151139741,
+            "stop_name": "Main St / Bissonnet St",
+            "wheelchair_boarding": 0
+          },
+          "direction_headsign": "Westbound",
+          "direction_id": 1,
+          "headsign": "Synott Rd",
+          "merged_headsign": "West to Synott Rd",
+          "schedule_items": [
+            {
+              "arrival_time": 1759917780,
+              "departure_time": 1759917780,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11427723",
+              "scheduled_arrival_time": 1759917780,
+              "scheduled_departure_time": 1759917780,
+              "trip_search_key": "MTAHC:49747875:99:3:2",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759918680,
+              "departure_time": 1759918680,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11427722",
+              "scheduled_arrival_time": 1759918680,
+              "scheduled_departure_time": 1759918680,
+              "trip_search_key": "MTAHC:49747875:99:3:3",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759919580,
+              "departure_time": 1759919580,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11427721",
+              "scheduled_arrival_time": 1759919580,
+              "scheduled_departure_time": 1759919580,
+              "trip_search_key": "MTAHC:49747875:99:3:4",
+              "wheelchair_accessible": 1
+            }
+          ]
+        }
+      ],
+      "mode_name": "Bus",
+      "real_time_route_id": "065",
+      "route_color": "005db4",
+      "route_display_short_name": {
+        "boxed_text": "",
+        "elements": [
+          null,
+          "65",
+          null
+        ],
+        "route_name_redundancy": false
+      },
+      "route_image": "",
+      "route_long_name": "Bissonnet",
+      "route_network_id": "METRO|Houston",
+      "route_network_name": "METRO",
+      "route_short_name": "65",
+      "route_text_color": "ffffff",
+      "route_timezone": "America/Chicago",
+      "route_type": 3,
+      "sorting_key": "65",
+      "tts_long_name": "Bissonnet",
+      "tts_short_name": "65",
+      "vehicle": {
+        "image": "bus-new",
+        "name": "bus",
+        "name_inflection": "n"
+      }
+    },
+    {
+      "alerts": [
+        {
+          "created_at": 1755543540,
+          "description": "Affected direction: Westbound\n\n4 Beechnut W/B – Continue Pressler and enter T.M.C./T.C. through Entrance # 1 to regular route.",
+          "effect": "DETOUR",
+          "informed_entities": [
+            {
+              "global_route_id": "MTAHC:5444"
+            }
+          ],
+          "severity": "Warning",
+          "title": "Route 004 Beechnut detoured beginning Mon Jun 2 due to 56 BOOST Construction"
+        },
+        {
+          "created_at": 1759501740,
+          "description": "Exit TMC (L)Pressler (R)Fannin (R)Braeswood (R)Greenbriar (L)Main to regular route.\nController: A,White 498",
+          "effect": "DETOUR",
+          "informed_entities": [
+            {
+              "global_route_id": "MTAHC:5444"
+            }
+          ],
+          "severity": "Warning",
+          "title": "Route 004 Beechnut detoured due to construction"
+        }
+      ],
+      "compact_display_short_name": {
+        "boxed_text": "",
+        "elements": [
+          null,
+          "4",
+          null
+        ],
+        "route_name_redundancy": false
+      },
+      "fares": [],
+      "global_route_id": "MTAHC:5444",
+      "itineraries": [
+        {
+          "branch_code": "",
+          "closest_stop": {
+            "city_name": "",
+            "global_stop_id": "MTAHC:52060",
+            "location_type": 0,
+            "parent_station": null,
+            "parent_station_global_stop_id": null,
+            "route_type": 3,
+            "rt_stop_id": "9593",
+            "stop_code": "9593",
+            "stop_lat": 29.7125546323161,
+            "stop_lon": -95.38252632020422,
+            "stop_name": "Mac Gregor Way / Almeda Rd",
+            "wheelchair_boarding": 0
+          },
+          "direction_headsign": "Eastbound",
+          "direction_id": 0,
+          "headsign": "Eastwood TC",
+          "merged_headsign": "East to Eastwood TC",
+          "schedule_items": [
+            {
+              "arrival_time": 1759920071,
+              "departure_time": 1759920071,
+              "is_cancelled": false,
+              "is_real_time": true,
+              "rt_trip_id": "11417251",
+              "scheduled_arrival_time": 1759920180,
+              "scheduled_departure_time": 1759920180,
+              "trip_search_key": "MTAHC:49747875:4:3:2",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759921009,
+              "departure_time": 1759921009,
+              "is_cancelled": false,
+              "is_real_time": true,
+              "rt_trip_id": "11417252",
+              "scheduled_arrival_time": 1759921080,
+              "scheduled_departure_time": 1759921080,
+              "trip_search_key": "MTAHC:49747875:4:3:3",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759922100,
+              "departure_time": 1759922100,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11417253",
+              "scheduled_arrival_time": 1759922100,
+              "scheduled_departure_time": 1759922100,
+              "trip_search_key": "MTAHC:49747875:4:3:4",
+              "wheelchair_accessible": 1
+            }
+          ]
+        },
+        {
+          "branch_code": "",
+          "closest_stop": {
+            "city_name": "",
+            "global_stop_id": "MTAHC:52109",
+            "location_type": 0,
+            "parent_station": null,
+            "parent_station_global_stop_id": null,
+            "route_type": 3,
+            "rt_stop_id": "5447",
+            "stop_code": "5447",
+            "stop_lat": 29.71370576234553,
+            "stop_lon": -95.38174391151234,
+            "stop_name": "Mac Gregor Way / Almeda Rd",
+            "wheelchair_boarding": 0
+          },
+          "direction_headsign": "Westbound",
+          "direction_id": 1,
+          "headsign": "Mission Bend TC",
+          "merged_headsign": "West to Mission Bend TC",
+          "schedule_items": [
+            {
+              "arrival_time": 1759917447,
+              "departure_time": 1759917447,
+              "is_cancelled": false,
+              "is_real_time": true,
+              "rt_trip_id": "11417420",
+              "scheduled_arrival_time": 1759917360,
+              "scheduled_departure_time": 1759917360,
+              "trip_search_key": "MTAHC:49747875:5:3:3",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759918260,
+              "departure_time": 1759918260,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11417338",
+              "scheduled_arrival_time": 1759918260,
+              "scheduled_departure_time": 1759918260,
+              "trip_search_key": "MTAHC:49747875:5:3:4",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759919160,
+              "departure_time": 1759919160,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11417339",
+              "scheduled_arrival_time": 1759919160,
+              "scheduled_departure_time": 1759919160,
+              "trip_search_key": "MTAHC:49747875:5:3:5",
+              "wheelchair_accessible": 1
+            }
+          ]
+        }
+      ],
+      "mode_name": "Bus",
+      "real_time_route_id": "004",
+      "route_color": "d94b3d",
+      "route_display_short_name": {
+        "boxed_text": "",
+        "elements": [
+          null,
+          "4",
+          null
+        ],
+        "route_name_redundancy": false
+      },
+      "route_image": "",
+      "route_long_name": "Beechnut",
+      "route_network_id": "METRO|Houston",
+      "route_network_name": "METRO",
+      "route_short_name": "4",
+      "route_text_color": "ffffff",
+      "route_timezone": "America/Chicago",
+      "route_type": 3,
+      "sorting_key": "4",
+      "tts_long_name": "Beechnut",
+      "tts_short_name": "4",
+      "vehicle": {
+        "image": "bus-new",
+        "name": "bus",
+        "name_inflection": "n"
+      }
+    },
+    {
+      "alerts": [
+        {
+          "created_at": 1756138500,
+          "description": "Eastbound 25 detour\nVia Wheeler\nR- Saint Emmanuel\nL-Blodgett\nL- Emancipation\nR-Wheeler to regular route\n\nWestbound\n\nVia Wheeler\nL- Emancipation\nR-Blodgett\nR-Chartres\nL-Wheeler to regular route",
+          "effect": "DETOUR",
+          "informed_entities": [
+            {
+              "global_route_id": "MTAHC:5458"
+            }
+          ],
+          "severity": "Warning",
+          "title": "Route 025 Richmond detoured due to construction at 288 & Wheeler Ave"
+        },
+        {
+          "created_at": 1757943120,
+          "description": "25 Richmond E/B\n(@ Wheeler & 288 Fwy)\n\nVia Wheeler Ave\nR – St Emanuel Street\nL – Blodgett Street\nL – Emancipation Ave\nR – Wheeler Ave\nTo regular route\nCompletion Date 12/02/2025\n\n25 Richmond W/B\n(@ Wheeler & 288 Fwy)\n\nVia Wheeler Ave\nL – Emancipation Ave\nR – Blodgett Street\nR – Chartress Street\nL – Wheeler Ave\nTo regular route",
+          "effect": "DETOUR",
+          "informed_entities": [
+            {
+              "global_route_id": "MTAHC:5458"
+            }
+          ],
+          "severity": "Warning",
+          "title": "Route 025 Richmond detoured through Tue Dec 2 due to construction at Wheeler & 288 Fwy"
+        }
+      ],
+      "compact_display_short_name": {
+        "boxed_text": "",
+        "elements": [
+          null,
+          "25",
+          null
+        ],
+        "route_name_redundancy": false
+      },
+      "fares": [],
+      "global_route_id": "MTAHC:5458",
+      "itineraries": [
+        {
+          "branch_code": "",
+          "closest_stop": {
+            "city_name": "",
+            "global_stop_id": "MTAHC:53719",
+            "location_type": 0,
+            "parent_station": null,
+            "parent_station_global_stop_id": null,
+            "route_type": 3,
+            "rt_stop_id": "12335",
+            "stop_code": "12335",
+            "stop_lat": 29.73012735167163,
+            "stop_lon": -95.37641993512622,
+            "stop_name": "Wheeler Ave / Almeda Rd",
+            "wheelchair_boarding": 0
+          },
+          "direction_headsign": "Eastbound",
+          "direction_id": 0,
+          "headsign": "Eastwood TC",
+          "merged_headsign": "East to Eastwood TC",
+          "schedule_items": [
+            {
+              "arrival_time": 1759918201,
+              "departure_time": 1759918201,
+              "is_cancelled": false,
+              "is_real_time": true,
+              "rt_trip_id": "11419977",
+              "scheduled_arrival_time": 1759918140,
+              "scheduled_departure_time": 1759918140,
+              "trip_search_key": "MTAHC:49747875:27:3:1",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759919159,
+              "departure_time": 1759919159,
+              "is_cancelled": false,
+              "is_real_time": true,
+              "rt_trip_id": "11419901",
+              "scheduled_arrival_time": 1759919040,
+              "scheduled_departure_time": 1759919040,
+              "trip_search_key": "MTAHC:49747875:26:3:1",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759919987,
+              "departure_time": 1759919987,
+              "is_cancelled": false,
+              "is_real_time": true,
+              "rt_trip_id": "11419976",
+              "scheduled_arrival_time": 1759920000,
+              "scheduled_departure_time": 1759920000,
+              "trip_search_key": "MTAHC:49747875:27:3:2",
+              "wheelchair_accessible": 1
+            }
+          ]
+        },
+        {
+          "branch_code": "",
+          "closest_stop": {
+            "city_name": "",
+            "global_stop_id": "MTAHC:53764",
+            "location_type": 0,
+            "parent_station": null,
+            "parent_station_global_stop_id": null,
+            "route_type": 3,
+            "rt_stop_id": "12336",
+            "stop_code": "12336",
+            "stop_lat": 29.72998346041795,
+            "stop_lon": -95.37591631573835,
+            "stop_name": "Wheeler Ave / Almeda Rd",
+            "wheelchair_boarding": 0
+          },
+          "direction_headsign": "Westbound",
+          "direction_id": 1,
+          "headsign": "Mission Bend TC",
+          "merged_headsign": "West to Mission Bend TC",
+          "schedule_items": [
+            {
+              "arrival_time": 1759917278,
+              "departure_time": 1759917278,
+              "is_cancelled": false,
+              "is_real_time": true,
+              "rt_trip_id": "11420059",
+              "scheduled_arrival_time": 1759917060,
+              "scheduled_departure_time": 1759917060,
+              "trip_search_key": "MTAHC:49747875:29:3:1",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759918093,
+              "departure_time": 1759918093,
+              "is_cancelled": false,
+              "is_real_time": true,
+              "rt_trip_id": "11420058",
+              "scheduled_arrival_time": 1759917960,
+              "scheduled_departure_time": 1759917960,
+              "trip_search_key": "MTAHC:49747875:28:3:3",
+              "wheelchair_accessible": 1
+            },
+            {
+              "arrival_time": 1759918860,
+              "departure_time": 1759918860,
+              "is_cancelled": false,
+              "is_real_time": false,
+              "rt_trip_id": "11420057",
+              "scheduled_arrival_time": 1759918860,
+              "scheduled_departure_time": 1759918860,
+              "trip_search_key": "MTAHC:49747875:29:3:2",
+              "wheelchair_accessible": 1
+            }
+          ]
+        }
+      ],
+      "mode_name": "Bus",
+      "real_time_route_id": "025",
+      "route_color": "005db4",
+      "route_display_short_name": {
+        "boxed_text": "",
+        "elements": [
+          null,
+          "25",
+          null
+        ],
+        "route_name_redundancy": false
+      },
+      "route_image": "",
+      "route_long_name": "Richmond",
+      "route_network_id": "METRO|Houston",
+      "route_network_name": "METRO",
+      "route_short_name": "25",
+      "route_text_color": "ffffff",
+      "route_timezone": "America/Chicago",
+      "route_type": 3,
+      "sorting_key": "25",
+      "tts_long_name": "Richmond",
+      "tts_short_name": "25",
+      "vehicle": {
+        "image": "bus-new",
+        "name": "bus",
+        "name_inflection": "n"
+      }
+    }
+  ]
+}
