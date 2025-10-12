@@ -5,3 +5,4 @@ architecture.
 # Links
 
 https://docs.espressif.com/projects/rust/book/preface.html
+https://docs.esp-rs.org/std-training/

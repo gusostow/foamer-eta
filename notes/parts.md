@@ -9,6 +9,12 @@ default to using this, but it's possible I'll need to switch to something else.
 - Bluetooth/Wifi
 - Supports Rust `std` library builds, which makes things easier.
 
+It turns out the basic ESP-32 isn't supported buy Rust. The tutorials use
+ESP32-C3-DevKit-RUST-1.
+
+https://github.com/esp-rs/esp-rust-board
+https://www.amazon.com/dp/B0B4FPV9FW
+
 ## Links
 
 - [Rust firmware](https://docs.espressif.com/projects/rust/book/overview/using-the-standard-library.html)

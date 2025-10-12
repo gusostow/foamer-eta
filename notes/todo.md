@@ -3,7 +3,8 @@
 - [x] Call Ride Metro GTFS Realtime from Rust
 - [x] Transit API client boilerplate
 - [x] Finish Transit API client crate
-- [ ] Investigate PE local transit to inform parameters / mock-up 
-- [ ] Mock-up
-- [ ] Purchase ESP32-C3 dev board
+- [x] Investigate PE local transit to inform parameters / mock-up 
+- [x] Mock-up
+- [x] Purchase ESP32-C3 dev board
+- [x] Purchase Adafruit MatrixPortal
 - [ ] ESP32 LED hello world
