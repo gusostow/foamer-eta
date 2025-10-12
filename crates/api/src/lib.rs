@@ -2,6 +2,7 @@ use anyhow::{Context, Result};
 use serde::{Deserialize, Serialize};
 use transit::TransitClient;
 
+// in meters
 const DEFAULT_DISTANCE: u32 = 500;
 
 type LatLon = (f32, f32);
