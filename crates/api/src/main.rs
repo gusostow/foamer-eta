@@ -1,11 +1,13 @@
 use anyhow::Result;
 
-#[tokio::main(flavor = "current_thread")]
+#[tokio::main]
 async fn main() -> Result<()> {
-    let client = transit::TransitClient::from_env()?;
-    let response = client
-        .nearby_routes(29.72134736791465, -95.38383198936232, Some(900), None, None, None)
-        .await;
-    println!("{:#?}", response);
+    let app = api::svc::create_router()?;
+
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await?;
+    println!("Server listening on {}", listener.local_addr()?);
+
+    axum::serve(listener, app).await?;
+
     Ok(())
 }
