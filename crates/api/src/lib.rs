@@ -2,6 +2,8 @@ use anyhow::{Context, Result};
 use serde::{Deserialize, Serialize};
 use transit::TransitClient;
 
+pub mod svc;
+
 // in meters
 const DEFAULT_DISTANCE: u32 = 500;
 
@@ -27,6 +29,7 @@ pub struct Direction {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
+#[serde(tag = "type", content = "minutes")]
 pub enum Departure {
     Scheduled(u16),
     RealTime(u16),
@@ -95,7 +98,7 @@ impl Client {
                             .collect();
 
                         Ok(Direction {
-                            headsign: itinerary.headsign,
+                            headsign: itinerary.direction_headsign.unwrap_or("".to_string()),
                             departures: departures?,
                         })
                     })
