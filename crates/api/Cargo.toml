@@ -8,4 +8,5 @@ prost-types = "0.14"
 tokio = { workspace = true }
 reqwest = "0.12"
 anyhow = { workspace = true }
+serde = { workspace = true }
 transit = { path = "../transit" }
