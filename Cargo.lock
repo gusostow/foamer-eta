@@ -30,6 +30,7 @@ dependencies = [
  "anyhow",
  "prost-types",
  "reqwest",
+ "serde",
  "tokio",
  "transit",
 ]

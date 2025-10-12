@@ -5,3 +5,4 @@ members = ["crates/api", "crates/transit"]
 [workspace.dependencies]
 anyhow = "1.0"
 tokio = { version = "1.0", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
