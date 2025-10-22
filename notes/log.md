@@ -19,3 +19,16 @@ jq '[.routes[].itineraries[].schedule_items[]] | (map(select(.is_real_time == tr
 0.2777777777777778
 ```
 
+
+_2025-10-13_
+
+I've had my suspicious that the ESP32-C3 won't cut it for the LED matrix displays.
+
+I posted on reddit and that's somewhat confirmed https://www.reddit.com/r/esp32/comments/1o47emo/guidance_for_hub75_led_matrix_panel/.
+
+An easier option is a combined board that's designed to plug directly into displays with HUB75.
+
+I bought this from MicroCenter https://learn.adafruit.com/adafruit-matrixportal-s3.
+
+Note that it isn't natively Rust compatible. I think doing this in Arduino or
+CircuitPython/micropython.

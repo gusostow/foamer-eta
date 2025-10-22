@@ -32,7 +32,9 @@ Key architectural pattern: The `transit` crate owns all Transit API types and HT
 
 ## Development Commands
 
-### Building
+### Rust Backend
+
+#### Building
 ```bash
 # Build entire workspace
 LIBRARY_PATH=/Users/aostow/.nix-profile/lib:$LIBRARY_PATH cargo build
@@ -44,7 +46,7 @@ LIBRARY_PATH=/Users/aostow/.nix-profile/lib:$LIBRARY_PATH cargo build -p transit
 
 Note: The `LIBRARY_PATH` prefix is required in this environment. When using the Bash tool with cargo commands, this is already pre-approved for automatic execution.
 
-### Running
+#### Running
 ```bash
 # Run the HTTP service (listens on 0.0.0.0:3000)
 LIBRARY_PATH=/Users/aostow/.nix-profile/lib:$LIBRARY_PATH cargo run -p api
@@ -52,7 +54,7 @@ LIBRARY_PATH=/Users/aostow/.nix-profile/lib:$LIBRARY_PATH cargo run -p api
 
 The service requires the `TRANSIT_KEY` environment variable to be set. This is loaded from `.envrc.local` (not in git).
 
-### Testing
+#### Testing
 ```bash
 # Run all tests
 cargo test
@@ -70,10 +72,39 @@ cargo test --test integration_test
 
 Integration tests require `TRANSIT_KEY` to be set. Tests use Houston, TX coordinates (29.72134736791465, -95.38383198936232) as test data.
 
-### API Usage Example
+#### API Usage Example
 ```bash
 # Query departures for a location
 curl "http://localhost:3000/departures?lat=29.7213&lon=-95.3838&max_distance=500"
+```
+
+### Arduino Firmware (ESP32-S3)
+
+The `firmware/foamer-display` directory contains Arduino code for the Adafruit MatrixPortal ESP32-S3 board with a 96x48 HUB75 LED matrix display.
+
+#### Building
+```bash
+# Compile firmware
+make compile
+```
+
+#### Uploading
+```bash
+# Compile and upload (auto-detects port)
+make upload
+
+# Override port if needed
+make upload PORT=/dev/cu.usbmodem103
+```
+
+#### Required Libraries
+- Adafruit GFX Library
+- ESP32 HUB75 LED MATRIX PANEL DMA Display
+
+These can be installed via arduino-cli:
+```bash
+arduino-cli lib install "Adafruit GFX Library"
+arduino-cli lib install "ESP32 HUB75 LED MATRIX PANEL DMA Display"
 ```
 
 ## Important Implementation Details
