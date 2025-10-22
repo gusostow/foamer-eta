@@ -1,0 +1,291 @@
+{
+  "routes": [
+    {
+      "name": "Red",
+      "mode": "METRORail",
+      "color": "e41937",
+      "directions": [
+        {
+          "headsign": "Southbound",
+          "departures": [
+            {
+              "type": "Scheduled",
+              "minutes": 10
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 22
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 34
+            }
+          ]
+        },
+        {
+          "headsign": "Northbound",
+          "departures": [
+            {
+              "type": "Scheduled",
+              "minutes": 2
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 15
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 33
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "5",
+      "mode": "Bus",
+      "color": "2da646",
+      "directions": [
+        {
+          "headsign": "Eastbound",
+          "departures": [
+            {
+              "type": "Scheduled",
+              "minutes": 8
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 488
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 539
+            }
+          ]
+        },
+        {
+          "headsign": "Westbound",
+          "departures": [
+            {
+              "type": "RealTime",
+              "minutes": 28
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 76
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 516
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "11",
+      "mode": "Bus",
+      "color": "045bae",
+      "directions": [
+        {
+          "headsign": "Northbound",
+          "departures": [
+            {
+              "type": "RealTime",
+              "minutes": 19
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 45
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 75
+            }
+          ]
+        },
+        {
+          "headsign": "Southbound",
+          "departures": [
+            {
+              "type": "RealTime",
+              "minutes": 26
+            },
+            {
+              "type": "RealTime",
+              "minutes": 44
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 75
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "56",
+      "mode": "Bus",
+      "color": "d94b3d",
+      "directions": [
+        {
+          "headsign": "Northbound",
+          "departures": [
+            {
+              "type": "RealTime",
+              "minutes": 7
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 38
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 68
+            }
+          ]
+        },
+        {
+          "headsign": "Southbound",
+          "departures": [
+            {
+              "type": "RealTime",
+              "minutes": 11
+            },
+            {
+              "type": "RealTime",
+              "minutes": 46
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 71
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4",
+      "mode": "Bus",
+      "color": "d94b3d",
+      "directions": [
+        {
+          "headsign": "Eastbound",
+          "departures": [
+            {
+              "type": "Scheduled",
+              "minutes": 3
+            },
+            {
+              "type": "RealTime",
+              "minutes": 20
+            },
+            {
+              "type": "RealTime",
+              "minutes": 52
+            }
+          ]
+        },
+        {
+          "headsign": "Westbound",
+          "departures": [
+            {
+              "type": "RealTime",
+              "minutes": 2
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 31
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 61
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "65",
+      "mode": "Bus",
+      "color": "005db4",
+      "directions": [
+        {
+          "headsign": "Eastbound",
+          "departures": [
+            {
+              "type": "Scheduled",
+              "minutes": 23
+            },
+            {
+              "type": "RealTime",
+              "minutes": 56
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 82
+            }
+          ]
+        },
+        {
+          "headsign": "Westbound",
+          "departures": [
+            {
+              "type": "Scheduled",
+              "minutes": 17
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 47
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 77
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "25",
+      "mode": "Bus",
+      "color": "005db4",
+      "directions": [
+        {
+          "headsign": "Eastbound",
+          "departures": [
+            {
+              "type": "Scheduled",
+              "minutes": 7
+            },
+            {
+              "type": "RealTime",
+              "minutes": 39
+            },
+            {
+              "type": "RealTime",
+              "minutes": 61
+            }
+          ]
+        },
+        {
+          "headsign": "Westbound",
+          "departures": [
+            {
+              "type": "Scheduled",
+              "minutes": 22
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 52
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 82
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
