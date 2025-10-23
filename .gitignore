@@ -25,3 +25,8 @@ target
 
 # MacOS
 .DS_STORE
+
+# PlatformIO
+.pio/
+.cache/
+compile_commands.json

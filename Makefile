@@ -1,13 +1,25 @@
-# Arduino CLI Makefile for foamer-display
+# PlatformIO Makefile for foamer-display
 # ESP32-S3 MatrixPortal board
 
-BOARD_FQBN = esp32:esp32:adafruit_matrixportal_esp32s3
-PORT ?= $(shell arduino-cli board list | grep -i "esp32" | head -n1 | awk '{print $$1}')
+PROJECT_DIR = firmware/foamer-display
+PIO = platformio
 
-.PHONY: compile upload
+.PHONY: compile upload monitor clean compiledb
 
 compile:
-	arduino-cli compile --log --fqbn $(BOARD_FQBN) firmware/foamer-display
+	cd $(PROJECT_DIR) && $(PIO) run
 
-upload: compile
-	arduino-cli upload --log --fqbn $(BOARD_FQBN) --port $(PORT) firmware/foamer-display
+upload:
+	cd $(PROJECT_DIR) && $(PIO) run -t upload
+
+monitor:
+	cd $(PROJECT_DIR) && $(PIO) device monitor
+
+upload-monitor:
+	cd $(PROJECT_DIR) && $(PIO) run -t upload -t monitor
+
+clean:
+	cd $(PROJECT_DIR) && $(PIO) run -t clean
+
+compiledb:
+	cd $(PROJECT_DIR) && $(PIO) run -t compiledb
