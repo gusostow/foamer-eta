@@ -98,7 +98,7 @@ impl Client {
                             .collect();
 
                         Ok(Direction {
-                            headsign: itinerary.direction_headsign.unwrap_or("".to_string()),
+                            headsign: itinerary.headsign,
                             departures: departures?,
                         })
                     })
