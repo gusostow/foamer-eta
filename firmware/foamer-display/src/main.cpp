@@ -446,18 +446,6 @@ void setup(void) {
   String dir = String(headsign);
   dir.toUpperCase();
 
-  // Shorten common direction names
-  // == operator is OVERLOADED for String class
-  // In C you'd use: strcmp(dir, "SOUTHBOUND") == 0
-  if (dir == "SOUTHBOUND")
-    dir = "S";
-  else if (dir == "NORTHBOUND")
-    dir = "N";
-  else if (dir == "EASTBOUND")
-    dir = "E";
-  else if (dir == "WESTBOUND")
-    dir = "W";
-
   display.print(dir);
   display.print("|");
 
