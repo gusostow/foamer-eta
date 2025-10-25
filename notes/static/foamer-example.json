@@ -6,36 +6,36 @@
       "color": "e41937",
       "directions": [
         {
-          "headsign": "Southbound",
+          "headsign": "Fannin South",
           "departures": [
             {
               "type": "Scheduled",
-              "minutes": 10
+              "minutes": 4
             },
             {
               "type": "Scheduled",
-              "minutes": 22
+              "minutes": 16
             },
             {
               "type": "Scheduled",
-              "minutes": 34
+              "minutes": 28
             }
           ]
         },
         {
-          "headsign": "Northbound",
+          "headsign": "North Line TC",
           "departures": [
             {
               "type": "Scheduled",
-              "minutes": 2
+              "minutes": 8
             },
             {
               "type": "Scheduled",
-              "minutes": 15
+              "minutes": 20
             },
             {
               "type": "Scheduled",
-              "minutes": 33
+              "minutes": 32
             }
           ]
         }
@@ -47,36 +47,36 @@
       "color": "2da646",
       "directions": [
         {
-          "headsign": "Eastbound",
+          "headsign": "Richey St",
           "departures": [
             {
               "type": "Scheduled",
-              "minutes": 8
+              "minutes": 32
             },
             {
               "type": "Scheduled",
-              "minutes": 488
+              "minutes": 77
             },
             {
               "type": "Scheduled",
-              "minutes": 539
+              "minutes": 122
             }
           ]
         },
         {
-          "headsign": "Westbound",
+          "headsign": "Wheeler TC",
           "departures": [
             {
               "type": "RealTime",
-              "minutes": 28
+              "minutes": 14
             },
             {
               "type": "Scheduled",
-              "minutes": 76
+              "minutes": 59
             },
             {
               "type": "Scheduled",
-              "minutes": 516
+              "minutes": 104
             }
           ]
         }
@@ -88,36 +88,36 @@
       "color": "045bae",
       "directions": [
         {
-          "headsign": "Northbound",
-          "departures": [
-            {
-              "type": "RealTime",
-              "minutes": 19
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 45
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 75
-            }
-          ]
-        },
-        {
-          "headsign": "Southbound",
+          "headsign": "Gellhorn / 610",
           "departures": [
             {
               "type": "RealTime",
               "minutes": 26
             },
             {
-              "type": "RealTime",
-              "minutes": 44
+              "type": "Scheduled",
+              "minutes": 54
             },
             {
               "type": "Scheduled",
-              "minutes": 75
+              "minutes": 84
+            }
+          ]
+        },
+        {
+          "headsign": "Hiram Clarke TC",
+          "departures": [
+            {
+              "type": "RealTime",
+              "minutes": 0
+            },
+            {
+              "type": "RealTime",
+              "minutes": 32
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 60
             }
           ]
         }
@@ -129,36 +129,36 @@
       "color": "d94b3d",
       "directions": [
         {
-          "headsign": "Northbound",
+          "headsign": "Greenspoint TC",
           "departures": [
             {
-              "type": "RealTime",
-              "minutes": 7
+              "type": "Scheduled",
+              "minutes": 12
             },
             {
               "type": "Scheduled",
-              "minutes": 38
+              "minutes": 42
             },
             {
               "type": "Scheduled",
-              "minutes": 68
+              "minutes": 72
             }
           ]
         },
         {
-          "headsign": "Southbound",
+          "headsign": "TMC TC",
           "departures": [
             {
               "type": "RealTime",
-              "minutes": 11
+              "minutes": 14
             },
             {
               "type": "RealTime",
-              "minutes": 46
+              "minutes": 50
             },
             {
-              "type": "Scheduled",
-              "minutes": 71
+              "type": "RealTime",
+              "minutes": 74
             }
           ]
         }
@@ -170,36 +170,36 @@
       "color": "d94b3d",
       "directions": [
         {
-          "headsign": "Eastbound",
+          "headsign": "Eastwood TC",
           "departures": [
             {
-              "type": "Scheduled",
-              "minutes": 3
+              "type": "RealTime",
+              "minutes": 14
             },
             {
               "type": "RealTime",
-              "minutes": 20
+              "minutes": 34
             },
             {
               "type": "RealTime",
-              "minutes": 52
+              "minutes": 50
             }
           ]
         },
         {
-          "headsign": "Westbound",
+          "headsign": "Mission Bend TC",
           "departures": [
             {
-              "type": "RealTime",
-              "minutes": 2
+              "type": "Scheduled",
+              "minutes": 6
             },
             {
               "type": "Scheduled",
-              "minutes": 31
+              "minutes": 21
             },
             {
               "type": "Scheduled",
-              "minutes": 61
+              "minutes": 36
             }
           ]
         }
@@ -211,24 +211,48 @@
       "color": "005db4",
       "directions": [
         {
-          "headsign": "Eastbound",
+          "headsign": "Wheeler TC",
           "departures": [
             {
-              "type": "Scheduled",
-              "minutes": 23
+              "type": "RealTime",
+              "minutes": 11
             },
             {
               "type": "RealTime",
-              "minutes": 56
+              "minutes": 18
             },
             {
-              "type": "Scheduled",
-              "minutes": 82
+              "type": "RealTime",
+              "minutes": 31
             }
           ]
         },
         {
-          "headsign": "Westbound",
+          "headsign": "Synott Rd",
+          "departures": [
+            {
+              "type": "Scheduled",
+              "minutes": 6
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 21
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 36
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "USS",
+      "mode": "Bus",
+      "color": "76fa8c",
+      "directions": [
+        {
+          "headsign": "Target and Fiesta Shopping Center",
           "departures": [
             {
               "type": "Scheduled",
@@ -236,11 +260,11 @@
             },
             {
               "type": "Scheduled",
-              "minutes": 47
+              "minutes": 48
             },
             {
               "type": "Scheduled",
-              "minutes": 77
+              "minutes": 78
             }
           ]
         }
@@ -252,36 +276,36 @@
       "color": "005db4",
       "directions": [
         {
-          "headsign": "Eastbound",
+          "headsign": "Eastwood TC",
           "departures": [
             {
-              "type": "Scheduled",
-              "minutes": 7
+              "type": "RealTime",
+              "minutes": 9
             },
             {
               "type": "RealTime",
-              "minutes": 39
+              "minutes": 24
             },
             {
               "type": "RealTime",
-              "minutes": 61
+              "minutes": 33
             }
           ]
         },
         {
-          "headsign": "Westbound",
+          "headsign": "Westchase",
           "departures": [
+            {
+              "type": "RealTime",
+              "minutes": 5
+            },
             {
               "type": "Scheduled",
               "minutes": 22
             },
             {
               "type": "Scheduled",
-              "minutes": 52
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 82
+              "minutes": 37
             }
           ]
         }
