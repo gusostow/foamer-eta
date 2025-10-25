@@ -16,3 +16,6 @@ LED to the ESP32 and also power both at the same time.
 [Waveshare manual](https://www.waveshare.com/wiki/RGB-Matrix-P2.5-96x48-F)
 
 [LED wiring post for Pi](https://github.com/hzeller/rpi-rgb-led-matrix/blob/master/wiring.md)
+
+
+https://learn.adafruit.com/adafruit-matrixportal-s3/wifi-test
