@@ -317,7 +317,7 @@ const char STATIC_JSON[] PROGMEM = R"({
 /* Display configuration constants */
 const int HEADSIGN_WIDTH = 7;
 const char* REALTIME_COLOR = "3ac364";
-const int DISPLAY_INTERVAL_MS = 2000; // 10 seconds per page
+const int DISPLAY_INTERVAL_MS = 3000; // 10 seconds per page
 
 // Global variables for rotation
 int currentRouteIndex = 0;
