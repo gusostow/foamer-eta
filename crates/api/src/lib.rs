@@ -76,10 +76,11 @@ impl Client {
                         let departures: Result<Vec<_>> = itinerary
                             .schedule_items
                             .into_iter()
-                            .map(|item| {
+                            .filter_map(|item| {
                                 let now = std::time::SystemTime::now()
                                     .duration_since(std::time::UNIX_EPOCH)
-                                    .context("Failed to get current time")?
+                                    .context("Failed to get current time")
+                                    .ok()?
                                     .as_secs();
 
                                 // Calculate minutes, handling negative values (past departures)
@@ -89,11 +90,16 @@ impl Client {
                                     0
                                 };
 
-                                Ok(if item.is_real_time {
+                                // Filter out departures > 60 minutes
+                                if minutes > 99 {
+                                    return None;
+                                }
+
+                                Some(Ok(if item.is_real_time {
                                     Departure::RealTime(minutes)
                                 } else {
                                     Departure::Scheduled(minutes)
-                                })
+                                }))
                             })
                             .collect();
 

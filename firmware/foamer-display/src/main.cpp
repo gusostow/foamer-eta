@@ -18,6 +18,23 @@ const char STATIC_JSON[] PROGMEM = R"({
           "departures": [
             {
               "type": "Scheduled",
+              "minutes": 0
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 12
+            },
+            {
+              "type": "Scheduled",
+              "minutes": 24
+            }
+          ]
+        },
+        {
+          "headsign": "North Line TC",
+          "departures": [
+            {
+              "type": "Scheduled",
               "minutes": 4
             },
             {
@@ -27,23 +44,6 @@ const char STATIC_JSON[] PROGMEM = R"({
             {
               "type": "Scheduled",
               "minutes": 28
-            }
-          ]
-        },
-        {
-          "headsign": "North Line TC",
-          "departures": [
-            {
-              "type": "Scheduled",
-              "minutes": 8
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 20
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 32
             }
           ]
         }
@@ -58,16 +58,16 @@ const char STATIC_JSON[] PROGMEM = R"({
           "headsign": "Richey St",
           "departures": [
             {
-              "type": "Scheduled",
-              "minutes": 32
+              "type": "RealTime",
+              "minutes": 6
             },
             {
               "type": "Scheduled",
-              "minutes": 77
+              "minutes": 43
             },
             {
               "type": "Scheduled",
-              "minutes": 122
+              "minutes": 88
             }
           ]
         },
@@ -76,15 +76,11 @@ const char STATIC_JSON[] PROGMEM = R"({
           "departures": [
             {
               "type": "RealTime",
-              "minutes": 14
+              "minutes": 26
             },
             {
-              "type": "Scheduled",
-              "minutes": 59
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 104
+              "type": "RealTime",
+              "minutes": 71
             }
           ]
         }
@@ -100,15 +96,15 @@ const char STATIC_JSON[] PROGMEM = R"({
           "departures": [
             {
               "type": "RealTime",
-              "minutes": 26
+              "minutes": 15
             },
             {
               "type": "Scheduled",
-              "minutes": 54
+              "minutes": 50
             },
             {
               "type": "Scheduled",
-              "minutes": 84
+              "minutes": 80
             }
           ]
         },
@@ -117,15 +113,15 @@ const char STATIC_JSON[] PROGMEM = R"({
           "departures": [
             {
               "type": "RealTime",
-              "minutes": 0
+              "minutes": 5
             },
             {
               "type": "RealTime",
-              "minutes": 32
+              "minutes": 27
             },
             {
               "type": "Scheduled",
-              "minutes": 60
+              "minutes": 56
             }
           ]
         }
@@ -140,16 +136,16 @@ const char STATIC_JSON[] PROGMEM = R"({
           "headsign": "Greenspoint TC",
           "departures": [
             {
-              "type": "Scheduled",
-              "minutes": 12
+              "type": "RealTime",
+              "minutes": 8
             },
             {
               "type": "Scheduled",
-              "minutes": 42
+              "minutes": 38
             },
             {
               "type": "Scheduled",
-              "minutes": 72
+              "minutes": 68
             }
           ]
         },
@@ -158,15 +154,15 @@ const char STATIC_JSON[] PROGMEM = R"({
           "departures": [
             {
               "type": "RealTime",
-              "minutes": 14
+              "minutes": 21
             },
             {
               "type": "RealTime",
-              "minutes": 50
+              "minutes": 51
             },
             {
               "type": "RealTime",
-              "minutes": 74
+              "minutes": 64
             }
           ]
         }
@@ -182,15 +178,15 @@ const char STATIC_JSON[] PROGMEM = R"({
           "departures": [
             {
               "type": "RealTime",
-              "minutes": 14
+              "minutes": 11
             },
             {
               "type": "RealTime",
-              "minutes": 34
+              "minutes": 37
             },
             {
-              "type": "RealTime",
-              "minutes": 50
+              "type": "Scheduled",
+              "minutes": 42
             }
           ]
         },
@@ -198,16 +194,16 @@ const char STATIC_JSON[] PROGMEM = R"({
           "headsign": "Mission Bend TC",
           "departures": [
             {
-              "type": "Scheduled",
-              "minutes": 6
+              "type": "RealTime",
+              "minutes": 12
+            },
+            {
+              "type": "RealTime",
+              "minutes": 17
             },
             {
               "type": "Scheduled",
-              "minutes": 21
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 36
+              "minutes": 32
             }
           ]
         }
@@ -223,15 +219,15 @@ const char STATIC_JSON[] PROGMEM = R"({
           "departures": [
             {
               "type": "RealTime",
-              "minutes": 11
+              "minutes": 0
             },
             {
               "type": "RealTime",
-              "minutes": 18
+              "minutes": 30
             },
             {
               "type": "RealTime",
-              "minutes": 31
+              "minutes": 33
             }
           ]
         },
@@ -239,16 +235,16 @@ const char STATIC_JSON[] PROGMEM = R"({
           "headsign": "Synott Rd",
           "departures": [
             {
-              "type": "Scheduled",
-              "minutes": 6
+              "type": "RealTime",
+              "minutes": 2
             },
             {
               "type": "Scheduled",
-              "minutes": 21
+              "minutes": 17
             },
             {
               "type": "Scheduled",
-              "minutes": 36
+              "minutes": 32
             }
           ]
         }
@@ -264,15 +260,11 @@ const char STATIC_JSON[] PROGMEM = R"({
           "departures": [
             {
               "type": "Scheduled",
-              "minutes": 17
+              "minutes": 16
             },
             {
               "type": "Scheduled",
-              "minutes": 48
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 78
+              "minutes": 47
             }
           ]
         }
@@ -288,15 +280,15 @@ const char STATIC_JSON[] PROGMEM = R"({
           "departures": [
             {
               "type": "RealTime",
-              "minutes": 9
+              "minutes": 1
             },
             {
               "type": "RealTime",
-              "minutes": 24
+              "minutes": 15
             },
             {
               "type": "RealTime",
-              "minutes": 33
+              "minutes": 34
             }
           ]
         },
@@ -305,15 +297,15 @@ const char STATIC_JSON[] PROGMEM = R"({
           "departures": [
             {
               "type": "RealTime",
-              "minutes": 5
+              "minutes": 3
             },
             {
               "type": "Scheduled",
-              "minutes": 22
+              "minutes": 18
             },
             {
               "type": "Scheduled",
-              "minutes": 37
+              "minutes": 33
             }
           ]
         }
@@ -496,7 +488,7 @@ void setup(void) {
   JsonObject route1 = doc["routes"][0];
   displayRoute(display, route1);
 
-  JsonObject route2 = doc["routes"][7];
+  JsonObject route2 = doc["routes"][1];
   displayRoute(display, route2);
 }
 
