@@ -2,6 +2,12 @@
 #include <Adafruit_GFX.h> // Adafruit graphics library (class-based)
 #include <ArduinoJson.h>  // JSON parsing library
 #include <ESP32-HUB75-MatrixPanel-I2S-DMA.h> // LED matrix driver
+#include <WiFi.h>
+
+// WiFi credentials from environment variables
+const char* ssid = WIFI_SSID;
+const char* password = WIFI_PASSWORD;
+WiFiClient client;
 
 /* Test JSON data (embedded from foamer-example.json) */
 // PROGMEM = store in flash memory instead of RAM (ESP32-specific)
@@ -317,7 +323,7 @@ const char STATIC_JSON[] PROGMEM = R"({
 /* Display configuration constants */
 const int HEADSIGN_WIDTH = 7;
 const char* REALTIME_COLOR = "3ac364";
-const int DISPLAY_INTERVAL_MS = 3000; // 10 seconds per page
+const int DISPLAY_INTERVAL_MS = 5000; // 10 seconds per page
 
 // Global variables for rotation
 int currentRouteIndex = 0;
@@ -450,6 +456,17 @@ void setup(void) {
   // Dot notation: object.method() - calls a function that belongs to that object
   Serial.begin(115200);
   delay(2000); // Give serial time to connect
+               //
+  Serial.print("Attempting to connect to SSID: ");
+  Serial.println(ssid);
+
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+      delay(500);
+      Serial.print(".");
+  }
+  Serial.println("");
+  Serial.println("Connected to WiFi");
 
   Serial.println("Parsing JSON...");
 
