@@ -339,6 +339,53 @@ const HUB75_I2S_CFG::i2s_pins PINMAP = {
 // Constructor syntax: ClassName varName(arg1, arg2, ...)
 // Similar to: HUB75_I2S_CFG mxcfg; mxcfg_init(&mxcfg, 96, 48, 1, PINMAP); in C
 HUB75_I2S_CFG mxcfg(96, 48, 1, PINMAP); // width, height, chains, pins
+                                        //
+void displayDirection(MatrixPanel_I2S_DMA &display, JsonObject direction) {
+    const char *headsign = direction["headsign"];
+    JsonArray departures = direction["departures"];
+
+    String displayHeadsign = String(headsign);
+    displayHeadsign.toUpperCase();
+    displayHeadsign.replace(" ", "");
+    if (displayHeadsign.length() > 7) {
+        displayHeadsign = displayHeadsign.substring(0, 7);
+    }
+
+    display.print(displayHeadsign);
+    display.print("|");
+
+    int depCount = 0;
+
+    for (JsonObject dep : departures) {
+        if(depCount == 3) break;
+
+        int minutes = dep["minutes"];
+
+        if (depCount > 0) {
+            display.print(",");
+        }
+        display.print(minutes);
+
+        depCount++;
+    }
+    display.print("\n");
+}
+
+/* Function to display a route on the LED matrix */
+void displayRoute(MatrixPanel_I2S_DMA &display, JsonObject route) {
+    const char* name = route["name"];
+    String routeName = String(name);
+    routeName.toUpperCase();
+    display.println(routeName);
+
+    JsonArray directions = route["directions"];
+
+    for (JsonObject direction : directions) {
+        displayDirection(display, direction);
+    }
+
+}
+
 
 void setup(void) {
   // Serial is a global OBJECT (instance of a class)
@@ -364,21 +411,6 @@ void setup(void) {
     Serial.println(error.c_str());
     return;
   }
-
-  // Get first route
-  // doc["routes"] uses operator[] overloading (C++ feature)
-  // In C you'd do: get_element(doc, "routes")
-  // JsonObject is a CLASS representing a JSON object
-  JsonObject route = doc["routes"][0];
-
-  // More operator[] usage - gets value and implicitly converts to const char*
-  const char *routeName = route["name"];
-  const char *routeMode = route["mode"];
-
-  Serial.print("First route: ");
-  Serial.print(routeName);
-  Serial.print(" ");
-  Serial.println(routeMode);
 
   // This fixes ghosting
   // .clkphase is a MEMBER VARIABLE (field) of the mxcfg object
@@ -415,75 +447,8 @@ void setup(void) {
   display.setTextColor(display.color565(255, 255, 255)); // white for now
   display.setTextSize(1);
 
-  // Display route name only (no mode to save space)
-  // String is a CLASS (Arduino's string class, not std::string)
-  // String(routeName) calls the CONSTRUCTOR that takes a const char*
-  // Creates a String OBJECT from a C-style string
-  String header = String(routeName);
-
-  // .toUpperCase() is a METHOD that modifies the String object in-place
-  // In C you'd write: str_to_upper(header);
-  header.toUpperCase();
-
-  // .print() METHOD - overloaded to accept many types (String, int, char*, etc)
-  // FUNCTION OVERLOADING = same function name, different parameter types
-  display.print(header);
-
-  Serial.print("Display header: ");
-  Serial.println(header);
-
-  // Get first direction
-  // JsonObject, JsonArray are CLASSes from ArduinoJson
-  JsonObject direction = route["directions"][0];
-  const char *headsign = direction["headsign"];
-  JsonArray departures = direction["departures"];
-
-  // Draw first direction (Y position ~8 pixels from top)
-  display.setCursor(0, 8);
-  display.setTextColor(display.color565(100, 200, 255)); // cyan for direction
-
-  // Abbreviate direction headsign
-  String dir = String(headsign);
-  dir.toUpperCase();
-
-  // Remove all whitespace
-  dir.replace(" ", "");
-
-  // Truncate to 7 characters
-  if (dir.length() > 7) {
-    dir = dir.substring(0, 7);
-  }
-
-  display.print(dir);
-  display.print("|");
-
-  // Departure times (up to 3, no comma spaces)
-  int depCount = 0;
-
-  // RANGE-BASED FOR LOOP (C++11 feature)
-  // Similar to Python's: for dep in departures:
-  // In C you'd write: for (int i = 0; i < departures.length; i++) { dep = departures[i]; ...}
-  // JsonObject dep is created fresh each iteration
-  for (JsonObject dep : departures) {
-    if (depCount >= 3)
-      break;
-
-    // Implicit type conversion from JSON value to int
-    int minutes = dep["minutes"];
-    if (depCount > 0) {
-      display.print(",");
-    }
-    display.print(minutes);
-
-    // ++ is increment operator (same as C)
-    depCount++;
-  }
-
-  Serial.print("First direction: ");
-  Serial.print(headsign);
-  Serial.print(" | ");
-  Serial.print(depCount);
-  Serial.println(" departures");
+  JsonObject route = doc["routes"][0];
+  displayRoute(display, route);
 }
 
 void loop() { /* nothing */
