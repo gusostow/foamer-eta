@@ -431,8 +431,15 @@ void displayRoute(MatrixPanel_I2S_DMA &display, JsonObject route) {
 
     JsonArray directions = route["directions"];
 
-    for (JsonObject direction : directions) {
-        displayDirection(display, direction, color);
+    // Display first two directions (or less if not available)
+    for (int i = 0; i < 2; i++) {
+        if (i < directions.size()) {
+            JsonObject direction = directions[i];
+            displayDirection(display, direction, color);
+        } else {
+            // Write empty line if direction doesn't exist
+            display.print("\n");
+        }
     }
 
 }
