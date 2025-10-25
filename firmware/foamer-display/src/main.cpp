@@ -322,6 +322,10 @@ const char STATIC_JSON[] PROGMEM = R"({
   ]
 })";
 
+/* Display configuration constants */
+const int HEADSIGN_WIDTH = 7;
+const char* REALTIME_COLOR = "3ac364";
+
 /* MatrixPortal-S3 ↔ HUB75 pin map */
 // :: is the scope resolution operator - accesses nested type 'i2s_pins' inside class 'HUB75_I2S_CFG'
 // This is like accessing a struct member in C, but for types defined inside classes
@@ -367,15 +371,20 @@ void displayDirection(MatrixPanel_I2S_DMA &display, JsonObject direction, const 
     String displayHeadsign = String(headsign);
     displayHeadsign.toUpperCase();
     displayHeadsign.replace(" ", "");
-    if (displayHeadsign.length() > 7) {
-        displayHeadsign = displayHeadsign.substring(0, 7);
+    if (displayHeadsign.length() > HEADSIGN_WIDTH) {
+        displayHeadsign = displayHeadsign.substring(0, HEADSIGN_WIDTH);
+    } else {
+        // Pad with spaces to HEADSIGN_WIDTH characters
+        while (displayHeadsign.length() < HEADSIGN_WIDTH) {
+            displayHeadsign += " ";
+        }
     }
 
     // Display headsign in route color
     display.setTextColor(hexToColor565(color));
     display.print(displayHeadsign);
 
-    // Display separator and times in white
+    // Display separator in white
     display.setTextColor(display.color565(255, 255, 255));
     display.print("|");
 
@@ -384,11 +393,22 @@ void displayDirection(MatrixPanel_I2S_DMA &display, JsonObject direction, const 
     for (JsonObject dep : departures) {
         if(depCount == 3) break;
 
+        const char* type = dep["type"];
         int minutes = dep["minutes"];
 
         if (depCount > 0) {
+            // Comma always in white
+            display.setTextColor(display.color565(255, 255, 255));
             display.print(",");
         }
+
+        // Set color based on departure type
+        if (strcmp(type, "RealTime") == 0) {
+            display.setTextColor(hexToColor565(REALTIME_COLOR));
+        } else {
+            display.setTextColor(display.color565(255, 255, 255));
+        }
+
         display.print(minutes);
 
         depCount++;
@@ -476,7 +496,7 @@ void setup(void) {
   JsonObject route1 = doc["routes"][0];
   displayRoute(display, route1);
 
-  JsonObject route2 = doc["routes"][1];
+  JsonObject route2 = doc["routes"][7];
   displayRoute(display, route2);
 }
 
