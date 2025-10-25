@@ -350,7 +350,17 @@ HUB75_I2S_CFG initConfig() {
 // Create display object as global variable
 MatrixPanel_I2S_DMA display(initConfig());
 
-void displayDirection(MatrixPanel_I2S_DMA &display, JsonObject direction) {
+// Convert hex color string (e.g., "2da646") to RGB565 color
+uint16_t hexToColor565(const char* hex) {
+  // Parse hex string to RGB components
+  long hexValue = strtol(hex, NULL, 16);
+  uint8_t r = (hexValue >> 16) & 0xFF;
+  uint8_t g = (hexValue >> 8) & 0xFF;
+  uint8_t b = hexValue & 0xFF;
+  return display.color565(r, g, b);
+}
+
+void displayDirection(MatrixPanel_I2S_DMA &display, JsonObject direction, const char* color) {
     const char *headsign = direction["headsign"];
     JsonArray departures = direction["departures"];
 
@@ -361,7 +371,12 @@ void displayDirection(MatrixPanel_I2S_DMA &display, JsonObject direction) {
         displayHeadsign = displayHeadsign.substring(0, 7);
     }
 
+    // Display headsign in route color
+    display.setTextColor(hexToColor565(color));
     display.print(displayHeadsign);
+
+    // Display separator and times in white
+    display.setTextColor(display.color565(255, 255, 255));
     display.print("|");
 
     int depCount = 0;
@@ -387,7 +402,10 @@ void displayRoute(MatrixPanel_I2S_DMA &display, JsonObject route) {
     String routeName = String(name);
     const char* mode = route["mode"];
     String routeMode = String(mode);
+    const char* color = route["color"];
 
+    // Display route name and mode in route color
+    display.setTextColor(hexToColor565(color));
     routeName.toUpperCase();
     display.print(routeName);
     display.print(" ");
@@ -397,7 +415,7 @@ void displayRoute(MatrixPanel_I2S_DMA &display, JsonObject route) {
     JsonArray directions = route["directions"];
 
     for (JsonObject direction : directions) {
-        displayDirection(display, direction);
+        displayDirection(display, direction, color);
     }
 
 }
@@ -437,8 +455,8 @@ void setup(void) {
       ;
   }
 
-  // Call METHOD .setBrightness8() with argument 80
-  display.setBrightness8(80); // keep < panel-width (96) to avoid ghosting
+  // Call METHOD .setBrightness8() with argument (0-255)
+  display.setBrightness8(120); // Higher brightness
 
   /* ---- draw route header ---- */
   // Calling METHODS on the display object
