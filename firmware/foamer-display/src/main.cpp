@@ -317,7 +317,7 @@ const char STATIC_JSON[] PROGMEM = R"({
 /* Display configuration constants */
 const int HEADSIGN_WIDTH = 7;
 const char* REALTIME_COLOR = "3ac364";
-const int DISPLAY_INTERVAL_MS = 10000; // 10 seconds per page
+const int DISPLAY_INTERVAL_MS = 2000; // 10 seconds per page
 
 // Global variables for rotation
 int currentRouteIndex = 0;
@@ -367,7 +367,6 @@ void displayDirection(MatrixPanel_I2S_DMA &display, JsonObject direction, const 
 
     String displayHeadsign = String(headsign);
     displayHeadsign.toUpperCase();
-    displayHeadsign.replace(" ", "");
     if (displayHeadsign.length() > HEADSIGN_WIDTH) {
         displayHeadsign = displayHeadsign.substring(0, HEADSIGN_WIDTH);
     } else {
