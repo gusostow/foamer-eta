@@ -15,7 +15,7 @@ WiFiClient client;
 /* Display configuration constants */
 const int HEADSIGN_WIDTH = 7;
 const char* REALTIME_COLOR = "3ac364";
-const int DISPLAY_INTERVAL_MS = 5000; // 10 seconds per page
+const int DISPLAY_INTERVAL_MS = 10000; // 10 seconds per page
 
 // Global variables for rotation
 int currentRouteIndex = 0;
@@ -65,7 +65,7 @@ bool fetchDepartures(JsonDocument &doc) {
   HTTPClient http;
 
   // TODO: Get lat/lon from config or make dynamic
-  String url = String("http://") + foamer_api_host + "/departures?lat=29.7213&lon=-95.3838";
+  String url = String("http://") + foamer_api_host + "/departures?lat=40.68722&lon=-73.97481";
 
   Serial.print("Fetching: ");
   Serial.println(url);
