@@ -317,6 +317,11 @@ const char STATIC_JSON[] PROGMEM = R"({
 /* Display configuration constants */
 const int HEADSIGN_WIDTH = 7;
 const char* REALTIME_COLOR = "3ac364";
+const int DISPLAY_INTERVAL_MS = 10000; // 10 seconds per page
+
+// Global variables for rotation
+int currentRouteIndex = 0;
+int totalRoutes = 0;
 
 /* MatrixPortal-S3 ↔ HUB75 pin map */
 // :: is the scope resolution operator - accesses nested type 'i2s_pins' inside class 'HUB75_I2S_CFG'
@@ -442,55 +447,64 @@ void setup(void) {
 
   Serial.println("Parsing JSON...");
 
-  // Parse JSON
-  // JsonDocument is a CLASS from ArduinoJson library
-  // 'doc' is an OBJECT (instance) created with default constructor (no arguments)
+  // Parse JSON once to get route count
   JsonDocument doc;
-
-  // deserializeJson is a regular function (not a method)
-  // It returns a DeserializationError object
   DeserializationError error = deserializeJson(doc, STATIC_JSON);
 
   if (error) {
     Serial.print("JSON parse failed: ");
-    // .c_str() is a METHOD that converts the error object to a C-style string (char*)
     Serial.println(error.c_str());
     return;
   }
 
+  totalRoutes = doc["routes"].size();
+  Serial.print("Total routes: ");
+  Serial.println(totalRoutes);
+
   // Call .begin() METHOD on display object
-  // ! is logical NOT operator (same as C)
   if (!display.begin()) {
     Serial.println("DMA init failed");
-    // Infinite loop (same as C)
     for (;;)
       ;
   }
 
-  // Call METHOD .setBrightness8() with argument (0-255)
-  display.setBrightness8(120); // Higher brightness
-
-  /* ---- draw route header ---- */
-  // Calling METHODS on the display object
-  display.fillScreen(0);
+  display.setBrightness8(120);
   display.setTextWrap(false);
-
-  // Route header at top (compact)
-  display.setCursor(0, 0);
-
-  // Nested method calls: display.color565(...) returns a color value
-  // That return value is passed to setTextColor()
-  // This is METHOD CHAINING pattern
-  display.setTextColor(display.color565(255, 255, 255)); // white for now
   display.setTextSize(1);
-
-  // Display first two routes
-  JsonObject route1 = doc["routes"][0];
-  displayRoute(display, route1);
-
-  JsonObject route2 = doc["routes"][1];
-  displayRoute(display, route2);
 }
 
-void loop() { /* nothing */
+void loop() {
+  // Parse JSON each iteration (local variable on stack)
+  JsonDocument doc;
+  DeserializationError error = deserializeJson(doc, STATIC_JSON);
+
+  if (error) {
+    Serial.println("JSON parse error in loop");
+    delay(1000);
+    return;
+  }
+
+  JsonArray routes = doc["routes"];
+
+  // Clear screen and reset cursor
+  display.fillScreen(0);
+  display.setCursor(0, 0);
+  display.setTextColor(display.color565(255, 255, 255));
+
+  // Display two routes starting from currentRouteIndex
+  for (int i = 0; i < 2 && (currentRouteIndex + i) < totalRoutes; i++) {
+    JsonObject route = routes[currentRouteIndex + i];
+    displayRoute(display, route);
+  }
+
+  // Wait for display interval
+  delay(DISPLAY_INTERVAL_MS);
+
+  // Move to next pair of routes
+  currentRouteIndex += 2;
+
+  // Loop back to start when we reach the end
+  if (currentRouteIndex >= totalRoutes) {
+    currentRouteIndex = 0;
+  }
 }
