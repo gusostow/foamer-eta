@@ -446,6 +446,14 @@ void setup(void) {
   String dir = String(headsign);
   dir.toUpperCase();
 
+  // Remove all whitespace
+  dir.replace(" ", "");
+
+  // Truncate to 7 characters
+  if (dir.length() > 7) {
+    dir = dir.substring(0, 7);
+  }
+
   display.print(dir);
   display.print("|");
 
