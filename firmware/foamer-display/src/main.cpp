@@ -339,7 +339,17 @@ const HUB75_I2S_CFG::i2s_pins PINMAP = {
 // Constructor syntax: ClassName varName(arg1, arg2, ...)
 // Similar to: HUB75_I2S_CFG mxcfg; mxcfg_init(&mxcfg, 96, 48, 1, PINMAP); in C
 HUB75_I2S_CFG mxcfg(96, 48, 1, PINMAP); // width, height, chains, pins
-                                        //
+
+// Helper function to initialize mxcfg with clkphase before display construction
+HUB75_I2S_CFG initConfig() {
+  HUB75_I2S_CFG cfg(96, 48, 1, PINMAP);
+  cfg.clkphase = false; // sample on falling edge to fix ghosting
+  return cfg;
+}
+
+// Create display object as global variable
+MatrixPanel_I2S_DMA display(initConfig());
+
 void displayDirection(MatrixPanel_I2S_DMA &display, JsonObject direction) {
     const char *headsign = direction["headsign"];
     JsonArray departures = direction["departures"];
@@ -375,8 +385,14 @@ void displayDirection(MatrixPanel_I2S_DMA &display, JsonObject direction) {
 void displayRoute(MatrixPanel_I2S_DMA &display, JsonObject route) {
     const char* name = route["name"];
     String routeName = String(name);
+    const char* mode = route["mode"];
+    String routeMode = String(mode);
+
     routeName.toUpperCase();
-    display.println(routeName);
+    display.print(routeName);
+    display.print(" ");
+    display.print(routeMode);
+    display.print("\n");
 
     JsonArray directions = route["directions"];
 
@@ -412,15 +428,6 @@ void setup(void) {
     return;
   }
 
-  // This fixes ghosting
-  // .clkphase is a MEMBER VARIABLE (field) of the mxcfg object
-  // Access with dot notation: object.member = value
-  mxcfg.clkphase = false; // sample on falling edge
-
-  // Create display object with mxcfg as constructor argument
-  // MatrixPanel_I2S_DMA is a CLASS
-  MatrixPanel_I2S_DMA display(mxcfg);
-
   // Call .begin() METHOD on display object
   // ! is logical NOT operator (same as C)
   if (!display.begin()) {
@@ -447,8 +454,12 @@ void setup(void) {
   display.setTextColor(display.color565(255, 255, 255)); // white for now
   display.setTextSize(1);
 
-  JsonObject route = doc["routes"][0];
-  displayRoute(display, route);
+  // Display first two routes
+  JsonObject route1 = doc["routes"][0];
+  displayRoute(display, route1);
+
+  JsonObject route2 = doc["routes"][1];
+  displayRoute(display, route2);
 }
 
 void loop() { /* nothing */
