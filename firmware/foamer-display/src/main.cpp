@@ -3,322 +3,14 @@
 #include <ArduinoJson.h>  // JSON parsing library
 #include <ESP32-HUB75-MatrixPanel-I2S-DMA.h> // LED matrix driver
 #include <WiFi.h>
+#include <HTTPClient.h>
+
+const char* foamer_api_host = FOAMER_API_HOST;
 
 // WiFi credentials from environment variables
 const char* ssid = WIFI_SSID;
 const char* password = WIFI_PASSWORD;
 WiFiClient client;
-
-/* Test JSON data (embedded from foamer-example.json) */
-// PROGMEM = store in flash memory instead of RAM (ESP32-specific)
-// R"(...)" = raw string literal (C++11), no escape sequences needed
-const char STATIC_JSON[] PROGMEM = R"({
-  "routes": [
-    {
-      "name": "Red",
-      "mode": "METRORail",
-      "color": "e41937",
-      "directions": [
-        {
-          "headsign": "Fannin South",
-          "departures": [
-            {
-              "type": "Scheduled",
-              "minutes": 0
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 12
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 24
-            }
-          ]
-        },
-        {
-          "headsign": "North Line TC",
-          "departures": [
-            {
-              "type": "Scheduled",
-              "minutes": 4
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 16
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 28
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "5",
-      "mode": "Bus",
-      "color": "2da646",
-      "directions": [
-        {
-          "headsign": "Richey St",
-          "departures": [
-            {
-              "type": "RealTime",
-              "minutes": 6
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 43
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 88
-            }
-          ]
-        },
-        {
-          "headsign": "Wheeler TC",
-          "departures": [
-            {
-              "type": "RealTime",
-              "minutes": 26
-            },
-            {
-              "type": "RealTime",
-              "minutes": 71
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "11",
-      "mode": "Bus",
-      "color": "045bae",
-      "directions": [
-        {
-          "headsign": "Gellhorn / 610",
-          "departures": [
-            {
-              "type": "RealTime",
-              "minutes": 15
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 50
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 80
-            }
-          ]
-        },
-        {
-          "headsign": "Hiram Clarke TC",
-          "departures": [
-            {
-              "type": "RealTime",
-              "minutes": 5
-            },
-            {
-              "type": "RealTime",
-              "minutes": 27
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 56
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "56",
-      "mode": "Bus",
-      "color": "d94b3d",
-      "directions": [
-        {
-          "headsign": "Greenspoint TC",
-          "departures": [
-            {
-              "type": "RealTime",
-              "minutes": 8
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 38
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 68
-            }
-          ]
-        },
-        {
-          "headsign": "TMC TC",
-          "departures": [
-            {
-              "type": "RealTime",
-              "minutes": 21
-            },
-            {
-              "type": "RealTime",
-              "minutes": 51
-            },
-            {
-              "type": "RealTime",
-              "minutes": 64
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "4",
-      "mode": "Bus",
-      "color": "d94b3d",
-      "directions": [
-        {
-          "headsign": "Eastwood TC",
-          "departures": [
-            {
-              "type": "RealTime",
-              "minutes": 11
-            },
-            {
-              "type": "RealTime",
-              "minutes": 37
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 42
-            }
-          ]
-        },
-        {
-          "headsign": "Mission Bend TC",
-          "departures": [
-            {
-              "type": "RealTime",
-              "minutes": 12
-            },
-            {
-              "type": "RealTime",
-              "minutes": 17
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 32
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "65",
-      "mode": "Bus",
-      "color": "005db4",
-      "directions": [
-        {
-          "headsign": "Wheeler TC",
-          "departures": [
-            {
-              "type": "RealTime",
-              "minutes": 0
-            },
-            {
-              "type": "RealTime",
-              "minutes": 30
-            },
-            {
-              "type": "RealTime",
-              "minutes": 33
-            }
-          ]
-        },
-        {
-          "headsign": "Synott Rd",
-          "departures": [
-            {
-              "type": "RealTime",
-              "minutes": 2
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 17
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 32
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "USS",
-      "mode": "Bus",
-      "color": "76fa8c",
-      "directions": [
-        {
-          "headsign": "Target and Fiesta Shopping Center",
-          "departures": [
-            {
-              "type": "Scheduled",
-              "minutes": 16
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 47
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "25",
-      "mode": "Bus",
-      "color": "005db4",
-      "directions": [
-        {
-          "headsign": "Eastwood TC",
-          "departures": [
-            {
-              "type": "RealTime",
-              "minutes": 1
-            },
-            {
-              "type": "RealTime",
-              "minutes": 15
-            },
-            {
-              "type": "RealTime",
-              "minutes": 34
-            }
-          ]
-        },
-        {
-          "headsign": "Westchase",
-          "departures": [
-            {
-              "type": "RealTime",
-              "minutes": 3
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 18
-            },
-            {
-              "type": "Scheduled",
-              "minutes": 33
-            }
-          ]
-        }
-      ]
-    }
-  ]
-})";
 
 /* Display configuration constants */
 const int HEADSIGN_WIDTH = 7;
@@ -328,6 +20,7 @@ const int DISPLAY_INTERVAL_MS = 5000; // 10 seconds per page
 // Global variables for rotation
 int currentRouteIndex = 0;
 int totalRoutes = 0;
+JsonDocument globalDoc; // Global to store fetched data
 
 /* MatrixPortal-S3 ↔ HUB75 pin map */
 // :: is the scope resolution operator - accesses nested type 'i2s_pins' inside class 'HUB75_I2S_CFG'
@@ -365,6 +58,39 @@ uint16_t hexToColor565(const char* hex) {
   uint8_t g = (hexValue >> 8) & 0xFF;
   uint8_t b = hexValue & 0xFF;
   return display.color565(r, g, b);
+}
+
+// Fetch departures from API
+bool fetchDepartures(JsonDocument &doc) {
+  HTTPClient http;
+
+  // TODO: Get lat/lon from config or make dynamic
+  String url = String("http://") + foamer_api_host + "/departures?lat=29.7213&lon=-95.3838";
+
+  Serial.print("Fetching: ");
+  Serial.println(url);
+
+  http.begin(url);
+  int httpCode = http.GET();
+
+  if (httpCode == HTTP_CODE_OK) {
+    String payload = http.getString();
+    DeserializationError error = deserializeJson(doc, payload);
+    http.end();
+
+    if (error) {
+      Serial.print("JSON parse failed: ");
+      Serial.println(error.c_str());
+      return false;
+    }
+    Serial.println("Successfully fetched departures");
+    return true;
+  } else {
+    Serial.print("HTTP request failed, code: ");
+    Serial.println(httpCode);
+    http.end();
+    return false;
+  }
 }
 
 void displayDirection(MatrixPanel_I2S_DMA &display, JsonObject direction, const char* color) {
@@ -468,22 +194,6 @@ void setup(void) {
   Serial.println("");
   Serial.println("Connected to WiFi");
 
-  Serial.println("Parsing JSON...");
-
-  // Parse JSON once to get route count
-  JsonDocument doc;
-  DeserializationError error = deserializeJson(doc, STATIC_JSON);
-
-  if (error) {
-    Serial.print("JSON parse failed: ");
-    Serial.println(error.c_str());
-    return;
-  }
-
-  totalRoutes = doc["routes"].size();
-  Serial.print("Total routes: ");
-  Serial.println(totalRoutes);
-
   // Call .begin() METHOD on display object
   if (!display.begin()) {
     Serial.println("DMA init failed");
@@ -497,17 +207,25 @@ void setup(void) {
 }
 
 void loop() {
-  // Parse JSON each iteration (local variable on stack)
-  JsonDocument doc;
-  DeserializationError error = deserializeJson(doc, STATIC_JSON);
+  // Fetch departures from API only at start of cycle
+  if (currentRouteIndex == 0) {
+    Serial.println("Fetching fresh data from API...");
+    if (!fetchDepartures(globalDoc)) {
+      Serial.println("Failed to fetch departures, retrying in 10s...");
+      delay(10000);
+      return;
+    }
 
-  if (error) {
-    Serial.println("JSON parse error in loop");
-    delay(1000);
-    return;
+    JsonArray routes = globalDoc["routes"];
+    totalRoutes = routes.size();
+    Serial.print("Total routes: ");
+    Serial.println(totalRoutes);
   }
 
-  JsonArray routes = doc["routes"];
+  JsonArray routes = globalDoc["routes"];
+
+  Serial.print("Current route index: ");
+  Serial.println(currentRouteIndex);
 
   // Clear screen and reset cursor
   display.fillScreen(0);
@@ -516,6 +234,8 @@ void loop() {
 
   // Display two routes starting from currentRouteIndex
   for (int i = 0; i < 2 && (currentRouteIndex + i) < totalRoutes; i++) {
+    Serial.print("displaying route index ");
+    Serial.println(currentRouteIndex + i);
     JsonObject route = routes[currentRouteIndex + i];
     displayRoute(display, route);
   }
@@ -528,6 +248,7 @@ void loop() {
 
   // Loop back to start when we reach the end
   if (currentRouteIndex >= totalRoutes) {
+    Serial.println("Completed full cycle, will fetch fresh data on next iteration");
     currentRouteIndex = 0;
   }
 }
