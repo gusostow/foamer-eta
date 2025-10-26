@@ -3,6 +3,7 @@ from aws_cdk import (
     RemovalPolicy,
     aws_s3 as s3,
     aws_ecr as ecr,
+    aws_secretsmanager as secretsmanager,
 )
 from constructs import Construct
 
@@ -33,4 +34,12 @@ class CdkStack(Stack):
                     max_image_count=5,
                 )
             ],
+        )
+
+        # Secrets Manager secret for Transit API key
+        transit_key_secret = secretsmanager.Secret(
+            self, "TransitKeySecret",
+            secret_name=f"foamer/{env_name}/transit-key",
+            description=f"Transit API key for {env_name} environment",
+            removal_policy=RemovalPolicy.DESTROY if env_name == "dev" else RemovalPolicy.RETAIN,
         )
