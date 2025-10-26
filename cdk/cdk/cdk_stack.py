@@ -2,6 +2,7 @@ from aws_cdk import (
     Stack,
     RemovalPolicy,
     aws_s3 as s3,
+    aws_ecr as ecr,
 )
 from constructs import Construct
 
@@ -17,4 +18,19 @@ class CdkStack(Stack):
             versioned=False,
             removal_policy=RemovalPolicy.DESTROY,
             auto_delete_objects=True,
+        )
+
+        # ECR repository for svc container images
+        ecr_repository = ecr.Repository(
+            self, "FoamerSvcRepository",
+            repository_name=f"foamer-{env_name}-svc",
+            image_scan_on_push=True,
+            removal_policy=RemovalPolicy.DESTROY if env_name == "dev" else RemovalPolicy.RETAIN,
+            empty_on_delete=True if env_name == "dev" else False,
+            lifecycle_rules=[
+                ecr.LifecycleRule(
+                    description="Keep last 5 images",
+                    max_image_count=5,
+                )
+            ],
         )
