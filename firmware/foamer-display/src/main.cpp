@@ -1,9 +1,9 @@
 // Include directives - <> means search in library/system paths
 #include <Adafruit_GFX.h> // Adafruit graphics library (class-based)
 #include <ArduinoJson.h>  // JSON parsing library
-#include <ESP32-HUB75-MatrixPanel-I2S-DMA.h> // LED matrix driver
 #include <WiFi.h>
 #include <HTTPClient.h>
+#include "display.h"
 
 const char* foamer_api_host = FOAMER_API_HOST;
 
@@ -21,34 +21,7 @@ const int DISPLAY_INTERVAL_MS = 10000; // 10 seconds per page
 int currentRouteIndex = 0;
 int totalRoutes = 0;
 JsonDocument globalDoc; // Global to store fetched data
-
-/* MatrixPortal-S3 ↔ HUB75 pin map */
-// :: is the scope resolution operator - accesses nested type 'i2s_pins' inside class 'HUB75_I2S_CFG'
-// This is like accessing a struct member in C, but for types defined inside classes
-const HUB75_I2S_CFG::i2s_pins PINMAP = {
-    42, 41, 40, // R1 G1 B1
-    38, 39, 37, // R2 G2 B2
-    45, 36, 48, // A  B  C
-    35, 21,     // D  E
-    47, 14, 2   // LAT OE CLK
-};
-
-/* Panel configuration --------------------------------------------------- */
-// HUB75_I2S_CFG is a CLASS (like a struct with functions)
-// This creates an OBJECT/INSTANCE of that class by calling its CONSTRUCTOR
-// Constructor syntax: ClassName varName(arg1, arg2, ...)
-// Similar to: HUB75_I2S_CFG mxcfg; mxcfg_init(&mxcfg, 96, 48, 1, PINMAP); in C
-HUB75_I2S_CFG mxcfg(96, 48, 1, PINMAP); // width, height, chains, pins
-
-// Helper function to initialize mxcfg with clkphase before display construction
-HUB75_I2S_CFG initConfig() {
-  HUB75_I2S_CFG cfg(96, 48, 1, PINMAP);
-  cfg.clkphase = false; // sample on falling edge to fix ghosting
-  return cfg;
-}
-
-// Create display object as global variable
-MatrixPanel_I2S_DMA display(initConfig());
+MatrixPanel_I2S_DMA* display; // Pointer to display object
 
 // Convert hex color string (e.g., "2da646") to RGB565 color
 uint16_t hexToColor565(const char* hex) {
@@ -57,7 +30,7 @@ uint16_t hexToColor565(const char* hex) {
   uint8_t r = (hexValue >> 16) & 0xFF;
   uint8_t g = (hexValue >> 8) & 0xFF;
   uint8_t b = hexValue & 0xFF;
-  return display.color565(r, g, b);
+  return display->color565(r, g, b);
 }
 
 // Fetch departures from API
@@ -93,7 +66,7 @@ bool fetchDepartures(JsonDocument &doc) {
   }
 }
 
-void displayDirection(MatrixPanel_I2S_DMA &display, JsonObject direction, const char* color) {
+void displayDirection(MatrixPanel_I2S_DMA* display, JsonObject direction, const char* color) {
     const char *headsign = direction["headsign"];
     JsonArray departures = direction["departures"];
 
@@ -109,12 +82,12 @@ void displayDirection(MatrixPanel_I2S_DMA &display, JsonObject direction, const 
     }
 
     // Display headsign in route color
-    display.setTextColor(hexToColor565(color));
-    display.print(displayHeadsign);
+    display->setTextColor(hexToColor565(color));
+    display->print(displayHeadsign);
 
     // Display separator in white
-    display.setTextColor(display.color565(255, 255, 255));
-    display.print("|");
+    display->setTextColor(display->color565(255, 255, 255));
+    display->print("|");
 
     int depCount = 0;
 
@@ -126,26 +99,26 @@ void displayDirection(MatrixPanel_I2S_DMA &display, JsonObject direction, const 
 
         if (depCount > 0) {
             // Comma always in white
-            display.setTextColor(display.color565(255, 255, 255));
-            display.print(",");
+            display->setTextColor(display->color565(255, 255, 255));
+            display->print(",");
         }
 
         // Set color based on departure type
         if (strcmp(type, "RealTime") == 0) {
-            display.setTextColor(hexToColor565(REALTIME_COLOR));
+            display->setTextColor(hexToColor565(REALTIME_COLOR));
         } else {
-            display.setTextColor(display.color565(255, 255, 255));
+            display->setTextColor(display->color565(255, 255, 255));
         }
 
-        display.print(minutes);
+        display->print(minutes);
 
         depCount++;
     }
-    display.print("\n");
+    display->print("\n");
 }
 
 /* Function to display a route on the LED matrix */
-void displayRoute(MatrixPanel_I2S_DMA &display, JsonObject route) {
+void displayRoute(MatrixPanel_I2S_DMA* display, JsonObject route) {
     const char* name = route["name"];
     String routeName = String(name);
     const char* mode = route["mode"];
@@ -153,12 +126,12 @@ void displayRoute(MatrixPanel_I2S_DMA &display, JsonObject route) {
     const char* color = route["color"];
 
     // Display route name and mode in route color
-    display.setTextColor(hexToColor565(color));
+    display->setTextColor(hexToColor565(color));
     routeName.toUpperCase();
-    display.print(routeName);
-    display.print(" ");
-    display.print(routeMode);
-    display.print("\n");
+    display->print(routeName);
+    display->print(" ");
+    display->print(routeMode);
+    display->print("\n");
 
     JsonArray directions = route["directions"];
 
@@ -169,7 +142,7 @@ void displayRoute(MatrixPanel_I2S_DMA &display, JsonObject route) {
             displayDirection(display, direction, color);
         } else {
             // Write empty line if direction doesn't exist
-            display.print("\n");
+            display->print("\n");
         }
     }
 
@@ -194,16 +167,19 @@ void setup(void) {
   Serial.println("");
   Serial.println("Connected to WiFi");
 
+  // Create display object
+  display = createDisplay();
+
   // Call .begin() METHOD on display object
-  if (!display.begin()) {
+  if (!display->begin()) {
     Serial.println("DMA init failed");
     for (;;)
       ;
   }
 
-  display.setBrightness8(120);
-  display.setTextWrap(false);
-  display.setTextSize(1);
+  display->setBrightness8(120);
+  display->setTextWrap(false);
+  display->setTextSize(1);
 }
 
 void loop() {
@@ -228,9 +204,9 @@ void loop() {
   Serial.println(currentRouteIndex);
 
   // Clear screen and reset cursor
-  display.fillScreen(0);
-  display.setCursor(0, 0);
-  display.setTextColor(display.color565(255, 255, 255));
+  display->fillScreen(0);
+  display->setCursor(0, 0);
+  display->setTextColor(display->color565(255, 255, 255));
 
   // Display two routes starting from currentRouteIndex
   for (int i = 0; i < 2 && (currentRouteIndex + i) < totalRoutes; i++) {
