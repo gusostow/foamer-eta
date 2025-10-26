@@ -1,4 +1,4 @@
-use crate::{Client, Departures};
+use api::{Client, Departures};
 use anyhow::Result;
 use axum::{
     extract::{Query, State},

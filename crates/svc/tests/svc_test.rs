@@ -6,7 +6,7 @@ use tower::ServiceExt;
 
 #[tokio::test]
 async fn test_departures_endpoint() -> Result<()> {
-    let app = api::svc::create_router()?;
+    let app = svc::create_router()?;
 
     let response = app
         .oneshot(
@@ -51,7 +51,7 @@ async fn test_departures_endpoint() -> Result<()> {
 
 #[tokio::test]
 async fn test_departures_endpoint_default_distance() -> Result<()> {
-    let app = api::svc::create_router()?;
+    let app = svc::create_router()?;
 
     let response = app
         .oneshot(
@@ -77,7 +77,7 @@ async fn test_departures_endpoint_default_distance() -> Result<()> {
 
 #[tokio::test]
 async fn test_departures_endpoint_missing_params() -> Result<()> {
-    let app = api::svc::create_router()?;
+    let app = svc::create_router()?;
 
     let response = app
         .oneshot(
