@@ -30,3 +30,6 @@ target
 .pio/
 .cache/
 compile_commands.json
+
+# CDK
+cdk.context.json

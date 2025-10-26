@@ -1,0 +1,21 @@
+[project]
+name = "foamer-cdk"
+version = "0.1.0"
+description = "CDK deployment for foamer-eta"
+requires-python = ">=3.12"
+dependencies = [
+    "aws-cdk-lib~=2.159.0",
+    "constructs>=10.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.2.5",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["cdk"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
