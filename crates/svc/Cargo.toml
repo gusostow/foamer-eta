@@ -1,0 +1,18 @@
+[package]
+name = "svc"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+api = { path = "../api" }
+tokio = { workspace = true }
+anyhow = { workspace = true }
+serde = { workspace = true }
+axum = "0.7"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+tower-http = { version = "0.6", features = ["trace"] }
+
+[dev-dependencies]
+tower = "0.5"
+serde_json = { workspace = true }

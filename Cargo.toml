@@ -1,6 +1,6 @@
 [workspace]
-resolver = "3"
-members = ["crates/api", "crates/transit"]
+resolver = "2"
+members = ["crates/api", "crates/transit", "crates/svc"]
 
 [workspace.dependencies]
 anyhow = "1.0"

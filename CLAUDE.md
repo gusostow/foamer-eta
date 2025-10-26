@@ -8,7 +8,7 @@ foamer-eta is a web service and embedded system software for an LED transit time
 
 ## Architecture
 
-The project is a Rust workspace with two main crates:
+The project is a Rust workspace with three main crates:
 
 ### `transit` crate
 Low-level client library for the Transit API (https://external.transitapp.com/v3). This crate:
@@ -19,16 +19,23 @@ Low-level client library for the Transit API (https://external.transitapp.com/v3
 - Returns raw Transit API responses with minimal transformation
 
 ### `api` crate
-High-level application logic and HTTP REST service. This crate:
+Library crate providing high-level domain logic. This crate:
 - Provides a `Client` struct that wraps `TransitClient` and transforms data into simplified domain models
 - Main transformation: `Client::departures()` calls `TransitClient::nearby_routes()` and converts Transit API routes/itineraries/schedule_items into a simplified `Departures` structure with routes, directions, and departure times
 - Converts Unix timestamps to "minutes until departure" values
 - Distinguishes between real-time and scheduled departures
-- Exposes an Axum-based HTTP service in the `svc` module with a `/departures` endpoint
-- The service accepts `lat`, `lon`, and optional `max_distance` query parameters
-- Default max_distance is 500 meters (defined in api/src/lib.rs:8)
+- Defines domain models: `Departures`, `Route`, `Direction`, and `Departure`
+- Default max_distance is 500 meters (defined in api/src/lib.rs:6)
 
-Key architectural pattern: The `transit` crate owns all Transit API types and HTTP logic, while the `api` crate provides simplified domain models suitable for display on an LED sign.
+### `svc` crate
+HTTP REST service binary. This crate:
+- Exposes an Axum-based HTTP service with a `/departures` endpoint
+- The service accepts `lat`, `lon`, and optional `max_distance` query parameters
+- Uses the `api` crate's `Client` for business logic
+- Handles HTTP routing, request/response serialization, and error responses
+- Includes tracing and logging configuration
+
+Key architectural pattern: The `transit` crate owns all Transit API types and HTTP logic, the `api` crate provides simplified domain models suitable for display on an LED sign, and the `svc` crate handles HTTP concerns.
 
 ## Development Commands
 
@@ -40,6 +47,7 @@ Key architectural pattern: The `transit` crate owns all Transit API types and HT
 LIBRARY_PATH=/Users/aostow/.nix-profile/lib:$LIBRARY_PATH cargo build
 
 # Build specific crate
+LIBRARY_PATH=/Users/aostow/.nix-profile/lib:$LIBRARY_PATH cargo build -p svc
 LIBRARY_PATH=/Users/aostow/.nix-profile/lib:$LIBRARY_PATH cargo build -p api
 LIBRARY_PATH=/Users/aostow/.nix-profile/lib:$LIBRARY_PATH cargo build -p transit
 ```
@@ -49,7 +57,7 @@ Note: The `LIBRARY_PATH` prefix is required in this environment. When using the 
 #### Running
 ```bash
 # Run the HTTP service (listens on 0.0.0.0:3000)
-LIBRARY_PATH=/Users/aostow/.nix-profile/lib:$LIBRARY_PATH cargo run -p api
+LIBRARY_PATH=/Users/aostow/.nix-profile/lib:$LIBRARY_PATH cargo run -p svc
 ```
 
 The service requires the `TRANSIT_KEY` environment variable to be set. This is loaded from `.envrc.local` (not in git).
@@ -60,6 +68,7 @@ The service requires the `TRANSIT_KEY` environment variable to be set. This is l
 cargo test
 
 # Run tests for specific crate
+cargo test -p svc
 cargo test -p api
 cargo test -p transit
 

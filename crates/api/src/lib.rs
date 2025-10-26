@@ -2,8 +2,6 @@ use anyhow::{Context, Result};
 use serde::{Deserialize, Serialize};
 use transit::TransitClient;
 
-pub mod svc;
-
 // in meters
 const DEFAULT_DISTANCE: u32 = 500;
 

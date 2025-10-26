@@ -10,11 +10,4 @@ reqwest = "0.12"
 anyhow = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
-axum = "0.7"
 transit = { path = "../transit" }
-tracing = "0.1"
-tracing-subscriber = { version = "0.3", features = ["env-filter"] }
-tower-http = { version = "0.6", features = ["trace"] }
-
-[dev-dependencies]
-tower = "0.5"
