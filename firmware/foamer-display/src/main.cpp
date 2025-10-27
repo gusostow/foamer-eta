@@ -2,15 +2,15 @@
 #include <Adafruit_GFX.h> // Adafruit graphics library (class-based)
 #include <ArduinoJson.h>  // JSON parsing library
 #include <WiFi.h>
+#include <WiFiClientSecure.h>
 #include <HTTPClient.h>
 #include "display.h"
 
-const char* foamer_api_host = FOAMER_API_HOST;
+const char* foamer_api_url = FOAMER_API_URL;
 
 // WiFi credentials from environment variables
 const char* ssid = WIFI_SSID;
 const char* password = WIFI_PASSWORD;
-WiFiClient client;
 
 /* Display configuration constants */
 const int HEADSIGN_WIDTH = 7;
@@ -38,12 +38,23 @@ bool fetchDepartures(JsonDocument &doc) {
   HTTPClient http;
 
   // TODO: Get lat/lon from config or make dynamic
-  String url = String("http://") + foamer_api_host + "/departures?lat=40.68722&lon=-73.97481";
+  String url = String(foamer_api_url) + "/departures?lat=40.68722&lon=-73.97481";
 
   Serial.print("Fetching: ");
   Serial.println(url);
 
-  http.begin(url);
+  // Detect scheme and use appropriate client
+  bool isHttps = url.startsWith("https://");
+
+  if (isHttps) {
+    WiFiClientSecure* secureClient = new WiFiClientSecure();
+    secureClient->setInsecure(); // Skip certificate verification for simplicity
+    http.begin(*secureClient, url);
+  } else {
+    WiFiClient* client = new WiFiClient();
+    http.begin(*client, url);
+  }
+
   int httpCode = http.GET();
 
   if (httpCode == HTTP_CODE_OK) {
