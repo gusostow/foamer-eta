@@ -14,7 +14,11 @@ async fn main() -> Result<()> {
 
     let app = svc::create_router()?;
 
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await?;
+    // Read PORT from environment variable, default to 8080 (Lambda Web Adapter default)
+    let port = std::env::var("PORT").unwrap_or_else(|_| "8080".to_string());
+    let addr = format!("0.0.0.0:{}", port);
+
+    let listener = tokio::net::TcpListener::bind(&addr).await?;
     tracing::info!("Server listening on {}", listener.local_addr()?);
 
     axum::serve(listener, app).await?;
