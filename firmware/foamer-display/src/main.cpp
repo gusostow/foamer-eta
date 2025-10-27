@@ -98,7 +98,7 @@ void displayDirection(MatrixPanel_I2S_DMA* display, JsonObject direction, const 
 
     // Display bullet prefix in white
     display->setTextColor(display->color565(255, 255, 255));
-    display->print("*");
+    display->print("|");
 
     // Display headsign in route color
     display->setTextColor(hexToColor565(color));
