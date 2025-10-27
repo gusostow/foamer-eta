@@ -1,12 +1,10 @@
 from aws_cdk import (
     Stack,
     RemovalPolicy,
-    aws_s3 as s3,
-    aws_ecr as ecr,
+    Duration,
+    CfnOutput,
     aws_secretsmanager as secretsmanager,
-    aws_ecs as ecs,
-    aws_logs as logs,
-    aws_ec2 as ec2,
+    aws_lambda as lambda_,
 )
 from constructs import Construct
 
@@ -14,30 +12,6 @@ class CdkStack(Stack):
 
     def __init__(self, scope: Construct, construct_id: str, env_name: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
-
-        # Test S3 bucket
-        bucket = s3.Bucket(
-            self, "FoamerTestBucket",
-            bucket_name=f"foamer-{env_name}-bucket",
-            versioned=False,
-            removal_policy=RemovalPolicy.DESTROY,
-            auto_delete_objects=True,
-        )
-
-        # ECR repository for svc container images
-        ecr_repository = ecr.Repository(
-            self, "FoamerSvcRepository",
-            repository_name=f"foamer-{env_name}-svc",
-            image_scan_on_push=True,
-            removal_policy=RemovalPolicy.DESTROY if env_name == "dev" else RemovalPolicy.RETAIN,
-            empty_on_delete=True if env_name == "dev" else False,
-            lifecycle_rules=[
-                ecr.LifecycleRule(
-                    description="Keep last 5 images",
-                    max_image_count=5,
-                )
-            ],
-        )
 
         # Secrets Manager secret for Transit API key
         transit_key_secret = secretsmanager.Secret(
@@ -47,54 +21,45 @@ class CdkStack(Stack):
             removal_policy=RemovalPolicy.DESTROY if env_name == "dev" else RemovalPolicy.RETAIN,
         )
 
-        # Use default VPC
-        vpc = ec2.Vpc.from_lookup(self, "DefaultVPC", is_default=True)
-
-        # ECS Cluster
-        cluster = ecs.Cluster(
-            self, "FoamerCluster",
-            cluster_name=f"foamer-{env_name}-cluster",
-            vpc=vpc,
-            container_insights=True,
-        )
-
-        # CloudWatch Log Group
-        log_group = logs.LogGroup(
-            self, "FoamerSvcLogGroup",
-            log_group_name=f"/ecs/foamer-{env_name}-svc",
-            retention=logs.RetentionDays.ONE_WEEK if env_name == "dev" else logs.RetentionDays.ONE_MONTH,
-            removal_policy=RemovalPolicy.DESTROY,
-        )
-
-        # Task Definition
-        task_definition = ecs.FargateTaskDefinition(
-            self, "FoamerSvcTaskDef",
-            family=f"foamer-{env_name}-svc",
-            cpu=256,
-            memory_limit_mib=512,
-        )
-
-        # Container Definition
-        container = task_definition.add_container(
-            "FoamerSvcContainer",
-            image=ecs.ContainerImage.from_ecr_repository(ecr_repository, tag="latest"),
-            logging=ecs.LogDriver.aws_logs(
-                stream_prefix="svc",
-                log_group=log_group,
-            ),
-            environment={},
-            secrets={
-                "TRANSIT_KEY": ecs.Secret.from_secrets_manager(transit_key_secret),
+        # Lambda function using pre-built cargo-lambda output
+        # Build with: cargo lambda build -p svc --release --x86-64
+        lambda_function = lambda_.Function(
+            self, "FoamerSvcFunction",
+            function_name=f"foamer-{env_name}-svc",
+            runtime=lambda_.Runtime.PROVIDED_AL2023,
+            handler="not.used",  # Not used with Lambda Web Adapter
+            code=lambda_.Code.from_asset("../target/lambda/svc"),
+            timeout=Duration.seconds(30),
+            memory_size=512,
+            environment={
+                "RUST_LOG": "svc=debug,api=debug",
+                "AWS_LAMBDA_EXEC_WRAPPER": "/opt/bootstrap",
+                "PORT": "8080",
             },
+            layers=[
+                # Lambda Web Adapter layer (us-east-1)
+                lambda_.LayerVersion.from_layer_version_arn(
+                    self, "LambdaWebAdapterLayer",
+                    layer_version_arn=f"arn:aws:lambda:{self.region}:753240598075:layer:LambdaAdapterLayerX86:22"
+                )
+            ],
         )
 
-        # Port mapping
-        container.add_port_mappings(
-            ecs.PortMapping(
-                container_port=3000,
-                protocol=ecs.Protocol.TCP,
-            )
+        # Add TRANSIT_KEY secret to Lambda
+        transit_key_secret.grant_read(lambda_function)
+        lambda_function.add_environment(
+            "TRANSIT_KEY",
+            transit_key_secret.secret_value.unsafe_unwrap()
         )
 
-        # Grant read access to the secret
-        transit_key_secret.grant_read(task_definition.task_role)
+        # Add Function URL for direct HTTP access (no API Gateway needed)
+        function_url = lambda_function.add_function_url(
+            auth_type=lambda_.FunctionUrlAuthType.NONE,  # Public access
+        )
+
+        # Output the Function URL
+        CfnOutput(
+            self, "FunctionUrl",
+            value=function_url.url,
+            description=f"Lambda Function URL for {env_name}",
+        )
