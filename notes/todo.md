@@ -19,9 +19,9 @@
 
 - [x] Deploy web service
 - [x] Make command for running against local server
+- [x] Web service auth
 - [ ] CI/CD with Github Actions
 - [ ] Dev transit token
-- [ ] Web service auth
 - [ ] Make it prettier
 - [ ] Flake for Nix shell / container image.
 - [ ] Monitoring
