@@ -7,6 +7,7 @@
 #include "display.h"
 
 const char* foamer_api_url = FOAMER_API_URL;
+const char* foamer_api_key = FOAMER_API_KEY;
 
 // WiFi credentials from environment variables
 const char* ssid = WIFI_SSID;
@@ -54,6 +55,9 @@ bool fetchDepartures(JsonDocument &doc) {
     WiFiClient* client = new WiFiClient();
     http.begin(*client, url);
   }
+
+  // Add API key header
+  http.addHeader("x-api-key", foamer_api_key);
 
   int httpCode = http.GET();
 
