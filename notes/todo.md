@@ -17,13 +17,16 @@
 
 # Late
 
-- [ ] Make it prettier
-- [ ] Deploy web service
+- [x] Deploy web service
+- [x] Make command for running against local server
+- [ ] CI/CD with Github Actions
+- [ ] Dev transit token
 - [ ] Web service auth
+- [ ] Make it prettier
 - [ ] Flake for Nix shell / container image.
-- [ ] Make command for running against local server
 - [ ] Monitoring
 - [ ] Telemetry
+- [ ] Informative error messages
 - [ ] Wifi flow?
 - [ ] OTA updates
 - [ ] Web UI
