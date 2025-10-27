@@ -14,7 +14,7 @@ const char* ssid = WIFI_SSID;
 const char* password = WIFI_PASSWORD;
 
 /* Display configuration constants */
-const int HEADSIGN_WIDTH = 7;
+const int HEADSIGN_WIDTH = 6;
 const char* REALTIME_COLOR = "3ac364";
 const int DISPLAY_INTERVAL_MS = 10000; // 10 seconds per page
 
@@ -95,6 +95,10 @@ void displayDirection(MatrixPanel_I2S_DMA* display, JsonObject direction, const 
             displayHeadsign += " ";
         }
     }
+
+    // Display bullet prefix in white
+    display->setTextColor(display->color565(255, 255, 255));
+    display->print("*");
 
     // Display headsign in route color
     display->setTextColor(hexToColor565(color));
