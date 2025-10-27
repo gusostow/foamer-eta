@@ -5,7 +5,9 @@ from aws_cdk import (
     CfnOutput,
     aws_secretsmanager as secretsmanager,
     aws_lambda as lambda_,
+    aws_apigatewayv2 as apigw,
 )
+from aws_cdk.aws_apigatewayv2_integrations import HttpLambdaIntegration
 from constructs import Construct
 
 class CdkStack(Stack):
@@ -52,14 +54,29 @@ class CdkStack(Stack):
             transit_key_secret.secret_value.unsafe_unwrap()
         )
 
-        # Add Function URL for direct HTTP access (no API Gateway needed)
-        function_url = lambda_function.add_function_url(
-            auth_type=lambda_.FunctionUrlAuthType.NONE,  # Public access
+        # API Gateway HTTP API
+        http_api = apigw.HttpApi(
+            self, "FoamerHttpApi",
+            api_name=f"foamer-{env_name}-api",
+            description=f"HTTP API for foamer {env_name} environment",
         )
 
-        # Output the Function URL
+        # Lambda integration
+        lambda_integration = HttpLambdaIntegration(
+            "LambdaIntegration",
+            lambda_function,
+        )
+
+        # Add route - proxy all requests to Lambda
+        http_api.add_routes(
+            path="/{proxy+}",
+            methods=[apigw.HttpMethod.ANY],
+            integration=lambda_integration,
+        )
+
+        # Output the API Gateway URL
         CfnOutput(
-            self, "FunctionUrl",
-            value=function_url.url,
-            description=f"Lambda Function URL for {env_name}",
+            self, "ApiUrl",
+            value=http_api.url,
+            description=f"API Gateway URL for {env_name}",
         )
