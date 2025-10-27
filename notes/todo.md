@@ -20,6 +20,7 @@
 - [x] Deploy web service
 - [x] Make command for running against local server
 - [x] Web service auth
+- [ ] Get Lat/Lon from requester IP
 - [ ] CI/CD with Github Actions
 - [ ] Dev transit token
 - [ ] Make it prettier
