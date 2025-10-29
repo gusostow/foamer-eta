@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["crates/api", "crates/transit", "crates/svc"]
+members = ["crates/api", "crates/transit", "crates/svc", "crates/messages"]
 
 [workspace.dependencies]
 anyhow = "1.0"
