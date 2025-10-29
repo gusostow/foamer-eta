@@ -30,7 +30,6 @@ pip-delete-this-directory.txt
 
 # uv
 .uv/
-uv.lock
 
 # CDK asset staging directory
 .cdk.staging
