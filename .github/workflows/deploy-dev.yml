@@ -21,7 +21,10 @@ jobs:
       - name: Set up Rust
         uses: actions-rust-lang/setup-rust-toolchain@v1
 
-      - name: Install cargo-lambda (and Zig)
+      - name: Set up Zig
+        uses: goto-bus-stop/setup-zig@v2
+
+      - name: Install cargo-lambda
         run: curl -fsSL https://cargo-lambda.info/install.sh | sh
 
       - name: Build Lambda function
