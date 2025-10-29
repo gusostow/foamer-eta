@@ -1,0 +1,48 @@
+name: Deploy to Dev
+
+on:
+  push:
+    branches:
+      - main
+
+# Required for OIDC authentication
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+
+      - name: Install cargo-lambda (and Zig)
+        run: curl -fsSL https://cargo-lambda.info/install.sh | sh
+
+      - name: Build Lambda function
+        run: cargo lambda build -p svc --release --x86-64
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: us-east-1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Deploy CDK stack
+        working-directory: cdk
+        run: |
+          uv sync
+          uv run cdk deploy FoamerDev --require-approval never
