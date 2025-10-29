@@ -6,6 +6,7 @@ from aws_cdk import (
     aws_secretsmanager as secretsmanager,
     aws_lambda as lambda_,
     aws_apigateway as apigw,
+    aws_dynamodb as dynamodb,
 )
 from constructs import Construct
 
@@ -20,6 +21,19 @@ class CdkStack(Stack):
             secret_name=f"foamer/{env_name}/transit-key",
             description=f"Transit API key for {env_name} environment",
             removal_policy=RemovalPolicy.DESTROY if env_name == "dev" else RemovalPolicy.RETAIN,
+        )
+
+        # DynamoDB table for messages
+        messages_table = dynamodb.Table(
+            self, "MessagesTable",
+            table_name=f"foamer-{env_name}-messages",
+            partition_key=dynamodb.Attribute(
+                name="id",
+                type=dynamodb.AttributeType.STRING
+            ),
+            billing_mode=dynamodb.BillingMode.PAY_PER_REQUEST,
+            removal_policy=RemovalPolicy.DESTROY if env_name == "dev" else RemovalPolicy.RETAIN,
+            point_in_time_recovery=env_name == "prod",
         )
 
         # Lambda function using pre-built cargo-lambda output
@@ -51,6 +65,13 @@ class CdkStack(Stack):
         lambda_function.add_environment(
             "TRANSIT_KEY",
             transit_key_secret.secret_value.unsafe_unwrap()
+        )
+
+        # Grant Lambda access to DynamoDB table and add table name to environment
+        messages_table.grant_read_write_data(lambda_function)
+        lambda_function.add_environment(
+            "FOAMER_MESSAGES_TABLE",
+            messages_table.table_name
         )
 
         # API Gateway REST API (required for API key support)
@@ -122,4 +143,11 @@ class CdkStack(Stack):
             self, "ApiKeyValue",
             value=api_key.key_id,
             description=f"API Key ID for {env_name} (use 'aws apigateway get-api-key' to retrieve value)",
+        )
+
+        # Output the DynamoDB table name
+        CfnOutput(
+            self, "MessagesTableName",
+            value=messages_table.table_name,
+            description=f"DynamoDB messages table name for {env_name}",
         )
