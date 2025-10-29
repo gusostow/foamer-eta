@@ -3,7 +3,7 @@ use api::Client;
 
 #[tokio::test]
 async fn test_departures() -> Result<()> {
-    let coords = (29.72134736791465, -95.38383198936232);
+    let coords = (29.721_348, -95.383_835);
 
     let client = Client::new()?;
     let departures = client.departures(&coords, None).await?;
@@ -51,7 +51,7 @@ async fn test_departures() -> Result<()> {
 
 #[tokio::test]
 async fn test_departures_zero_distance() -> Result<()> {
-    let coords = (29.72134736791465, -95.38383198936232);
+    let coords = (29.721_348, -95.383_835);
 
     let client = Client::new()?;
     let departures = client.departures(&coords, Some(0)).await?;
