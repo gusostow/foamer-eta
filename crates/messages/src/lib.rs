@@ -1,8 +1,8 @@
-use anyhow::Result;
+use anyhow::{Context, Result};
+use aws_sdk_dynamodb::types::AttributeValue;
+use aws_sdk_dynamodb::Client as DynamoClient;
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
-use std::sync::{Arc, RwLock};
 use uuid::Uuid;
 
 /// A message to be displayed on the LED sign
@@ -27,58 +27,137 @@ impl Message {
     }
 }
 
-/// Client for managing messages in memory
+/// Client for managing messages in DynamoDB
 #[derive(Clone)]
 pub struct Client {
-    messages: Arc<RwLock<HashMap<String, Message>>>,
+    table: String,
+    dynamo: DynamoClient,
 }
 
 impl Client {
-    /// Create a new messages client with empty storage
-    pub fn new() -> Self {
-        Self {
-            messages: Arc::new(RwLock::new(HashMap::new())),
-        }
+    /// Create a new messages client
+    pub fn new(table: String, dynamo: DynamoClient) -> Self {
+        Self { table, dynamo }
+    }
+
+    /// Create client from environment variables
+    pub async fn from_env() -> Result<Self> {
+        let table = std::env::var("FOAMER_MESSAGES_TABLE")
+            .context("FOAMER_MESSAGES_TABLE environment variable not set")?;
+
+        let config = aws_config::load_from_env().await;
+        let dynamo = DynamoClient::new(&config);
+
+        Ok(Self::new(table, dynamo))
     }
 
     /// Store or update a message
-    pub fn put(&self, content: String) -> Result<Message> {
-        let mut messages = self.messages.write().unwrap();
+    pub async fn put(&self, content: String) -> Result<Message> {
         let message = Message::new(content);
-        messages.insert(message.id.clone(), message.clone());
+
+        self.dynamo
+            .put_item()
+            .table_name(&self.table)
+            .item("id", AttributeValue::S(message.id.clone()))
+            .item("content", AttributeValue::S(message.content.clone()))
+            .item(
+                "created_at",
+                AttributeValue::S(message.created_at.to_rfc3339()),
+            )
+            .send()
+            .await
+            .context("Failed to put message")?;
+
         Ok(message)
     }
 
     /// Retrieve a message by ID
-    pub fn get(&self, id: &str) -> Result<Message> {
-        let messages = self.messages.read().unwrap();
-        messages
-            .get(id)
-            .cloned()
-            .ok_or_else(|| anyhow::anyhow!("Message not found: {}", id))
+    pub async fn get(&self, id: &str) -> Result<Message> {
+        let result = self
+            .dynamo
+            .get_item()
+            .table_name(&self.table)
+            .key("id", AttributeValue::S(id.to_string()))
+            .send()
+            .await
+            .context("Failed to get message")?;
+
+        let item = result
+            .item
+            .ok_or_else(|| anyhow::anyhow!("Message not found: {}", id))?;
+
+        self.parse_message(item)
     }
 
     /// List all messages
-    pub fn list_all(&self) -> Result<Vec<Message>> {
-        let messages = self.messages.read().unwrap();
-        let mut all_messages: Vec<Message> = messages.values().cloned().collect();
+    pub async fn list_all(&self) -> Result<Vec<Message>> {
+        let result = self
+            .dynamo
+            .scan()
+            .table_name(&self.table)
+            .send()
+            .await
+            .context("Failed to list messages")?;
+
+        let mut messages: Vec<Message> = result
+            .items
+            .unwrap_or_default()
+            .into_iter()
+            .filter_map(|item| self.parse_message(item).ok())
+            .collect();
 
         // Sort by creation time (newest first)
-        all_messages.sort_by(|a, b| b.created_at.cmp(&a.created_at));
+        messages.sort_by(|a, b| b.created_at.cmp(&a.created_at));
 
-        Ok(all_messages)
+        Ok(messages)
     }
 
     /// Delete a message by ID
-    pub fn delete(&self, id: &str) -> Result<bool> {
-        let mut messages = self.messages.write().unwrap();
-        Ok(messages.remove(id).is_some())
-    }
-}
+    pub async fn delete(&self, id: &str) -> Result<bool> {
+        let result = self
+            .dynamo
+            .delete_item()
+            .table_name(&self.table)
+            .key("id", AttributeValue::S(id.to_string()))
+            .return_values(aws_sdk_dynamodb::types::ReturnValue::AllOld)
+            .send()
+            .await
+            .context("Failed to delete message")?;
 
-impl Default for Client {
-    fn default() -> Self {
-        Self::new()
+        Ok(result.attributes.is_some())
+    }
+
+    /// Parse DynamoDB item into Message
+    fn parse_message(
+        &self,
+        item: std::collections::HashMap<String, AttributeValue>,
+    ) -> Result<Message> {
+        let id = item
+            .get("id")
+            .and_then(|v| v.as_s().ok())
+            .ok_or_else(|| anyhow::anyhow!("Missing or invalid id"))?
+            .clone();
+
+        let content = item
+            .get("content")
+            .and_then(|v| v.as_s().ok())
+            .ok_or_else(|| anyhow::anyhow!("Missing or invalid content"))?
+            .clone();
+
+        let created_at = item
+            .get("created_at")
+            .and_then(|v| v.as_s().ok())
+            .ok_or_else(|| anyhow::anyhow!("Missing or invalid created_at"))?;
+
+        let created_at = DateTime::parse_from_rfc3339(created_at)
+            .context("Failed to parse created_at")?
+            .with_timezone(&Utc);
+
+        Ok(Message {
+            id,
+            content,
+            created_at,
+        })
     }
 }
 
@@ -86,55 +165,58 @@ impl Default for Client {
 mod tests {
     use super::*;
 
-    #[test]
-    fn test_put_and_get() {
-        let client = Client::new();
-        let message = client.put("Hello, world!".to_string()).unwrap();
+    #[tokio::test]
+    async fn test_put_and_get() {
+        let client = Client::from_env().await.unwrap();
+        let message = client.put("Hello, world!".to_string()).await.unwrap();
 
-        let retrieved = client.get(&message.id).unwrap();
+        let retrieved = client.get(&message.id).await.unwrap();
 
         assert_eq!(retrieved.id, message.id);
         assert_eq!(retrieved.content, "Hello, world!");
         assert_eq!(retrieved.created_at, message.created_at);
     }
 
-    #[test]
-    fn test_get_nonexistent() {
-        let client = Client::new();
-        let result = client.get("nonexistent");
+    #[tokio::test]
+    async fn test_get_nonexistent() {
+        let client = Client::from_env().await.unwrap();
+        let result = client.get("nonexistent").await;
         assert!(result.is_err());
     }
 
-    #[test]
-    fn test_list_all() {
-        let client = Client::new();
+    #[tokio::test]
+    async fn test_list_all() {
+        let client = Client::from_env().await.unwrap();
 
-        let msg1 = client.put("First".to_string()).unwrap();
+        let msg1 = client.put("First".to_string()).await.unwrap();
         // Sleep briefly to ensure different timestamps
-        std::thread::sleep(std::time::Duration::from_millis(10));
-        let msg2 = client.put("Second".to_string()).unwrap();
+        tokio::time::sleep(tokio::time::Duration::from_millis(10)).await;
+        let msg2 = client.put("Second".to_string()).await.unwrap();
 
-        let all = client.list_all().unwrap();
-        assert_eq!(all.len(), 2);
+        let all = client.list_all().await.unwrap();
+        assert!(all.len() >= 2);
 
-        // Should be sorted newest first
-        assert_eq!(all[0].id, msg2.id);
-        assert_eq!(all[1].id, msg1.id);
+        // Find our messages in the list
+        let found_msg1 = all.iter().find(|m| m.id == msg1.id).unwrap();
+        let found_msg2 = all.iter().find(|m| m.id == msg2.id).unwrap();
+
+        assert_eq!(found_msg1.content, "First");
+        assert_eq!(found_msg2.content, "Second");
     }
 
-    #[test]
-    fn test_delete() {
-        let client = Client::new();
-        let message = client.put("To be deleted".to_string()).unwrap();
+    #[tokio::test]
+    async fn test_delete() {
+        let client = Client::from_env().await.unwrap();
+        let message = client.put("To be deleted".to_string()).await.unwrap();
 
-        assert!(client.get(&message.id).is_ok());
+        assert!(client.get(&message.id).await.is_ok());
 
-        let deleted = client.delete(&message.id).unwrap();
+        let deleted = client.delete(&message.id).await.unwrap();
         assert!(deleted);
-        assert!(client.get(&message.id).is_err());
+        assert!(client.get(&message.id).await.is_err());
 
         // Deleting again should return false
-        let deleted_again = client.delete(&message.id).unwrap();
+        let deleted_again = client.delete(&message.id).await.unwrap();
         assert!(!deleted_again);
     }
 }
