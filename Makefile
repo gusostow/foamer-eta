@@ -16,7 +16,14 @@ else
     export FOAMER_API_URL ?=
 endif
 
-.PHONY: compile upload monitor clean compiledb show-api-url
+.PHONY: compile upload monitor clean compiledb show-api-url cargo-build
+
+# Rust/Cargo targets
+#
+cargo-build:
+	cargo zigbuild --target x86_64-unknown-linux-gnu
+
+# Firmware targets
 
 show-api-url:
 	@echo "FOAMER_API_URL=$(FOAMER_API_URL)"
