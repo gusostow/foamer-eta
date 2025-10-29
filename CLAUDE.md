@@ -91,15 +91,17 @@ curl "http://localhost:3000/departures?lat=29.7213&lon=-95.3838&max_distance=500
 
 The `firmware/foamer-display` directory contains Arduino code for the Adafruit MatrixPortal ESP32-S3 board with a 96x48 HUB75 LED matrix display.
 
+**Note**: The Makefile is located at the project root. All `make` commands must be run from the project root directory.
+
 #### Building
 ```bash
-# Compile firmware
+# Compile firmware (run from project root)
 make compile
 ```
 
 #### Uploading
 ```bash
-# Compile and upload (auto-detects port)
+# Compile and upload (auto-detects port, run from project root)
 make upload
 
 # Override port if needed

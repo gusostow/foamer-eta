@@ -1,31 +1,30 @@
 // Include directives - <> means search in library/system paths
+#include "display.h"
+#include "network.h"
 #include <Adafruit_GFX.h> // Adafruit graphics library (class-based)
 #include <ArduinoJson.h>  // JSON parsing library
-#include <WiFi.h>
-#include <WiFiClientSecure.h>
-#include <HTTPClient.h>
-#include "display.h"
 
-const char* foamer_api_url = FOAMER_API_URL;
-const char* foamer_api_key = FOAMER_API_KEY;
+const char *foamer_api_url = FOAMER_API_URL;
+const char *foamer_api_key = FOAMER_API_KEY;
 
 // WiFi credentials from environment variables
-const char* ssid = WIFI_SSID;
-const char* password = WIFI_PASSWORD;
+const char *ssid = WIFI_SSID;
+const char *password = WIFI_PASSWORD;
 
 /* Display configuration constants */
+const char *ERROR_COLOR = "D70000";
 const int HEADSIGN_WIDTH = 6;
-const char* REALTIME_COLOR = "3ac364";
+const char *TRANSIT_COLOR = "3ac364";
 const int DISPLAY_INTERVAL_MS = 10000; // 10 seconds per page
 
 // Global variables for rotation
 int currentRouteIndex = 0;
 int totalRoutes = 0;
-JsonDocument globalDoc; // Global to store fetched data
-MatrixPanel_I2S_DMA* display; // Pointer to display object
+JsonDocument globalDoc;       // Global to store fetched data
+MatrixPanel_I2S_DMA *display; // Pointer to display object
 
 // Convert hex color string (e.g., "2da646") to RGB565 color
-uint16_t hexToColor565(const char* hex) {
+uint16_t hexToColor565(const char *hex) {
   // Parse hex string to RGB components
   long hexValue = strtol(hex, NULL, 16);
   uint8_t r = (hexValue >> 16) & 0xFF;
@@ -39,20 +38,19 @@ bool fetchDepartures(JsonDocument &doc) {
   HTTPClient http;
 
   // TODO: Get lat/lon from config or make dynamic
-  String url = String(foamer_api_url) + "/departures?lat=40.68722&lon=-73.97481";
+  String url = String(foamer_api_url) +
+               "/departures?lat=29.72134736791465&lon=-95.38383198936232";
 
   Serial.print("Fetching: ");
   Serial.println(url);
 
-  // Detect scheme and use appropriate client
-  bool isHttps = url.startsWith("https://");
-
-  if (isHttps) {
-    WiFiClientSecure* secureClient = new WiFiClientSecure();
-    secureClient->setInsecure(); // Skip certificate verification for simplicity
-    http.begin(*secureClient, url);
+  // Create client and track pointer for cleanup
+  WiFiClient *client = nullptr;
+  if (url.startsWith("https://")) {
+    client = createSecureClient();
+    http.begin(*static_cast<WiFiClientSecure *>(client), url);
   } else {
-    WiFiClient* client = new WiFiClient();
+    client = createClient();
     http.begin(*client, url);
   }
 
@@ -61,130 +59,123 @@ bool fetchDepartures(JsonDocument &doc) {
 
   int httpCode = http.GET();
 
+  bool success = false;
   if (httpCode == HTTP_CODE_OK) {
     String payload = http.getString();
     DeserializationError error = deserializeJson(doc, payload);
-    http.end();
 
     if (error) {
       Serial.print("JSON parse failed: ");
       Serial.println(error.c_str());
-      return false;
+    } else {
+      Serial.println("Successfully fetched departures");
+      success = true;
     }
-    Serial.println("Successfully fetched departures");
-    return true;
   } else {
     Serial.print("HTTP request failed, code: ");
     Serial.println(httpCode);
-    http.end();
-    return false;
   }
+
+  http.end();
+  delete client; // Free the allocated client memory
+
+  return success;
 }
 
-void displayDirection(MatrixPanel_I2S_DMA* display, JsonObject direction, const char* color) {
-    const char *headsign = direction["headsign"];
-    JsonArray departures = direction["departures"];
+void displayDirection(MatrixPanel_I2S_DMA *display, JsonObject direction,
+                      const char *color) {
+  const char *headsign = direction["headsign"];
+  JsonArray departures = direction["departures"];
 
-    String displayHeadsign = String(headsign);
-    displayHeadsign.toUpperCase();
-    if (displayHeadsign.length() > HEADSIGN_WIDTH) {
-        displayHeadsign = displayHeadsign.substring(0, HEADSIGN_WIDTH);
+  String displayHeadsign = String(headsign);
+  displayHeadsign.toUpperCase();
+  if (displayHeadsign.length() > HEADSIGN_WIDTH) {
+    displayHeadsign = displayHeadsign.substring(0, HEADSIGN_WIDTH);
+  } else {
+    // Pad with spaces to HEADSIGN_WIDTH characters
+    while (displayHeadsign.length() < HEADSIGN_WIDTH) {
+      displayHeadsign += " ";
+    }
+  }
+
+  // Display bullet prefix in white
+  display->setTextColor(display->color565(255, 255, 255));
+  display->print("|");
+
+  // Display headsign in route color
+  display->setTextColor(hexToColor565(color));
+  display->print(displayHeadsign);
+
+  // Display separator in white
+  display->setTextColor(display->color565(255, 255, 255));
+  display->print(" ");
+
+  int depCount = 0;
+
+  for (JsonObject dep : departures) {
+    if (depCount == 3)
+      break;
+
+    const char *type = dep["type"];
+    int minutes = dep["minutes"];
+
+    if (depCount > 0) {
+      // Comma always in white
+      display->setTextColor(display->color565(255, 255, 255));
+      display->print(",");
+    }
+
+    // Set color based on departure type
+    if (strcmp(type, "RealTime") == 0) {
+      display->setTextColor(hexToColor565(TRANSIT_COLOR));
     } else {
-        // Pad with spaces to HEADSIGN_WIDTH characters
-        while (displayHeadsign.length() < HEADSIGN_WIDTH) {
-            displayHeadsign += " ";
-        }
+      display->setTextColor(display->color565(255, 255, 255));
     }
 
-    // Display bullet prefix in white
-    display->setTextColor(display->color565(255, 255, 255));
-    display->print("|");
+    display->print(minutes);
 
-    // Display headsign in route color
-    display->setTextColor(hexToColor565(color));
-    display->print(displayHeadsign);
-
-    // Display separator in white
-    display->setTextColor(display->color565(255, 255, 255));
-    display->print("|");
-
-    int depCount = 0;
-
-    for (JsonObject dep : departures) {
-        if(depCount == 3) break;
-
-        const char* type = dep["type"];
-        int minutes = dep["minutes"];
-
-        if (depCount > 0) {
-            // Comma always in white
-            display->setTextColor(display->color565(255, 255, 255));
-            display->print(",");
-        }
-
-        // Set color based on departure type
-        if (strcmp(type, "RealTime") == 0) {
-            display->setTextColor(hexToColor565(REALTIME_COLOR));
-        } else {
-            display->setTextColor(display->color565(255, 255, 255));
-        }
-
-        display->print(minutes);
-
-        depCount++;
-    }
-    display->print("\n");
+    depCount++;
+  }
+  display->print("\n");
 }
 
 /* Function to display a route on the LED matrix */
-void displayRoute(MatrixPanel_I2S_DMA* display, JsonObject route) {
-    const char* name = route["name"];
-    String routeName = String(name);
-    const char* mode = route["mode"];
-    String routeMode = String(mode);
-    const char* color = route["color"];
+void displayRoute(MatrixPanel_I2S_DMA *display, JsonObject route) {
+  const char *name = route["name"];
+  String routeName = String(name);
+  const char *mode = route["mode"];
+  String routeMode = String(mode);
+  const char *color = route["color"];
 
-    // Display route name and mode in route color
-    display->setTextColor(hexToColor565(color));
-    routeName.toUpperCase();
-    display->print(routeName);
-    display->print(" ");
-    display->print(routeMode);
-    display->print("\n");
+  // Display route name and mode in route color
+  display->setTextColor(hexToColor565(color));
+  routeName.toUpperCase();
+  display->print(routeName);
+  display->print(" ");
+  display->print(routeMode);
+  display->print("\n");
 
-    JsonArray directions = route["directions"];
+  JsonArray directions = route["directions"];
 
-    // Display first two directions (or less if not available)
-    for (int i = 0; i < 2; i++) {
-        if (i < directions.size()) {
-            JsonObject direction = directions[i];
-            displayDirection(display, direction, color);
-        } else {
-            // Write empty line if direction doesn't exist
-            display->print("\n");
-        }
+  // Display first two directions (or less if not available)
+  for (int i = 0; i < 2; i++) {
+    if (i < directions.size()) {
+      JsonObject direction = directions[i];
+      displayDirection(display, direction, color);
+    } else {
+      // Write empty line if direction doesn't exist
+      display->print("\n");
     }
-
+  }
 }
-
 
 void setup(void) {
   // Serial is a global OBJECT (instance of a class)
   // .begin() is a METHOD (member function) of the Serial class
-  // Dot notation: object.method() - calls a function that belongs to that object
+  // Dot notation: object.method() - calls a function that belongs to that
+  // object
   Serial.begin(115200);
   delay(2000); // Give serial time to connect
-               //
-  Serial.print("Attempting to connect to SSID: ");
-  Serial.println(ssid);
-
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {
-      delay(500);
-      Serial.print(".");
-  }
-  Serial.println("");
-  Serial.println("Connected to WiFi");
 
   // Create display object
   display = createDisplay();
@@ -197,8 +188,27 @@ void setup(void) {
   }
 
   display->setBrightness8(120);
-  display->setTextWrap(false);
   display->setTextSize(1);
+
+  display->setTextWrap(true);
+  while (!setupWiFi(ssid, password)) {
+    display->setTextColor(hexToColor565(ERROR_COLOR));
+    display->println("WiFi error: ");
+    display->println("");
+    display->println(ssid);
+    delay(5000);
+    display->fillScreen(0);
+    display->setCursor(0, 0);
+  }
+  display->setTextColor(hexToColor565(TRANSIT_COLOR));
+  display->println("WiFi connected: ");
+  display->println("");
+  display->println(ssid);
+  delay(10000);
+  display->fillScreen(0);
+  display->setCursor(0, 0);
+
+  display->setTextWrap(false);
 }
 
 void loop() {
@@ -243,7 +253,8 @@ void loop() {
 
   // Loop back to start when we reach the end
   if (currentRouteIndex >= totalRoutes) {
-    Serial.println("Completed full cycle, will fetch fresh data on next iteration");
+    Serial.println(
+        "Completed full cycle, will fetch fresh data on next iteration");
     currentRouteIndex = 0;
   }
 }
