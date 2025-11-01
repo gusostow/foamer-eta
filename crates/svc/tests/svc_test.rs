@@ -6,7 +6,7 @@ use tower::ServiceExt;
 
 #[tokio::test]
 async fn test_departures_endpoint() -> Result<()> {
-    let app = svc::create_router()?;
+    let app = svc::create_router().await?;
 
     let response = app
         .oneshot(
@@ -51,7 +51,7 @@ async fn test_departures_endpoint() -> Result<()> {
 
 #[tokio::test]
 async fn test_departures_endpoint_default_distance() -> Result<()> {
-    let app = svc::create_router()?;
+    let app = svc::create_router().await?;
 
     let response = app
         .oneshot(
@@ -77,7 +77,7 @@ async fn test_departures_endpoint_default_distance() -> Result<()> {
 
 #[tokio::test]
 async fn test_departures_endpoint_missing_params() -> Result<()> {
-    let app = svc::create_router()?;
+    let app = svc::create_router().await?;
 
     let response = app
         .oneshot(
@@ -90,5 +90,26 @@ async fn test_departures_endpoint_missing_params() -> Result<()> {
     // Should return 400 Bad Request when required params are missing
     assert_eq!(response.status(), StatusCode::BAD_REQUEST);
 
+    Ok(())
+}
+
+#[tokio::test]
+async fn test_messages() -> Result<()> {
+    let app = svc::create_router().await?;
+
+    let request = svc::PostMessageRequest {
+        content: "integration test content".to_string(),
+    };
+    let body = serde_json::to_vec(&request)?;
+    let response = app
+        .oneshot(
+            Request::builder()
+                .method("POST")
+                .uri("/messages")
+                .header("content-type", "application/json")
+                .body(Body::from(body))?,
+        )
+        .await?;
+    assert_eq!(response.status(), StatusCode::OK);
     Ok(())
 }

@@ -12,7 +12,7 @@ async fn main() -> Result<()> {
         .with(tracing_subscriber::fmt::layer())
         .init();
 
-    let app = svc::create_router()?;
+    let app = svc::create_router().await?;
 
     // Read PORT from environment variable, default to 8080 (Lambda Web Adapter default)
     let port = std::env::var("PORT").unwrap_or_else(|_| "8080".to_string());
