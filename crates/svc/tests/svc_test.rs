@@ -113,3 +113,24 @@ async fn test_messages() -> Result<()> {
     assert_eq!(response.status(), StatusCode::OK);
     Ok(())
 }
+
+#[tokio::test]
+async fn test_messages_too_long() -> Result<()> {
+    let app = svc::create_router().await?;
+
+    let request = svc::PostMessageRequest {
+        content: "X".repeat(300),
+    };
+    let body = serde_json::to_vec(&request)?;
+    let response = app
+        .oneshot(
+            Request::builder()
+                .method("POST")
+                .uri("/messages")
+                .header("content-type", "application/json")
+                .body(Body::from(body))?,
+        )
+        .await?;
+    assert_eq!(response.status(), StatusCode::BAD_REQUEST);
+    Ok(())
+}
