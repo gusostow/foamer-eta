@@ -1,16 +1,18 @@
-use api::{Client, Departures};
 use anyhow::Result;
+use api::{Client, Departures};
 use axum::{
+    Json, Router,
     extract::{Query, State},
     http::StatusCode,
     response::{IntoResponse, Response},
     routing::{get, post},
-    Json, Router,
 };
-use messages::{Client as MessagesClient, Message};
+use messages::Client as MessagesClient;
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 use tower_http::trace::TraceLayer;
+
+const MAX_MESSAGE_LEN: usize = 96;
 
 #[derive(Deserialize)]
 pub struct DeparturesQuery {
@@ -62,10 +64,19 @@ pub struct PostMessageRequest {
 async fn post_message(
     State(state): State<Arc<AppState>>,
     Json(payload): Json<PostMessageRequest>,
-) -> Result<Json<Message>, AppError> {
+) -> Result<impl IntoResponse, AppError> {
+    // Validate content length (max 96 chars for display)
+    if payload.content.len() > MAX_MESSAGE_LEN {
+        return Ok((
+            StatusCode::BAD_REQUEST,
+            "Message content exceeds maximum length of 96 characters",
+        )
+            .into_response());
+    }
+
     // Create and store the message
     let message = state.messages_client.put(payload.content).await?;
-    Ok(Json(message))
+    Ok(Json(message).into_response())
 }
 
 // Error handling
