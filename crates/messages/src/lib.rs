@@ -168,12 +168,12 @@ mod tests {
     #[tokio::test]
     async fn test_put_and_get() {
         let client = Client::from_env().await.unwrap();
-        let message = client.put("Hello, world!".to_string()).await.unwrap();
+        let message = client.put("hello, world!".to_string()).await.unwrap();
 
         let retrieved = client.get(&message.id).await.unwrap();
 
         assert_eq!(retrieved.id, message.id);
-        assert_eq!(retrieved.content, "Hello, world!");
+        assert_eq!(retrieved.content, "hello, world!");
         assert_eq!(retrieved.created_at, message.created_at);
     }
 
@@ -188,20 +188,20 @@ mod tests {
     async fn test_list_all() {
         let client = Client::from_env().await.unwrap();
 
-        let msg1 = client.put("First".to_string()).await.unwrap();
-        // Sleep briefly to ensure different timestamps
+        let msg1 = client.put("first".to_string()).await.unwrap();
+        // sleep briefly to ensure different timestamps
         tokio::time::sleep(tokio::time::Duration::from_millis(10)).await;
-        let msg2 = client.put("Second".to_string()).await.unwrap();
+        let msg2 = client.put("second".to_string()).await.unwrap();
 
         let all = client.list_all().await.unwrap();
         assert!(all.len() >= 2);
 
-        // Find our messages in the list
+        // find our messages in the list
         let found_msg1 = all.iter().find(|m| m.id == msg1.id).unwrap();
         let found_msg2 = all.iter().find(|m| m.id == msg2.id).unwrap();
 
-        assert_eq!(found_msg1.content, "First");
-        assert_eq!(found_msg2.content, "Second");
+        assert_eq!(found_msg1.content, "first");
+        assert_eq!(found_msg2.content, "second");
     }
 
     #[tokio::test]
