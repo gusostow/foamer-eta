@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 api = { path = "../api" }
+messages = { path = "../messages" }
 tokio = { workspace = true }
 anyhow = { workspace = true }
 serde = { workspace = true }

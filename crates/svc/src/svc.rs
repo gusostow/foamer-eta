@@ -4,10 +4,11 @@ use axum::{
     extract::{Query, State},
     http::StatusCode,
     response::{IntoResponse, Response},
-    routing::get,
+    routing::{get, post},
     Json, Router,
 };
-use serde::Deserialize;
+use messages::{Client as MessagesClient, Message};
+use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 use tower_http::trace::TraceLayer;
 
@@ -20,14 +21,20 @@ pub struct DeparturesQuery {
 
 pub struct AppState {
     client: Client,
+    messages_client: MessagesClient,
 }
 
-pub fn create_router() -> Result<Router> {
+pub async fn create_router() -> Result<Router> {
     let client = Client::new()?;
-    let state = Arc::new(AppState { client });
+    let messages_client = MessagesClient::from_env().await?;
+    let state = Arc::new(AppState {
+        client,
+        messages_client,
+    });
 
     let app = Router::new()
         .route("/departures", get(get_departures))
+        .route("/messages", post(post_message))
         .with_state(state)
         .layer(TraceLayer::new_for_http());
 
@@ -45,6 +52,20 @@ async fn get_departures(
         .await?;
 
     Ok(Json(departures))
+}
+
+#[derive(Deserialize, Serialize)]
+pub struct PostMessageRequest {
+    pub content: String,
+}
+
+async fn post_message(
+    State(state): State<Arc<AppState>>,
+    Json(payload): Json<PostMessageRequest>,
+) -> Result<Json<Message>, AppError> {
+    // Create and store the message
+    let message = state.messages_client.put(payload.content).await?;
+    Ok(Json(message))
 }
 
 // Error handling

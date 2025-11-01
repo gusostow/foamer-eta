@@ -2101,6 +2101,7 @@ dependencies = [
  "anyhow",
  "api",
  "axum",
+ "messages",
  "serde",
  "serde_json",
  "tokio",
