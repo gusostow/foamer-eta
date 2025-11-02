@@ -195,6 +195,7 @@ void setup(void) {
     display->setTextColor(hexToColor565(ERROR_COLOR));
     display->println("WiFi error: ");
     display->println("");
+    display->setTextColor(display->color565(255, 255, 255));
     display->println(ssid);
     delay(5000);
     display->fillScreen(0);
@@ -203,8 +204,9 @@ void setup(void) {
   display->setTextColor(hexToColor565(TRANSIT_COLOR));
   display->println("WiFi connected: ");
   display->println("");
+  display->setTextColor(display->color565(255, 255, 255));
   display->println(ssid);
-  delay(10000);
+  delay(5000);
   display->fillScreen(0);
   display->setCursor(0, 0);
 
