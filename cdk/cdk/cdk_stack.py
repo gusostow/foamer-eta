@@ -7,6 +7,7 @@ from aws_cdk import (
     aws_lambda as lambda_,
     aws_apigateway as apigw,
     aws_dynamodb as dynamodb,
+    aws_s3 as s3,
 )
 from constructs import Construct
 
@@ -123,6 +124,24 @@ class CdkStack(Stack):
             any_method=True,
         )
 
+        # S3 bucket for frontend static site
+        frontend_bucket = s3.Bucket(
+            self,
+            "FrontendBucket",
+            bucket_name=f"foamer-{env_name}-frontend",
+            website_index_document="index.html",
+            website_error_document="index.html",
+            public_read_access=True,
+            block_public_access=s3.BlockPublicAccess(
+                block_public_acls=False,
+                block_public_policy=False,
+                ignore_public_acls=False,
+                restrict_public_buckets=False,
+            ),
+            removal_policy=RemovalPolicy.DESTROY if env_name == "dev" else RemovalPolicy.RETAIN,
+            auto_delete_objects=True if env_name == "dev" else False,
+        )
+
         # Output the API Gateway URL
         CfnOutput(
             self,
@@ -137,4 +156,20 @@ class CdkStack(Stack):
             "MessagesTableName",
             value=messages_table.table_name,
             description=f"DynamoDB messages table name for {env_name}",
+        )
+
+        # Output the S3 bucket name
+        CfnOutput(
+            self,
+            "FrontendBucketName",
+            value=frontend_bucket.bucket_name,
+            description=f"S3 bucket name for frontend in {env_name}",
+        )
+
+        # Output the S3 website URL
+        CfnOutput(
+            self,
+            "FrontendWebsiteUrl",
+            value=frontend_bucket.bucket_website_url,
+            description=f"S3 website URL for frontend in {env_name}",
         )
