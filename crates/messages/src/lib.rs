@@ -1,6 +1,6 @@
 use anyhow::{Context, Result};
-use aws_sdk_dynamodb::types::AttributeValue;
 use aws_sdk_dynamodb::Client as DynamoClient;
+use aws_sdk_dynamodb::types::AttributeValue;
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
@@ -160,4 +160,3 @@ impl Client {
         })
     }
 }
-

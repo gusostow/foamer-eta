@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write
+
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -12,6 +15,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: us-east-1
 
       - name: Set up Rust
         uses: actions-rust-lang/setup-rust-toolchain@v1
@@ -24,4 +33,5 @@ jobs:
       - name: Run integration tests
         env:
           TRANSIT_KEY: ${{ secrets.TRANSIT_KEY }}
+          FOAMER_MESSAGES_TABLE: foamer-dev-messages
         run: cargo test --test integration_test

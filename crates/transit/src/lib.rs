@@ -76,10 +76,7 @@ impl TransitClient {
     ) -> Result<NearbyRoutesResponse> {
         let url = format!("{}/public/nearby_routes", BASE_URL);
 
-        let mut query_params = vec![
-            ("lat", lat.to_string()),
-            ("lon", lon.to_string()),
-        ];
+        let mut query_params = vec![("lat", lat.to_string()), ("lon", lon.to_string())];
 
         if let Some(distance) = max_distance {
             query_params.push(("max_distance", distance.to_string()));
