@@ -9,11 +9,15 @@
 const char *ERROR_COLOR = "D70000";
 const int HEADSIGN_WIDTH = 6;
 const char *TRANSIT_COLOR = "3ac364";
+const char *MESSAGE_COLOR = "FF7B9C"; // Coral pink between peach and hot pink
 const int DISPLAY_INTERVAL_MS = 10000; // 10 seconds per page
 
 // Global variables for rotation
 int currentRouteIndex = 0;
 int totalRoutes = 0;
+bool hasMessage = false;
+bool messageShown = false;
+String currentMessage = "";
 JsonDocument globalDoc;       // Global to store fetched data
 MatrixPanel_I2S_DMA *display; // Pointer to display object
 
@@ -133,6 +137,17 @@ void displayDirection(MatrixPanel_I2S_DMA *display, JsonObject direction,
   display->print("\n");
 }
 
+/* Function to display a message on the LED matrix */
+void displayMessage(MatrixPanel_I2S_DMA *display, const char *message) {
+  display->fillScreen(0);
+  display->setCursor(0, 0);
+  display->setTextColor(hexToColor565(MESSAGE_COLOR));
+  display->setTextWrap(true);
+  display->println(message);
+  display->setTextWrap(false);
+  delay(10000);
+}
+
 /* Function to display a route on the LED matrix */
 void displayRoute(MatrixPanel_I2S_DMA *display, JsonObject route) {
   const char *name = route["name"];
@@ -228,9 +243,16 @@ void loop() {
     totalRoutes = routes.size();
     Serial.print("Total routes: ");
     Serial.println(totalRoutes);
-  }
 
-  JsonArray routes = globalDoc["routes"];
+    // Check if there's a message to display
+    const char *message = globalDoc["message"];
+    if (message != nullptr) {
+      currentMessage = String(message);
+      Serial.print("Message to display: ");
+      Serial.println(currentMessage);
+      displayMessage(display, currentMessage.c_str());
+    }
+  }
 
   // Clear screen and reset cursor
   display->fillScreen(0);
@@ -238,13 +260,11 @@ void loop() {
   display->setTextColor(display->color565(255, 255, 255));
 
   // Display two routes starting from currentRouteIndex
+  JsonArray routes = globalDoc["routes"];
   for (int i = 0; i < 2 && (currentRouteIndex + i) < totalRoutes; i++) {
     JsonObject route = routes[currentRouteIndex + i];
     displayRoute(display, route);
   }
-
-  // Wait for display interval
-  delay(DISPLAY_INTERVAL_MS);
 
   // Move to next pair of routes
   currentRouteIndex += 2;
@@ -253,4 +273,7 @@ void loop() {
   if (currentRouteIndex >= totalRoutes) {
     currentRouteIndex = 0;
   }
+
+  // Wait for display interval
+  delay(DISPLAY_INTERVAL_MS);
 }
