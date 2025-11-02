@@ -25,3 +25,25 @@ secret.
 The secret will need to gate access at two points.
 - Initial access to the frontend.
 - Making API calls.
+
+
+## Site
+
+### Functionality
+
+- Text box to submit text to /messages endpoint via POST request.
+- Don't allow user to submit messages >96 chars.
+
+### Stack
+
+Simple static site in CSS, html, and potentically javascript.
+
+### Code organization
+
+Put files under `frontend/` at the root of the repo.
+
+### Serving
+
+This will be deployed as a static site on Github Pages.
+
+For local development I should just be able to open the HTML file in my web browser.

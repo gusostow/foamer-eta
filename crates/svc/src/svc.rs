@@ -10,6 +10,7 @@ use axum::{
 use messages::Client as MessagesClient;
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
+use tower_http::cors::CorsLayer;
 use tower_http::trace::TraceLayer;
 
 const MAX_MESSAGE_LEN: usize = 96;
@@ -38,6 +39,7 @@ pub async fn create_router() -> Result<Router> {
         .route("/departures", get(get_departures))
         .route("/messages", post(post_message))
         .with_state(state)
+        .layer(CorsLayer::permissive())
         .layer(TraceLayer::new_for_http());
 
     Ok(app)
