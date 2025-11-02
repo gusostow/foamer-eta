@@ -9,6 +9,16 @@ const charCount = document.getElementById('charCount');
 const submitBtn = document.getElementById('submitBtn');
 const statusMessage = document.getElementById('statusMessage');
 
+// Check if string contains only ASCII characters
+function isAscii(str) {
+    for (let i = 0; i < str.length; i++) {
+        if (str.charCodeAt(i) > 127) {
+            return false;
+        }
+    }
+    return true;
+}
+
 // Update character counter as user types
 messageInput.addEventListener('input', () => {
     const length = messageInput.value.length;
@@ -40,6 +50,11 @@ form.addEventListener('submit', async (e) => {
 
     if (!content || content.length > 96) {
         showStatus('Message must be between 1 and 96 characters', 'error');
+        return;
+    }
+
+    if (!isAscii(content)) {
+        showStatus('Message must contain only ASCII characters', 'error');
         return;
     }
 
