@@ -1,9 +1,10 @@
-use anyhow::Result;
+use anyhow::{Context, Result};
 use api::{Client as FoamerClient, Departures};
 use axum::{
     Json, Router,
     extract::{Query, State},
-    http::StatusCode,
+    http::{HeaderMap, Request, StatusCode},
+    middleware::{self, Next},
     response::{IntoResponse, Response},
     routing::{get, post},
 };
@@ -25,24 +26,48 @@ pub struct DeparturesQuery {
 pub struct AppState {
     foamer_client: FoamerClient,
     messages_client: MessagesClient,
+    shared_secret: String,
 }
 
 pub async fn create_router() -> Result<Router> {
     let client = FoamerClient::new().await?;
     let messages_client = MessagesClient::from_env().await?;
+    let shared_secret = std::env::var("FOAMER_SECRET")
+        .context("FOAMER_SECRET environment variable not set")?;
+
     let state = Arc::new(AppState {
         foamer_client: client,
         messages_client,
+        shared_secret,
     });
 
     let app = Router::new()
         .route("/departures", get(get_departures))
         .route("/messages", post(post_message))
-        .with_state(state)
+        .with_state(state.clone())
+        .layer(middleware::from_fn_with_state(state, auth_middleware))
         .layer(CorsLayer::permissive())
         .layer(TraceLayer::new_for_http());
 
     Ok(app)
+}
+
+async fn auth_middleware(
+    State(state): State<Arc<AppState>>,
+    headers: HeaderMap,
+    request: Request<axum::body::Body>,
+    next: Next,
+) -> Result<Response, StatusCode> {
+    let api_key = headers
+        .get("x-api-key")
+        .and_then(|v| v.to_str().ok())
+        .unwrap_or("");
+
+    if api_key != state.shared_secret {
+        return Err(StatusCode::FORBIDDEN);
+    }
+
+    Ok(next.run(request).await)
 }
 
 async fn get_departures(

@@ -3,6 +3,7 @@ const API_BASE_URL = 'http://localhost:8080';
 
 // Get form elements
 const form = document.getElementById('messageForm');
+const passwordInput = document.getElementById('apiPassword');
 const messageInput = document.getElementById('messageContent');
 const charCount = document.getElementById('charCount');
 const submitBtn = document.getElementById('submitBtn');
@@ -21,9 +22,15 @@ messageInput.addEventListener('input', () => {
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    const password = passwordInput.value.trim();
     const content = messageInput.value.trim();
 
     // Client-side validation
+    if (!password) {
+        showStatus('Password is required', 'error');
+        return;
+    }
+
     if (!content || content.length > 96) {
         showStatus('Message must be between 1 and 96 characters', 'error');
         return;
@@ -31,6 +38,7 @@ form.addEventListener('submit', async (e) => {
 
     // Disable form during submission
     submitBtn.disabled = true;
+    passwordInput.disabled = true;
     messageInput.disabled = true;
     showStatus('Submitting...', 'info');
 
@@ -39,6 +47,7 @@ form.addEventListener('submit', async (e) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'x-api-key': password,
             },
             body: JSON.stringify({ content }),
         });
@@ -47,9 +56,11 @@ form.addEventListener('submit', async (e) => {
             const data = await response.json();
             showStatus('Message submitted successfully!', 'success');
 
-            // Clear form
+            // Clear message field (keep password for convenience)
             messageInput.value = '';
             charCount.textContent = '0';
+        } else if (response.status === 403) {
+            showStatus('Authentication failed: Invalid password', 'error');
         } else {
             const errorText = await response.text();
             showStatus(`Error: ${errorText}`, 'error');
@@ -59,6 +70,7 @@ form.addEventListener('submit', async (e) => {
     } finally {
         // Re-enable form
         submitBtn.disabled = false;
+        passwordInput.disabled = false;
         messageInput.disabled = false;
     }
 });
