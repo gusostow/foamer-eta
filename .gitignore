@@ -20,8 +20,9 @@ target
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-# Environment variables
+# Environment variables / secrets
 .envrc.local
+firmware/profiles/
 
 # MacOS
 .DS_STORE
