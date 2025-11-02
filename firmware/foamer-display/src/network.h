@@ -12,7 +12,7 @@ bool setupWiFi(const char *ssid, const char *password) {
 
   WiFi.begin(ssid, password);
 
-  for (int i; i < 10; i++) {
+  for (int i = 0; i < 10; i++) {
 
     if (WiFi.status() == WL_CONNECTED) {
       Serial.println("");
