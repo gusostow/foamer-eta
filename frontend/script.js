@@ -18,6 +18,13 @@ messageInput.addEventListener('input', () => {
     submitBtn.disabled = length === 0 || length > 96;
 });
 
+// Prevent Enter key from submitting form
+form.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+    }
+});
+
 // Handle form submission
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
