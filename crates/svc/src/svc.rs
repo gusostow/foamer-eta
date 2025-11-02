@@ -27,7 +27,7 @@ pub struct AppState {
 }
 
 pub async fn create_router() -> Result<Router> {
-    let client = FoamerClient::new()?;
+    let client = FoamerClient::new().await?;
     let messages_client = MessagesClient::from_env().await?;
     let state = Arc::new(AppState {
         foamer_client: client,
