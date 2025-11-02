@@ -24,4 +24,5 @@ jobs:
       - name: Run integration tests
         env:
           TRANSIT_KEY: ${{ secrets.TRANSIT_KEY }}
+          FOAMER_MESSAGES_TABLE: foamer-dev-messages
         run: cargo test --test integration_test
