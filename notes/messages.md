@@ -42,8 +42,13 @@ Simple static site in CSS, html, and potentically javascript.
 
 Put files under `frontend/` at the root of the repo.
 
-### Serving
+### Deployment
 
 This will be deployed as a static site on Github Pages.
 
 For local development I should just be able to open the HTML file in my web browser.
+
+This will be deployed to two GH Pages sites for dev and prod. Each frontend should use the correct
+Lambda API Gateway url from the CDK stack.
+
+The `deploy-dev.yml` workflow will deploy to the dev Github pages site.

@@ -1,4 +1,4 @@
-// API endpoint - change this for production
+// API endpoint - defaults to localhost for local dev, replaced during deployment
 const API_BASE_URL = 'http://localhost:8080';
 
 // Get form elements
