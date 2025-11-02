@@ -10,4 +10,6 @@ reqwest = { workspace = true }
 anyhow = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
+rand = { workspace = true }
 transit = { path = "../transit" }
+messages = { path = "../messages" }

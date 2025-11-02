@@ -1,4 +1,6 @@
 use anyhow::{Context, Result};
+use messages::Client as MessagesClient;
+use rand::seq::SliceRandom;
 use serde::{Deserialize, Serialize};
 use transit::TransitClient;
 
@@ -10,6 +12,7 @@ type LatLon = (f32, f32);
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Departures {
     pub routes: Vec<Route>,
+    pub message: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -35,12 +38,14 @@ pub enum Departure {
 
 pub struct Client {
     transit_client: TransitClient,
+    messages_client: MessagesClient,
 }
 
 impl Client {
-    pub fn new() -> Result<Self> {
+    pub async fn new() -> Result<Self> {
         Ok(Self {
             transit_client: TransitClient::from_env()?,
+            messages_client: MessagesClient::from_env().await?,
         })
     }
 
@@ -125,6 +130,21 @@ impl Client {
 
         let routes = routes?;
 
-        Ok(Departures { routes })
+        // Fetch a random message if available
+        let message = self
+            .messages_client
+            .list_all()
+            .await
+            .ok()
+            .and_then(|messages| {
+                if messages.is_empty() {
+                    None
+                } else {
+                    let mut rng = rand::thread_rng();
+                    messages.choose(&mut rng).map(|m| m.content.clone())
+                }
+            });
+
+        Ok(Departures { routes, message })
     }
 }
