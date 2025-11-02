@@ -12,11 +12,6 @@ on:
         type: string
         description: 'CDK stack name (FoamerDev or FoamerProd)'
 
-# Required for OIDC authentication
-permissions:
-  id-token: write
-  contents: read
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
