@@ -101,6 +101,10 @@ async fn post_message(
             .into_response());
     }
 
+    if !payload.content.is_ascii() {
+        return Ok((StatusCode::BAD_REQUEST, "Message should be ASCII only").into_response())
+    }
+
     // Create and store the message
     let message = state.messages_client.put(payload.content).await?;
     Ok(Json(message).into_response())
