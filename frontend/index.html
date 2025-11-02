@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foamer Message Submission</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Submit a Message</h1>
+
+        <form id="messageForm">
+            <div class="form-group">
+                <label for="messageContent">Message (max 96 characters):</label>
+                <input
+                    type="text"
+                    id="messageContent"
+                    name="content"
+                    maxlength="96"
+                    required
+                >
+                <div class="char-counter">
+                    <span id="charCount">0</span>/96
+                </div>
+            </div>
+
+            <button type="submit" id="submitBtn">Submit Message</button>
+
+            <div id="statusMessage" class="status-message"></div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
