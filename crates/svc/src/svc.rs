@@ -1,5 +1,5 @@
 use anyhow::Result;
-use api::{Client, Departures};
+use api::{Client as FoamerClient, Departures};
 use axum::{
     Json, Router,
     extract::{Query, State},
@@ -10,6 +10,7 @@ use axum::{
 use messages::Client as MessagesClient;
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
+use tower_http::cors::CorsLayer;
 use tower_http::trace::TraceLayer;
 
 const MAX_MESSAGE_LEN: usize = 96;
@@ -22,15 +23,15 @@ pub struct DeparturesQuery {
 }
 
 pub struct AppState {
-    client: Client,
+    foamer_client: FoamerClient,
     messages_client: MessagesClient,
 }
 
 pub async fn create_router() -> Result<Router> {
-    let client = Client::new()?;
+    let client = FoamerClient::new().await?;
     let messages_client = MessagesClient::from_env().await?;
     let state = Arc::new(AppState {
-        client,
+        foamer_client: client,
         messages_client,
     });
 
@@ -38,6 +39,7 @@ pub async fn create_router() -> Result<Router> {
         .route("/departures", get(get_departures))
         .route("/messages", post(post_message))
         .with_state(state)
+        .layer(CorsLayer::permissive())
         .layer(TraceLayer::new_for_http());
 
     Ok(app)
@@ -49,7 +51,7 @@ async fn get_departures(
 ) -> Result<Json<Departures>, AppError> {
     let coords = (params.lat, params.lon);
     let departures = state
-        .client
+        .foamer_client
         .departures(&coords, params.max_distance)
         .await?;
 

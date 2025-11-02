@@ -5,7 +5,7 @@ use api::Client;
 async fn test_departures() -> Result<()> {
     let coords = (29.721_348, -95.383_835);
 
-    let client = Client::new()?;
+    let client = Client::new().await?;
     let departures = client.departures(&coords, None).await?;
 
     // Verify we got some routes
@@ -53,7 +53,7 @@ async fn test_departures() -> Result<()> {
 async fn test_departures_zero_distance() -> Result<()> {
     let coords = (29.721_348, -95.383_835);
 
-    let client = Client::new()?;
+    let client = Client::new().await?;
     let departures = client.departures(&coords, Some(0)).await?;
 
     // With max_distance of 0, no routes should be returned
