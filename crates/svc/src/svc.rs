@@ -1,5 +1,5 @@
 use anyhow::Result;
-use api::{Client, Departures};
+use api::{Client as FoamerClient, Departures};
 use axum::{
     Json, Router,
     extract::{Query, State},
@@ -22,15 +22,15 @@ pub struct DeparturesQuery {
 }
 
 pub struct AppState {
-    client: Client,
+    foamer_client: FoamerClient,
     messages_client: MessagesClient,
 }
 
 pub async fn create_router() -> Result<Router> {
-    let client = Client::new()?;
+    let client = FoamerClient::new()?;
     let messages_client = MessagesClient::from_env().await?;
     let state = Arc::new(AppState {
-        client,
+        foamer_client: client,
         messages_client,
     });
 
@@ -49,7 +49,7 @@ async fn get_departures(
 ) -> Result<Json<Departures>, AppError> {
     let coords = (params.lat, params.lon);
     let departures = state
-        .client
+        .foamer_client
         .departures(&coords, params.max_distance)
         .await?;
 
