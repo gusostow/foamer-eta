@@ -28,6 +28,17 @@ class CdkStack(Stack):
             else RemovalPolicy.RETAIN,
         )
 
+        # Secrets Manager secret for shared API password
+        shared_password_secret = secretsmanager.Secret(
+            self,
+            "SharedPasswordSecret",
+            secret_name=f"foamer/{env_name}/shared-password",
+            description=f"Shared password for API access in {env_name} environment",
+            removal_policy=RemovalPolicy.DESTROY
+            if env_name == "dev"
+            else RemovalPolicy.RETAIN,
+        )
+
         # DynamoDB table for messages
         messages_table = dynamodb.Table(
             self,
@@ -113,10 +124,13 @@ class CdkStack(Stack):
             api_key_required=True,
         )
 
-        # Create API key
-        api_key = api.add_api_key(
+        # Create API key with custom value from Secrets Manager
+        api_key = apigw.CfnApiKey(
+            self,
             f"FoamerApiKey{env_name}",
-            api_key_name=f"foamer-{env_name}-key",
+            name=f"foamer-{env_name}-key",
+            enabled=True,
+            value=shared_password_secret.secret_value.unsafe_unwrap(),
         )
 
         # Create usage plan with throttling
@@ -133,8 +147,15 @@ class CdkStack(Stack):
             ),
         )
 
-        # Associate API key with usage plan
-        usage_plan.add_api_key(api_key)
+        # Associate API key with usage plan using L1 construct
+        apigw.CfnUsagePlanKey(
+            self,
+            "UsagePlanKey",
+            key_id=api_key.ref,
+            key_type="API_KEY",
+            usage_plan_id=usage_plan.usage_plan_id,
+        )
+
         usage_plan.add_api_stage(
             stage=api.deployment_stage,
         )
@@ -147,12 +168,12 @@ class CdkStack(Stack):
             description=f"API Gateway URL for {env_name}",
         )
 
-        # Output the API key value
+        # Output the shared password secret name
         CfnOutput(
             self,
-            "ApiKeyValue",
-            value=api_key.key_id,
-            description=f"API Key ID for {env_name} (use 'aws apigateway get-api-key' to retrieve value)",
+            "SharedPasswordSecretName",
+            value=shared_password_secret.secret_name,
+            description=f"Secrets Manager secret name for shared password in {env_name}",
         )
 
         # Output the DynamoDB table name
