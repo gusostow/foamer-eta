@@ -1,7 +1,7 @@
-name: Deploy to Dev
+name: Deploy to Prod
 
 on:
-  push:
+  workflow_dispatch:
     branches:
       - main
 
@@ -9,6 +9,6 @@ jobs:
   deploy:
     uses: ./.github/workflows/deploy-stack.yml
     with:
-      env_name: dev
-      stack_name: FoamerDev
+      env_name: prod
+      stack_name: FoamerProd
     secrets: inherit
