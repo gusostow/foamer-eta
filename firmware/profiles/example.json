@@ -1,0 +1,14 @@
+{
+  "wifi": {
+    "ssid": "YourSSID",
+    "password": "YourPassword"
+  },
+  "api": {
+    "url": "http://localhost:8080",
+    "secret": "your-api-secret-here"
+  },
+  "geo": {
+      "lat": "38.89544",
+      "lon": "-77.03128"
+  }
+}

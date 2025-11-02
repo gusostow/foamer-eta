@@ -3,42 +3,27 @@
 
 PROJECT_DIR = firmware/foamer-display
 PIO = platformio
-ENV ?= dev
 
-# Get local IPv4 address (filters out loopback)
-LOCAL_IP := $(shell ifconfig | grep "inet " | grep -v 127.0.0.1 | awk '{print $$2}' | head -n 1)
+# Config profile to use (dev, prod, etc.)
+# Pass PROFILE=xxx to make to select a profile
+PROFILE ?= dev
+export CONFIG_PROFILE = $(PROFILE)
 
-# Set FOAMER_API_URL based on ENV
-ifeq ($(ENV),local)
-    export FOAMER_API_URL := http://$(LOCAL_IP):8080
-else
-    # Use environment variable if set, otherwise empty
-    export FOAMER_API_URL ?=
-endif
-
-.PHONY: compile upload monitor clean compiledb show-api-url cargo-build
-
-# Rust/Cargo targets
-#
-cargo-build:
-	cargo zigbuild --target x86_64-unknown-linux-gnu
-
-# Firmware targets
-
-show-api-url:
-	@echo "FOAMER_API_URL=$(FOAMER_API_URL)"
+.PHONY: compile upload monitor clean compiledb
 
 compile:
-	@echo "Building with FOAMER_API_URL=$(FOAMER_API_URL)"
+	@echo "building with profile: $(PROFILE)"
 	cd $(PROJECT_DIR) && $(PIO) run
 
 upload:
+	@echo "building with profile: $(PROFILE)"
 	cd $(PROJECT_DIR) && $(PIO) run -t upload
 
 monitor:
 	cd $(PROJECT_DIR) && $(PIO) device monitor
 
 upload-monitor:
+	@echo "building with profile: $(PROFILE)"
 	cd $(PROJECT_DIR) && $(PIO) run -t upload -t monitor
 
 clean:

@@ -23,6 +23,7 @@ target
 # Environment variables / secrets
 .envrc.local
 firmware/profiles/
+firmware/foamer-display/src/config_data.h
 
 # MacOS
 .DS_STORE
@@ -31,6 +32,7 @@ firmware/profiles/
 .pio/
 .cache/
 compile_commands.json
+
 
 # CDK
 cdk.context.json
