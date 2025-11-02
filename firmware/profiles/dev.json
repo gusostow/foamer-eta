@@ -1,0 +1,14 @@
+{
+  "wifi": {
+    "ssid": "SpectrumSetup-CF05",
+    "password": "glasssalt239"
+  },
+  "api": {
+    "url": "https://api-dev.foamer.net",
+    "secret": "2025-11-15"
+  },
+  "geo": {
+      "lat": "29.72135",
+      "lon": "-95.38388"
+  }
+}

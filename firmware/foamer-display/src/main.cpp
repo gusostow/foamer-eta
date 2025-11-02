@@ -1,15 +1,9 @@
 // Include directives - <> means search in library/system paths
+#include "config.h"
 #include "display.h"
 #include "network.h"
 #include <Adafruit_GFX.h> // Adafruit graphics library (class-based)
 #include <ArduinoJson.h>  // JSON parsing library
-
-const char *foamer_api_url = FOAMER_API_URL;
-const char *foamer_secret = FOAMER_SECRET;
-
-// WiFi credentials from environment variables
-const char *ssid = WIFI_SSID;
-const char *password = WIFI_PASSWORD;
 
 /* Display configuration constants */
 const char *ERROR_COLOR = "D70000";
@@ -37,9 +31,9 @@ uint16_t hexToColor565(const char *hex) {
 bool fetchDepartures(JsonDocument &doc) {
   HTTPClient http;
 
-  // TODO: Get lat/lon from config or make dynamic
-  String url = String(foamer_api_url) +
-               "/departures?lat=29.72134736791465&lon=-95.38383198936232";
+  String url = String(Config::getApiUrl()) +
+               "/departures?lat=" + String(Config::getGeoLat()) +
+               "&lon=" + String(Config::getGeoLon());
 
   Serial.print("Fetching: ");
   Serial.println(url);
@@ -55,7 +49,7 @@ bool fetchDepartures(JsonDocument &doc) {
   }
 
   // Add API key header
-  http.addHeader("x-api-key", foamer_secret);
+  http.addHeader("x-api-key", Config::getApiSecret());
 
   int httpCode = http.GET();
 
@@ -177,6 +171,13 @@ void setup(void) {
   Serial.begin(115200);
   delay(2000); // Give serial time to connect
 
+  // Initialize configuration
+  if (!Config::begin()) {
+    Serial.println("Config init failed");
+    for (;;)
+      ;
+  }
+
   // Create display object
   display = createDisplay();
 
@@ -191,12 +192,12 @@ void setup(void) {
   display->setTextSize(1);
 
   display->setTextWrap(true);
-  while (!setupWiFi(ssid, password)) {
+  while (!setupWiFi(Config::getWifiSSID(), Config::getWifiPassword())) {
     display->setTextColor(hexToColor565(ERROR_COLOR));
     display->println("WiFi error: ");
     display->println("");
     display->setTextColor(display->color565(255, 255, 255));
-    display->println(ssid);
+    display->println(Config::getWifiSSID());
     delay(5000);
     display->fillScreen(0);
     display->setCursor(0, 0);
@@ -205,7 +206,7 @@ void setup(void) {
   display->println("WiFi connected: ");
   display->println("");
   display->setTextColor(display->color565(255, 255, 255));
-  display->println(ssid);
+  display->println(Config::getWifiSSID());
   delay(5000);
   display->fillScreen(0);
   display->setCursor(0, 0);
