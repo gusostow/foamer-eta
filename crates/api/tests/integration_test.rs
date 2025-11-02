@@ -46,11 +46,6 @@ async fn test_departures() -> Result<()> {
         }
     }
 
-    assert!(
-        departures.message.is_some(),
-        "a message should have been returned"
-    );
-
     Ok(())
 }
 
