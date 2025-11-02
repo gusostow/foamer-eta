@@ -5,7 +5,7 @@
 #include <ArduinoJson.h>  // JSON parsing library
 
 const char *foamer_api_url = FOAMER_API_URL;
-const char *foamer_api_key = FOAMER_API_KEY;
+const char *foamer_secret = FOAMER_SECRET;
 
 // WiFi credentials from environment variables
 const char *ssid = WIFI_SSID;
@@ -55,7 +55,7 @@ bool fetchDepartures(JsonDocument &doc) {
   }
 
   // Add API key header
-  http.addHeader("x-api-key", foamer_api_key);
+  http.addHeader("x-api-key", foamer_secret);
 
   int httpCode = http.GET();
 
