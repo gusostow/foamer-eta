@@ -157,7 +157,7 @@ class CdkStack(Stack):
         # Define domain names based on environment
         if env_name == "prod":
             api_domain_name = "api.foamer.net"
-            frontend_domain_name = "foamer.net"
+            frontend_domain_name = "asakura-eccles.foamer.net"
         else:  # dev
             api_domain_name = f"api-{env_name}.foamer.net"
             frontend_domain_name = f"{env_name}.foamer.net"
