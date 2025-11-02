@@ -1,0 +1,88 @@
+name: Deploy Stack (Reusable)
+
+on:
+  workflow_call:
+    inputs:
+      env_name:
+        required: true
+        type: string
+        description: 'Environment name (dev or prod)'
+      stack_name:
+        required: true
+        type: string
+        description: 'CDK stack name (FoamerDev or FoamerProd)'
+
+# Required for OIDC authentication
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+
+      - name: Set up Zig
+        uses: goto-bus-stop/setup-zig@v2
+
+      - name: Install cargo-lambda
+        run: curl -fsSL https://cargo-lambda.info/install.sh | sh
+
+      - name: Build Lambda function
+        run: cargo lambda build -p svc --release --x86-64
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: us-east-1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: "cdk/uv.lock"
+
+      - name: Install AWS CDK CLI
+        run: npm install -g aws-cdk
+
+      - name: Deploy CDK stack
+        working-directory: cdk
+        run: |
+          uv sync
+          uv run cdk deploy ${{ inputs.stack_name }} --require-approval never --outputs-file outputs.json
+
+      - name: Get outputs from CDK
+        id: cdk-outputs
+        run: |
+          API_URL=$(jq -r '.${{ inputs.stack_name }}.ApiUrl' cdk/outputs.json)
+          BUCKET_NAME=$(jq -r '.${{ inputs.stack_name }}.FrontendBucketName' cdk/outputs.json)
+          DISTRIBUTION_ID=$(jq -r '.${{ inputs.stack_name }}.CloudFrontDistributionId' cdk/outputs.json)
+          echo "api-url=$API_URL" >> $GITHUB_OUTPUT
+          echo "bucket-name=$BUCKET_NAME" >> $GITHUB_OUTPUT
+          echo "distribution-id=$DISTRIBUTION_ID" >> $GITHUB_OUTPUT
+
+      - name: Configure frontend with API URL
+        run: |
+          sed -i "s|http://localhost:8080|${{ steps.cdk-outputs.outputs.api-url }}|g" frontend/script.js
+
+      - name: Sync frontend to S3
+        run: |
+          aws s3 sync frontend/ s3://${{ steps.cdk-outputs.outputs.bucket-name }}/ --delete
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ steps.cdk-outputs.outputs.distribution-id }} \
+            --paths "/*"
