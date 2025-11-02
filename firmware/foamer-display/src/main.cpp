@@ -232,9 +232,6 @@ void loop() {
 
   JsonArray routes = globalDoc["routes"];
 
-  Serial.print("Current route index: ");
-  Serial.println(currentRouteIndex);
-
   // Clear screen and reset cursor
   display->fillScreen(0);
   display->setCursor(0, 0);
@@ -242,8 +239,6 @@ void loop() {
 
   // Display two routes starting from currentRouteIndex
   for (int i = 0; i < 2 && (currentRouteIndex + i) < totalRoutes; i++) {
-    Serial.print("displaying route index ");
-    Serial.println(currentRouteIndex + i);
     JsonObject route = routes[currentRouteIndex + i];
     displayRoute(display, route);
   }
@@ -256,8 +251,6 @@ void loop() {
 
   // Loop back to start when we reach the end
   if (currentRouteIndex >= totalRoutes) {
-    Serial.println(
-        "Completed full cycle, will fetch fresh data on next iteration");
     currentRouteIndex = 0;
   }
 }
