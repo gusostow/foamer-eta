@@ -5,11 +5,10 @@ on:
     branches:
       - main
 
-# Required for OIDC authentication and GitHub Pages deployment
+# Required for OIDC authentication
 permissions:
   id-token: write
   contents: read
-  pages: write
 
 jobs:
   deploy:
@@ -57,24 +56,18 @@ jobs:
           uv sync
           uv run cdk deploy FoamerDev --require-approval never --outputs-file outputs.json
 
-      - name: Get API URL from CDK outputs
-        id: api-url
+      - name: Get outputs from CDK
+        id: cdk-outputs
         run: |
           API_URL=$(jq -r '.FoamerDev.ApiUrl' cdk/outputs.json)
-          echo "url=$API_URL" >> $GITHUB_OUTPUT
+          BUCKET_NAME=$(jq -r '.FoamerDev.FrontendBucketName' cdk/outputs.json)
+          echo "api-url=$API_URL" >> $GITHUB_OUTPUT
+          echo "bucket-name=$BUCKET_NAME" >> $GITHUB_OUTPUT
 
       - name: Configure frontend with API URL
         run: |
-          sed -i "s|http://localhost:8080|${{ steps.api-url.outputs.url }}|g" frontend/script.js
+          sed -i "s|http://localhost:8080|${{ steps.cdk-outputs.outputs.api-url }}|g" frontend/script.js
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: 'frontend'
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Sync frontend to S3
+        run: |
+          aws s3 sync frontend/ s3://${{ steps.cdk-outputs.outputs.bucket-name }}/ --delete
