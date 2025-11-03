@@ -41,9 +41,9 @@ Uses https://github.com/mrcodetastic/ESP32-HUB75-MatrixPanel-DMA to drive the pa
 
 Embedded development with PlatformIO.
 
-### Backend
+### Web
 
-Written in Rust. Axum webserver deployed to AWS Lambda.
+Backend written in Rust. Axum webserver deployed to AWS Lambda.
 
 Static frontend served from S3.
 
