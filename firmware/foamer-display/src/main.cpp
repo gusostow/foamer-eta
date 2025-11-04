@@ -15,9 +15,6 @@ const int DISPLAY_INTERVAL_MS = 10000; // 10 seconds per page
 // Global variables for rotation
 int currentRouteIndex = 0;
 int totalRoutes = 0;
-bool hasMessage = false;
-bool messageShown = false;
-String currentMessage = "";
 JsonDocument globalDoc;       // Global to store fetched data
 MatrixPanel_I2S_DMA *display; // Pointer to display object
 
@@ -138,13 +135,14 @@ void displayDirection(MatrixPanel_I2S_DMA *display, JsonObject direction,
 }
 
 /* Function to display a message on the LED matrix */
-void displayMessage(MatrixPanel_I2S_DMA *display, const char *message) {
+void displayMessage(MatrixPanel_I2S_DMA *display, JsonArray messageLines) {
   display->fillScreen(0);
   display->setCursor(0, 0);
   display->setTextColor(hexToColor565(MESSAGE_COLOR));
-  display->setTextWrap(true);
-  display->println(message);
-  display->setTextWrap(false);
+  for (JsonVariant line : messageLines) {
+    const char *lineText = line.as<const char *>();
+    display->println(lineText);
+  }
   delay(10000);
 }
 
@@ -245,12 +243,13 @@ void loop() {
     Serial.println(totalRoutes);
 
     // Check if there's a message to display
-    const char *message = globalDoc["message"];
-    if (message != nullptr) {
-      currentMessage = String(message);
-      Serial.print("Message to display: ");
-      Serial.println(currentMessage);
-      displayMessage(display, currentMessage.c_str());
+    JsonArray message = globalDoc["message"];
+    if (!message.isNull()) {
+      Serial.println("Message to display:");
+      for (JsonVariant line : message) {
+        Serial.println(line.as<const char *>());
+      }
+      displayMessage(display, message);
     }
   }
 

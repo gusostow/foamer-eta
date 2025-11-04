@@ -10,6 +10,7 @@ mod fmt;
 
 // in meters
 const DEFAULT_DISTANCE: u32 = 500;
+// this is LED display specificm luckily this is designed for n=1 device.
 const MAX_MESSAGE_WIDTH: usize = 16;
 
 type LatLon = (f32, f32);
