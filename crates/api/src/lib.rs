@@ -4,15 +4,20 @@ use rand::seq::SliceRandom;
 use serde::{Deserialize, Serialize};
 use transit::TransitClient;
 
+use self::fmt::lines;
+
+mod fmt;
+
 // in meters
 const DEFAULT_DISTANCE: u32 = 500;
+const MAX_MESSAGE_WIDTH: usize = 16;
 
 type LatLon = (f32, f32);
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Departures {
     pub routes: Vec<Route>,
-    pub message: Option<String>,
+    pub message: Option<Vec<String>>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -143,7 +148,8 @@ impl Client {
                     let mut rng = rand::thread_rng();
                     messages.choose(&mut rng).map(|m| m.content.clone())
                 }
-            });
+            })
+            .and_then(|x| Some(lines(x, MAX_MESSAGE_WIDTH)));
 
         Ok(Departures { routes, message })
     }
