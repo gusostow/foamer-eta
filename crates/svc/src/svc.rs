@@ -14,7 +14,7 @@ use std::sync::Arc;
 use tower_http::cors::CorsLayer;
 use tower_http::trace::TraceLayer;
 
-const MAX_MESSAGE_LEN: usize = 96;
+const MAX_MESSAGE_LEN: usize = 88;
 
 #[derive(Deserialize)]
 pub struct DeparturesQuery {
