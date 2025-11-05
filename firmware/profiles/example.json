@@ -10,5 +10,9 @@
   "geo": {
       "lat": "38.89544",
       "lon": "-77.03128"
+  },
+  "display": {
+      "page_ms": 10000,
+      "message_interval_ms": 30000
   }
 }

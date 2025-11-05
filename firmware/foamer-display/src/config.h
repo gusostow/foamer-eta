@@ -21,6 +21,10 @@ public:
   static const char *getGeoLat();
   static const char *getGeoLon();
 
+  // Display settings
+  static int getPageIntervalMs();
+  static int getMessageIntervalMs();
+
 private:
   static JsonDocument doc;
   static bool initialized;

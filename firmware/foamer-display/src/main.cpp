@@ -10,13 +10,13 @@ const char *ERROR_COLOR = "D70000";
 const int HEADSIGN_WIDTH = 6;
 const char *TRANSIT_COLOR = "3ac364";
 const char *MESSAGE_COLOR = "FF7B9C"; // Coral pink between peach and hot pink
-const int DISPLAY_INTERVAL_MS = 10000; // 10 seconds per page
 
 // Global variables for rotation
 int currentRouteIndex = 0;
 int totalRoutes = 0;
-JsonDocument globalDoc;       // Global to store fetched data
-MatrixPanel_I2S_DMA *display; // Pointer to display object
+unsigned long lastMessageTimeMs = 0; // Track when last message was displayed
+JsonDocument globalDoc;              // Global to store fetched data
+MatrixPanel_I2S_DMA *display;        // Pointer to display object
 
 // Convert hex color string (e.g., "2da646") to RGB565 color
 uint16_t hexToColor565(const char *hex) {
@@ -136,14 +136,41 @@ void displayDirection(MatrixPanel_I2S_DMA *display, JsonObject direction,
 
 /* Function to display a message on the LED matrix */
 void displayMessage(MatrixPanel_I2S_DMA *display, JsonArray messageLines) {
-  display->fillScreen(0);
-  display->setCursor(0, 0);
-  display->setTextColor(hexToColor565(MESSAGE_COLOR));
-  for (JsonVariant line : messageLines) {
-    const char *lineText = line.as<const char *>();
-    display->println(lineText);
+  int totalLines = messageLines.size();
+  int linesPerPage = 6;
+
+  if (totalLines <= linesPerPage) {
+    // Single page - display all lines for 10s
+    display->fillScreen(0);
+    display->setCursor(0, 0);
+    display->setTextColor(hexToColor565(MESSAGE_COLOR));
+    for (JsonVariant line : messageLines) {
+      const char *lineText = line.as<const char *>();
+      display->println(lineText);
+    }
+    delay(10000);
+  } else {
+    // Two pages - 5s each for 10s total
+    // Page 1: lines 0-5
+    display->fillScreen(0);
+    display->setCursor(0, 0);
+    display->setTextColor(hexToColor565(MESSAGE_COLOR));
+    for (int i = 0; i < linesPerPage && i < totalLines; i++) {
+      const char *lineText = messageLines[i].as<const char *>();
+      display->println(lineText);
+    }
+    delay(7000);
+
+    // Page 2: lines 6-11
+    display->fillScreen(0);
+    display->setCursor(0, 0);
+    display->setTextColor(hexToColor565(MESSAGE_COLOR));
+    for (int i = linesPerPage; i < totalLines; i++) {
+      const char *lineText = messageLines[i].as<const char *>();
+      display->println(lineText);
+    }
+    delay(3000);
   }
-  delay(10000);
 }
 
 /* Function to display a route on the LED matrix */
@@ -245,11 +272,23 @@ void loop() {
     // Check if there's a message to display
     JsonArray message = globalDoc["message"];
     if (!message.isNull()) {
-      Serial.println("Message to display:");
-      for (JsonVariant line : message) {
-        Serial.println(line.as<const char *>());
+      unsigned long currentTime = millis();
+      unsigned long elapsed = currentTime - lastMessageTimeMs;
+
+      if (elapsed >= Config::getMessageIntervalMs()) {
+        Serial.println("Message to display:");
+        for (JsonVariant line : message) {
+          Serial.println(line.as<const char *>());
+        }
+        displayMessage(display, message);
+        lastMessageTimeMs = millis();
+      } else {
+        Serial.print("Skipping message, elapsed: ");
+        Serial.print(elapsed);
+        Serial.print("ms, interval: ");
+        Serial.print(Config::getMessageIntervalMs());
+        Serial.println("ms");
       }
-      displayMessage(display, message);
     }
   }
 
@@ -274,5 +313,5 @@ void loop() {
   }
 
   // Wait for display interval
-  delay(DISPLAY_INTERVAL_MS);
+  delay(Config::getPageIntervalMs());
 }

@@ -77,3 +77,19 @@ const char *Config::getGeoLon() {
   }
   return value;
 }
+
+int Config::getPageIntervalMs() {
+  if (!doc["display"]["page_ms"].is<int>()) {
+    Serial.println("FATAL: Missing or invalid display.page_ms in config");
+    for (;;);
+  }
+  return doc["display"]["page_ms"].as<int>();
+}
+
+int Config::getMessageIntervalMs() {
+  if (!doc["display"]["message_interval_ms"].is<int>()) {
+    Serial.println("FATAL: Missing or invalid display.message_interval_ms in config");
+    for (;;);
+  }
+  return doc["display"]["message_interval_ms"].as<int>();
+}
