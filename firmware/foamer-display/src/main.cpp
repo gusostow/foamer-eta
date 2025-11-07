@@ -149,7 +149,7 @@ void displayMessage(MatrixPanel_I2S_DMA *display, JsonArray messageLines) {
       const char *lineText = line.as<const char *>();
       display->println(lineText);
     }
-    delay(10000);
+    delay(20000);
   } else {
     // Two pages - 5s each for 10s total
     // Page 1: lines 0-5
@@ -160,7 +160,7 @@ void displayMessage(MatrixPanel_I2S_DMA *display, JsonArray messageLines) {
       const char *lineText = messageLines[i].as<const char *>();
       display->println(lineText);
     }
-    delay(7000);
+    delay(15000);
 
     // Page 2: lines 6-11
     display->fillScreen(0);
@@ -170,7 +170,7 @@ void displayMessage(MatrixPanel_I2S_DMA *display, JsonArray messageLines) {
       const char *lineText = messageLines[i].as<const char *>();
       display->println(lineText);
     }
-    delay(3000);
+    delay(5000);
   }
 }
 
