@@ -24,6 +24,7 @@ target
 .envrc.local
 firmware/profiles/
 firmware/foamer-display/src/config_data.h
+firmware/foamer-display/src/splash.h
 
 # MacOS
 .DS_STORE

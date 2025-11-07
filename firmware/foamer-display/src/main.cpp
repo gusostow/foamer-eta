@@ -2,6 +2,7 @@
 #include "config.h"
 #include "display.h"
 #include "network.h"
+#include "splash.h"
 #include <Adafruit_GFX.h> // Adafruit graphics library (class-based)
 #include <ArduinoJson.h>  // JSON parsing library
 
@@ -203,6 +204,18 @@ void displayRoute(MatrixPanel_I2S_DMA *display, JsonObject route) {
   }
 }
 
+/* Function to display splash screen at startup */
+void displaySplash(MatrixPanel_I2S_DMA *display) {
+  display->fillScreen(0);
+  for (int y = 0; y < SPLASH_HEIGHT; y++) {
+    for (int x = 0; x < SPLASH_WIDTH; x++) {
+      uint16_t color = SPLASH_BITMAP[y * SPLASH_WIDTH + x];
+      display->drawPixel(x, y, color);
+    }
+  }
+  delay(3000);
+}
+
 void setup(void) {
   // Serial is a global OBJECT (instance of a class)
   // .begin() is a METHOD (member function) of the Serial class
@@ -230,6 +243,15 @@ void setup(void) {
 
   display->setBrightness8(120);
   display->setTextSize(1);
+
+  // Display splash screen
+  displaySplash(display);
+
+  // Clear screen before WiFi setup
+  display->fillScreen(0);
+  display->setCursor(0, 0);
+
+  delay(2000);
 
   display->setTextWrap(true);
   while (!setupWiFi(Config::getWifiSSID(), Config::getWifiPassword())) {
