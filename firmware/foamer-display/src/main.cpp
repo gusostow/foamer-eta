@@ -264,10 +264,10 @@ void setup(void) {
     display->fillScreen(0);
     display->setCursor(0, 0);
   }
-  display->setTextColor(hexToColor565(TRANSIT_COLOR));
+  display->setTextColor(display->color565(255, 255, 255));
   display->println("WiFi connected: ");
   display->println("");
-  display->setTextColor(display->color565(255, 255, 255));
+  display->setTextColor(hexToColor565(TRANSIT_COLOR));
   display->println(Config::getWifiSSID());
   delay(5000);
   display->fillScreen(0);
