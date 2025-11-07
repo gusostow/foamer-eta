@@ -1,0 +1,8 @@
+[project]
+name = "foamer-display-build"
+version = "0.1.0"
+description = "Build dependencies for foamer-display firmware"
+requires-python = ">=3.11"
+dependencies = [
+    "pillow>=11.0.0",
+]

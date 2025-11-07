@@ -9,20 +9,24 @@ PIO = platformio
 PROFILE ?= dev
 export CONFIG_PROFILE = $(PROFILE)
 
-.PHONY: compile upload monitor clean compiledb
+.PHONY: compile upload monitor clean compiledb embed
 
-compile:
+embed:
+	@echo "embedding config and splash for profile: $(PROFILE)"
+	cd $(PROJECT_DIR) && uv run python scripts/embed_config.py
+
+compile: embed
 	@echo "building with profile: $(PROFILE)"
 	cd $(PROJECT_DIR) && $(PIO) run
 
-upload:
+upload: embed
 	@echo "building with profile: $(PROFILE)"
 	cd $(PROJECT_DIR) && $(PIO) run -t upload
 
 monitor:
 	cd $(PROJECT_DIR) && $(PIO) device monitor
 
-upload-monitor:
+upload-monitor: embed
 	@echo "building with profile: $(PROFILE)"
 	cd $(PROJECT_DIR) && $(PIO) run -t upload -t monitor
 
