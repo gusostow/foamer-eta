@@ -251,7 +251,7 @@ void setup(void) {
   display->fillScreen(0);
   display->setCursor(0, 0);
 
-  delay(2000);
+  delay(1500);
 
   display->setTextWrap(true);
   while (!setupWiFi(Config::getWifiSSID(), Config::getWifiPassword())) {
