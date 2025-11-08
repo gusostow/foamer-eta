@@ -2,8 +2,19 @@
 #define AWS_IOT_H
 
 #include "config.h"
+#include <Arduino.h>
+#include <ArduinoJson.h>
 #include <PubSubClient.h>
 #include <WiFiClientSecure.h>
+
+// Log levels
+const char* LOG_DEBUG = "DEBUG";
+const char* LOG_INFO = "INFO";
+const char* LOG_WARN = "WARNING";
+const char* LOG_ERROR = "ERROR";
+
+// Global MQTT client pointer (defined at bottom of file)
+extern PubSubClient *mqttClient;
 
 // Initialize AWS IoT connection
 // Returns true if enabled and initialized successfully
@@ -16,8 +27,31 @@ bool maintainAwsIotConnection();
 // MQTT callback for incoming messages (currently unused, for future use)
 void mqttCallback(char *topic, byte *payload, unsigned int length);
 
-// Global MQTT client (defined in implementation)
-extern PubSubClient *mqttClient;
+// Log a message to both Serial and AWS IoT (if connected)
+void log(const char* level, const char* message) {
+  // Always output to Serial
+  Serial.print("[");
+  Serial.print(level);
+  Serial.print("] ");
+  Serial.println(message);
+
+  // If AWS IoT is enabled and connected, publish to MQTT
+  if (Config::isAwsIotEnabled() && mqttClient && mqttClient->connected()) {
+    // Create JSON log message
+    JsonDocument doc;
+    doc["timestamp"] = time(nullptr);
+    doc["level"] = level;
+    doc["message"] = message;
+
+    // Serialize to string
+    String jsonString;
+    serializeJson(doc, jsonString);
+
+    // Publish to log topic (non-blocking)
+    const char* logTopic = Config::getAwsIotLogTopic();
+    mqttClient->publish(logTopic, jsonString.c_str());
+  }
+}
 
 // Connect to AWS IoT MQTT broker
 // Returns true on success
@@ -90,7 +124,7 @@ bool maintainAwsIotConnection() {
   }
 
   if (!mqttClient->connected()) {
-    Serial.println("AWS IoT disconnected, reconnecting...");
+    log(LOG_WARN, "AWS IoT disconnected, reconnecting");
     if (!connectToAwsIot()) {
       return false;
     }

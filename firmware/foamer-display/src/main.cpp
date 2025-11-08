@@ -288,20 +288,23 @@ void setup(void) {
 
   bool ntp_failed = false;
   if (now < 1000000000) {
-    Serial.println("NTP sync failed!");
+    log(LOG_ERROR, "NTP sync failed");
     ntp_failed = true;
   } else {
     localtime_r(&now, &timeinfo);
     Serial.print("Current time: ");
     Serial.println(asctime(&timeinfo));
+    log(LOG_INFO, "NTP sync successful");
   }
 
   // Initialize AWS IoT if enabled
   bool iot_failed = false;
   if (Config::isAwsIotEnabled()) {
     if (!setupAwsIot()) {
-      Serial.println("AWS IoT connection failed");
+      log(LOG_ERROR, "AWS IoT connection failed");
       iot_failed = true;
+    } else {
+      log(LOG_INFO, "AWS IoT connected");
     }
   }
 
@@ -330,9 +333,9 @@ void loop() {
 
   // Fetch departures from API only at start of cycle
   if (currentRouteIndex == 0) {
-    Serial.println("Fetching fresh data from API...");
+    log(LOG_INFO, "Fetching departures from API");
     if (!fetchDepartures(globalDoc)) {
-      Serial.println("Failed to fetch departures, retrying in 10s...");
+      log(LOG_ERROR, "Failed to fetch departures, retrying in 10s");
       delay(10000);
       return;
     }
@@ -341,6 +344,7 @@ void loop() {
     totalRoutes = routes.size();
     Serial.print("Total routes: ");
     Serial.println(totalRoutes);
+    log(LOG_INFO, "Departures fetched successfully");
 
     // Check if there's a message to display
     JsonArray message = globalDoc["message"];
@@ -355,6 +359,7 @@ void loop() {
         }
         displayMessage(display, message);
         lastMessageTimeMs = millis();
+        log(LOG_INFO, "Message displayed");
       } else {
         Serial.print("Skipping message, elapsed: ");
         Serial.print(elapsed);
