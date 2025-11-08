@@ -279,7 +279,15 @@ void setup(void) {
   display->setTextColor(display->color565(255, 255, 255));
   display->println("Syncing time...");
 
-  configTime(-6 * 3600, 0, "pool.ntp.org", "time.nist.gov");
+  // Set timezone to US Central with automatic DST handling
+  // Format: CST6CDT,M3.2.0,M11.1.0
+  // CST6CDT = Central Standard Time (UTC-6) / Central Daylight Time (UTC-5)
+  // M3.2.0 = DST starts 2nd Sunday in March at 2am
+  // M11.1.0 = DST ends 1st Sunday in November at 2am
+  configTime(-6 * 3600, 3600, "pool.ntp.org", "time.nist.gov");
+  setenv("TZ", "CST6CDT,M3.2.0,M11.1.0", 1);
+  tzset();
+
   time_t now = 0;
   struct tm timeinfo;
   int retry = 0;
