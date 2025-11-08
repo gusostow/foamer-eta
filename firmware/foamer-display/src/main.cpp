@@ -42,6 +42,10 @@ bool fetchDepartures(JsonDocument &doc) {
   Serial.print("Fetching: ");
   Serial.println(url);
 
+  // Log API request
+  String logMsg = "API request: " + url;
+  log(LOG_DEBUG, logMsg.c_str());
+
   // Create client and track pointer for cleanup
   WiFiClient *client = nullptr;
   if (url.startsWith("https://")) {
@@ -65,6 +69,10 @@ bool fetchDepartures(JsonDocument &doc) {
     if (error) {
       Serial.print("JSON parse failed: ");
       Serial.println(error.c_str());
+
+      // Log JSON parse error
+      String logMsg = "API JSON parse failed: " + String(error.c_str());
+      log(LOG_ERROR, logMsg.c_str());
     } else {
       Serial.println("Successfully fetched departures");
       success = true;
@@ -72,6 +80,16 @@ bool fetchDepartures(JsonDocument &doc) {
   } else {
     Serial.print("HTTP request failed, code: ");
     Serial.println(httpCode);
+
+    // Log HTTP error with response body
+    String responseBody = http.getString();
+    String logMsg = "API request failed: HTTP " + String(httpCode);
+    if (responseBody.length() > 0 && responseBody.length() < 200) {
+      logMsg += " - " + responseBody;
+    } else if (responseBody.length() > 0) {
+      logMsg += " - " + responseBody.substring(0, 200) + "...";
+    }
+    log(LOG_ERROR, logMsg.c_str());
   }
 
   http.end();
