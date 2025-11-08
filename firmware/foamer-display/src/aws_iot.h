@@ -37,9 +37,10 @@ void log(const char* level, const char* message) {
 
   // If AWS IoT is enabled and connected, publish to MQTT
   if (Config::isAwsIotEnabled() && mqttClient && mqttClient->connected()) {
-    // Create JSON log message
+    // Create JSON log message with thing name for easy filtering
     JsonDocument doc;
     doc["timestamp"] = time(nullptr);
+    doc["thing_name"] = Config::getAwsIotThingName();
     doc["level"] = level;
     doc["message"] = message;
 
