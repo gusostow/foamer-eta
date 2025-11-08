@@ -39,9 +39,6 @@ bool fetchDepartures(JsonDocument &doc) {
                "/departures?lat=" + String(Config::getGeoLat()) +
                "&lon=" + String(Config::getGeoLon());
 
-  Serial.print("Fetching: ");
-  Serial.println(url);
-
   // Log API request
   String logMsg = "API request: " + url;
   log(LOG_DEBUG, logMsg.c_str());
@@ -67,20 +64,13 @@ bool fetchDepartures(JsonDocument &doc) {
     DeserializationError error = deserializeJson(doc, payload);
 
     if (error) {
-      Serial.print("JSON parse failed: ");
-      Serial.println(error.c_str());
-
       // Log JSON parse error
       String logMsg = "API JSON parse failed: " + String(error.c_str());
       log(LOG_ERROR, logMsg.c_str());
     } else {
-      Serial.println("Successfully fetched departures");
       success = true;
     }
   } else {
-    Serial.print("HTTP request failed, code: ");
-    Serial.println(httpCode);
-
     // Log HTTP error with response body
     String responseBody = http.getString();
     String logMsg = "API request failed: HTTP " + String(httpCode);
@@ -312,7 +302,12 @@ void setup(void) {
     localtime_r(&now, &timeinfo);
     Serial.print("Current time: ");
     Serial.println(asctime(&timeinfo));
-    log(LOG_INFO, "NTP sync successful");
+
+    // Log NTP sync with current time
+    char timeStr[64];
+    strftime(timeStr, sizeof(timeStr), "%Y-%m-%d %H:%M:%S %Z", &timeinfo);
+    String logMsg = String("NTP sync successful: ") + timeStr;
+    log(LOG_INFO, logMsg.c_str());
   }
 
   // Initialize AWS IoT if enabled
@@ -360,9 +355,10 @@ void loop() {
 
     JsonArray routes = globalDoc["routes"];
     totalRoutes = routes.size();
-    Serial.print("Total routes: ");
-    Serial.println(totalRoutes);
-    log(LOG_INFO, "Departures fetched successfully");
+
+    // Log success with route count
+    String logMsg = String("Departures fetched successfully: ") + String(totalRoutes) + " routes";
+    log(LOG_INFO, logMsg.c_str());
 
     // Check if there's a message to display
     JsonArray message = globalDoc["message"];
@@ -379,11 +375,11 @@ void loop() {
         lastMessageTimeMs = millis();
         log(LOG_INFO, "Message displayed");
       } else {
-        Serial.print("Skipping message, elapsed: ");
-        Serial.print(elapsed);
-        Serial.print("ms, interval: ");
-        Serial.print(Config::getMessageIntervalMs());
-        Serial.println("ms");
+        // Log message skip
+        String logMsg = String("Skipping message display, elapsed: ") +
+                       String(elapsed) + "ms, interval: " +
+                       String(Config::getMessageIntervalMs()) + "ms";
+        log(LOG_DEBUG, logMsg.c_str());
       }
     }
   }
