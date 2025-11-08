@@ -69,6 +69,9 @@ bool setupAwsIot() {
   // Increase buffer size for AWS IoT (default 128 is too small)
   mqttClient->setBufferSize(512);
 
+  // Set keepalive to 60 seconds (default is 15)
+  mqttClient->setKeepAlive(60);
+
   Serial.print("AWS IoT endpoint: ");
   Serial.println(endpoint);
 

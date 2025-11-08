@@ -385,6 +385,10 @@ void loop() {
     currentRouteIndex = 0;
   }
 
-  // Wait for display interval
-  delay(Config::getPageIntervalMs());
+  // Wait for display interval while maintaining IoT connection
+  unsigned long startTime = millis();
+  while (millis() - startTime < Config::getPageIntervalMs()) {
+    maintainAwsIotConnection();
+    delay(100); // Small delay to avoid tight loop
+  }
 }
