@@ -245,45 +245,34 @@ void setup(void) {
 
   display->setBrightness8(120);
   display->setTextSize(1);
+  display->setTextWrap(true);
 
-  // Display splash screen
+  // Display splash screen first
   displaySplash(display);
 
-  // Clear screen before WiFi setup
-  display->fillScreen(0);
-  display->setCursor(0, 0);
-
-  delay(1500);
-
-  display->setTextWrap(true);
+  // Connect to WiFi
   while (!setupWiFi(Config::getWifiSSID(), Config::getWifiPassword())) {
+    display->fillScreen(0);
+    display->setCursor(0, 0);
     display->setTextColor(hexToColor565(ERROR_COLOR));
     display->println("WiFi error: ");
     display->println("");
     display->setTextColor(display->color565(255, 255, 255));
     display->println(Config::getWifiSSID());
     delay(5000);
-    display->fillScreen(0);
-    display->setCursor(0, 0);
   }
-  display->setTextColor(display->color565(255, 255, 255));
-  display->println("WiFi connected: ");
-  display->println("");
-  display->setTextColor(hexToColor565(TRANSIT_COLOR));
-  display->println(Config::getWifiSSID());
-  delay(3000);
 
-  // Sync time with NTP (required for TLS certificate validation)
+  // Show WiFi connected message while doing NTP and IoT setup
   display->fillScreen(0);
   display->setCursor(0, 0);
   display->setTextColor(display->color565(255, 255, 255));
-  display->println("Syncing time...");
+  display->println("WiFi connected:");
+  display->println("");
+  display->setTextColor(hexToColor565(TRANSIT_COLOR));
+  display->println(Config::getWifiSSID());
 
+  // Sync time with NTP (required for TLS certificate validation)
   // Set timezone to US Central with automatic DST handling
-  // Format: CST6CDT,M3.2.0,M11.1.0
-  // CST6CDT = Central Standard Time (UTC-6) / Central Daylight Time (UTC-5)
-  // M3.2.0 = DST starts 2nd Sunday in March at 2am
-  // M11.1.0 = DST ends 1st Sunday in November at 2am
   configTime(-6 * 3600, 3600, "pool.ntp.org", "time.nist.gov");
   setenv("TZ", "CST6CDT,M3.2.0,M11.1.0", 1);
   tzset();
@@ -297,36 +286,35 @@ void setup(void) {
     retry++;
   }
 
+  bool ntp_failed = false;
   if (now < 1000000000) {
-    display->setTextColor(hexToColor565(ERROR_COLOR));
-    display->println("NTP sync failed!");
-    delay(3000);
+    Serial.println("NTP sync failed!");
+    ntp_failed = true;
   } else {
     localtime_r(&now, &timeinfo);
-    display->setTextColor(hexToColor565(TRANSIT_COLOR));
-    display->print("Time synced:");
-    display->println(asctime(&timeinfo));
     Serial.print("Current time: ");
     Serial.println(asctime(&timeinfo));
   }
-  delay(2000);
 
   // Initialize AWS IoT if enabled
+  bool iot_failed = false;
   if (Config::isAwsIotEnabled()) {
+    if (!setupAwsIot()) {
+      Serial.println("AWS IoT connection failed");
+      iot_failed = true;
+    }
+  }
+
+  // Show errors if any occurred
+  if (ntp_failed || iot_failed) {
     display->fillScreen(0);
     display->setCursor(0, 0);
-    display->setTextColor(display->color565(255, 255, 255));
-    display->println("Connecting to");
-    display->println("AWS IoT...");
-
-    if (setupAwsIot()) {
-      display->setTextColor(hexToColor565(TRANSIT_COLOR));
-      display->println("");
-      display->println("Connected!");
-    } else {
-      display->setTextColor(hexToColor565(ERROR_COLOR));
-      display->println("");
-      display->println("Failed");
+    display->setTextColor(hexToColor565(ERROR_COLOR));
+    if (ntp_failed) {
+      display->println("NTP sync failed!");
+    }
+    if (iot_failed) {
+      display->println("AWS IoT failed");
     }
     delay(3000);
   }
