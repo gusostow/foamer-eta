@@ -52,7 +52,10 @@ if device_serial:
     device_dir = devices_dir / device_serial
     device_json = device_dir / "device.json"
 
-    if device_dir.is_dir() and device_json.is_file():
+    # Check if AWS IoT is enabled in profile
+    aws_iot_enabled = config_data.get("aws_iot", {}).get("enabled", False)
+
+    if aws_iot_enabled and device_dir.is_dir() and device_json.is_file():
         log(f"loading device config: {device_json}")
 
         # Load device config
@@ -65,10 +68,6 @@ if device_serial:
         root_ca = (device_dir / "root_ca.pem").read_text()
 
         # Merge device config into aws_iot section
-        if "aws_iot" not in config_data:
-            config_data["aws_iot"] = {}
-
-        config_data["aws_iot"]["enabled"] = True
         config_data["aws_iot"]["thing_name"] = device_config["thing_name"]
         config_data["aws_iot"]["log_topic"] = device_config["log_topic"]
         config_data["aws_iot"]["cert_pem"] = cert_pem
@@ -78,9 +77,11 @@ if device_serial:
         log(f"  thing_name: {device_config['thing_name']}")
         log(f"  log_topic: {device_config['log_topic']}")
         log(f"  certificates loaded from {device_dir}")
-    else:
-        log(f"WARNING: DEVICE_SERIAL set but device config not found: {device_dir}")
+    elif aws_iot_enabled:
+        log(f"WARNING: AWS IoT enabled but device config not found: {device_dir}")
         log(f"Run: make provision to create device configuration")
+    else:
+        log("AWS IoT disabled in profile, skipping device config")
 else:
     log("device serial: None")
 

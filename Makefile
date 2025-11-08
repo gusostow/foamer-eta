@@ -30,7 +30,12 @@ compile: embed
 # Provision device if needed (checks for cached config)
 provision:
 	@echo "checking device provisioning..."
-	@SERIAL=$$(cd $(PROJECT_DIR) && uv run python scripts/get-device-serial.py); \
+	@AWS_IOT_ENABLED=$$(jq -r '.aws_iot.enabled // false' firmware/profiles/$(PROFILE).json); \
+	if [ "$$AWS_IOT_ENABLED" != "true" ]; then \
+		echo "AWS IoT disabled in profile, skipping provisioning"; \
+		exit 0; \
+	fi; \
+	SERIAL=$$(cd $(PROJECT_DIR) && uv run python scripts/get-device-serial.py); \
 	if [ -z "$$SERIAL" ]; then \
 		echo "ERROR: Failed to read device USB serial number"; \
 		exit 1; \
