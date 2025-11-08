@@ -22,7 +22,7 @@ compile: embed
 # Provision device if needed (checks for cached config)
 provision:
 	@echo "checking device provisioning..."
-	@SERIAL=$$(cd $(PROJECT_DIR) && uv run python scripts/get_device_serial.py); \
+	@SERIAL=$$(cd $(PROJECT_DIR) && uv run python scripts/get-device-serial.py); \
 	if [ -z "$$SERIAL" ]; then \
 		echo "ERROR: Failed to read device USB serial number"; \
 		exit 1; \
@@ -39,7 +39,7 @@ provision:
 
 upload: provision embed
 	@echo "building with profile: $(PROFILE)"
-	@SERIAL=$$(cd $(PROJECT_DIR) && uv run python scripts/get_device_serial.py); \
+	@SERIAL=$$(cd $(PROJECT_DIR) && uv run python scripts/get-device-serial.py); \
 	export DEVICE_SERIAL=$$SERIAL; \
 	cd $(PROJECT_DIR) && $(PIO) run -t upload
 
