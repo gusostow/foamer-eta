@@ -22,6 +22,7 @@ target
 
 # Environment variables / secrets
 .envrc.local
+firmware/certs/
 firmware/profiles/
 firmware/foamer-display/src/config_data.h
 firmware/foamer-display/src/splash.h
