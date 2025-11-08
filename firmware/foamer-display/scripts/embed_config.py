@@ -81,6 +81,8 @@ if device_serial:
     else:
         log(f"WARNING: DEVICE_SERIAL set but device config not found: {device_dir}")
         log(f"Run: make provision to create device configuration")
+else:
+    log("device serial: None")
 
 # re-serialize to ensure valid JSON
 config_json = json.dumps(config_data)

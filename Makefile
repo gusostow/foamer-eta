@@ -13,7 +13,15 @@ export CONFIG_PROFILE = $(PROFILE)
 
 embed:
 	@echo "embedding config and splash for profile: $(PROFILE)"
-	cd $(PROJECT_DIR) && uv run python scripts/embed_config.py
+	@SERIAL=$$(cd $(PROJECT_DIR) && uv run python scripts/get-device-serial.py 2>/dev/null || echo ""); \
+	if [ -n "$$SERIAL" ]; then \
+		echo "device detected: $$SERIAL"; \
+		export DEVICE_SERIAL=$$SERIAL; \
+		cd $(PROJECT_DIR) && DEVICE_SERIAL=$$SERIAL uv run python scripts/embed_config.py; \
+	else \
+		echo "no device detected, embedding profile only"; \
+		cd $(PROJECT_DIR) && uv run python scripts/embed_config.py; \
+	fi
 
 compile: embed
 	@echo "building with profile: $(PROFILE)"
