@@ -5,4 +5,5 @@ description = "Build dependencies for foamer-display firmware"
 requires-python = ">=3.11"
 dependencies = [
     "pillow>=11.0.0",
+    "pyserial>=3.5",
 ]
