@@ -28,7 +28,8 @@ const char *Config::getWifiSSID() {
   const char *value = doc["wifi"]["ssid"];
   if (!value) {
     Serial.println("FATAL: Missing wifi.ssid in config");
-    for (;;);
+    for (;;)
+      ;
   }
   return value;
 }
@@ -37,7 +38,8 @@ const char *Config::getWifiPassword() {
   const char *value = doc["wifi"]["password"];
   if (!value) {
     Serial.println("FATAL: Missing wifi.password in config");
-    for (;;);
+    for (;;)
+      ;
   }
   return value;
 }
@@ -46,7 +48,8 @@ const char *Config::getApiUrl() {
   const char *value = doc["api"]["url"];
   if (!value) {
     Serial.println("FATAL: Missing api.url in config");
-    for (;;);
+    for (;;)
+      ;
   }
   return value;
 }
@@ -55,7 +58,8 @@ const char *Config::getApiSecret() {
   const char *value = doc["api"]["secret"];
   if (!value) {
     Serial.println("FATAL: Missing api.secret in config");
-    for (;;);
+    for (;;)
+      ;
   }
   return value;
 }
@@ -64,7 +68,8 @@ const char *Config::getGeoLat() {
   const char *value = doc["geo"]["lat"];
   if (!value) {
     Serial.println("FATAL: Missing geo.lat in config");
-    for (;;);
+    for (;;)
+      ;
   }
   return value;
 }
@@ -73,7 +78,8 @@ const char *Config::getGeoLon() {
   const char *value = doc["geo"]["lon"];
   if (!value) {
     Serial.println("FATAL: Missing geo.lon in config");
-    for (;;);
+    for (;;)
+      ;
   }
   return value;
 }
@@ -81,28 +87,30 @@ const char *Config::getGeoLon() {
 int Config::getPageIntervalMs() {
   if (!doc["display"]["page_ms"].is<int>()) {
     Serial.println("FATAL: Missing or invalid display.page_ms in config");
-    for (;;);
+    for (;;)
+      ;
   }
   return doc["display"]["page_ms"].as<int>();
 }
 
 int Config::getMessageIntervalMs() {
   if (!doc["display"]["message_interval_ms"].is<int>()) {
-    Serial.println("FATAL: Missing or invalid display.message_interval_ms in config");
-    for (;;);
+    Serial.println(
+        "FATAL: Missing or invalid display.message_interval_ms in config");
+    for (;;)
+      ;
   }
   return doc["display"]["message_interval_ms"].as<int>();
 }
 
-bool Config::isAwsIotEnabled() {
-  return doc["aws_iot"]["enabled"].as<bool>();
-}
+bool Config::isAwsIotEnabled() { return doc["aws_iot"]["enabled"].as<bool>(); }
 
 const char *Config::getAwsIotEndpoint() {
   const char *value = doc["aws_iot"]["endpoint"];
   if (!value && isAwsIotEnabled()) {
     Serial.println("FATAL: Missing aws_iot.endpoint in config");
-    for (;;);
+    for (;;)
+      ;
   }
   return value;
 }
@@ -111,7 +119,8 @@ const char *Config::getAwsIotThingName() {
   const char *value = doc["aws_iot"]["thing_name"];
   if (!value && isAwsIotEnabled()) {
     Serial.println("FATAL: Missing aws_iot.thing_name in config");
-    for (;;);
+    for (;;)
+      ;
   }
   return value;
 }
@@ -120,7 +129,8 @@ const char *Config::getAwsIotLogTopic() {
   const char *value = doc["aws_iot"]["log_topic"];
   if (!value && isAwsIotEnabled()) {
     Serial.println("FATAL: Missing aws_iot.log_topic in config");
-    for (;;);
+    for (;;)
+      ;
   }
   return value;
 }
@@ -129,7 +139,8 @@ const char *Config::getAwsIotCertPem() {
   const char *value = doc["aws_iot"]["cert_pem"];
   if (!value && isAwsIotEnabled()) {
     Serial.println("FATAL: Missing aws_iot.cert_pem in config");
-    for (;;);
+    for (;;)
+      ;
   }
   return value;
 }
@@ -138,7 +149,8 @@ const char *Config::getAwsIotPrivateKey() {
   const char *value = doc["aws_iot"]["private_key"];
   if (!value && isAwsIotEnabled()) {
     Serial.println("FATAL: Missing aws_iot.private_key in config");
-    for (;;);
+    for (;;)
+      ;
   }
   return value;
 }
@@ -147,7 +159,8 @@ const char *Config::getAwsIotRootCa() {
   const char *value = doc["aws_iot"]["root_ca"];
   if (!value && isAwsIotEnabled()) {
     Serial.println("FATAL: Missing aws_iot.root_ca in config");
-    for (;;);
+    for (;;)
+      ;
   }
   return value;
 }
