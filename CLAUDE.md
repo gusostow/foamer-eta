@@ -186,3 +186,4 @@ make upload PROFILE=prod
 - **Display rotation**: The main loop rotates through transit routes showing 2 routes per page, with configurable page duration (`page_ms`)
 - **Text wrapping**: The firmware receives pre-wrapped message lines from the API and displays them directly without text wrapping
 - **Build dependencies**: The firmware build requires `uv` and Python (Pillow) for processing configuration and images. These are not needed at runtime on the device
+- The CDK stacks are written in Python not typescript

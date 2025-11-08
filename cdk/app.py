@@ -5,6 +5,7 @@ import aws_cdk as cdk
 
 from cdk.cdk_stack import CdkStack
 from cdk.ci_stack import CIStack
+from cdk.iot_stack import IoTStack
 
 
 app = cdk.App()
@@ -18,6 +19,10 @@ env = cdk.Environment(
 # CI/CD identity stack (for GitHub Actions)
 # Bootstrapped by running locally
 CIStack(app, "FoamerCI", github_repo="gusostow/foamer-eta", env=env)
+
+# IoT stacks for device management
+IoTStack(app, "FoamerIoTDev", env_name="dev", env=env)
+IoTStack(app, "FoamerIoTProd", env_name="prod", env=env)
 
 # Development stack
 CdkStack(app, "FoamerDev", env_name="dev", env=env)

@@ -14,5 +14,14 @@
   "display": {
       "page_ms": 10000,
       "message_interval_ms": 30000
+  },
+  "aws_iot": {
+      "enabled": false,
+      "endpoint": "xxxxxxxxxxxxx-ats.iot.us-east-1.amazonaws.com",
+      "thing_name": "foamer-display-001",
+      "log_topic": "device/foamer-display-001/logs",
+      "cert_pem": "-----BEGIN CERTIFICATE-----\nPaste device certificate here\n-----END CERTIFICATE-----",
+      "private_key": "-----BEGIN RSA PRIVATE KEY-----\nPaste private key here\n-----END RSA PRIVATE KEY-----",
+      "root_ca": "-----BEGIN CERTIFICATE-----\nPaste Amazon Root CA 1 here\n-----END CERTIFICATE-----"
   }
 }
