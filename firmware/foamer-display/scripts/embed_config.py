@@ -15,6 +15,7 @@ from PIL import Image
 log = partial(print, file=sys.stderr)
 
 profile = os.environ.get("CONFIG_PROFILE", "dev")
+device_serial = os.environ.get("DEVICE_SERIAL")  # Set by Makefile at upload time
 
 # Get project directory - __file__ is not available when run by PlatformIO
 try:
@@ -43,6 +44,43 @@ if not config_file.is_file():
 
 with config_file.open("r") as f:
     config_data = json.load(f)
+
+# If DEVICE_SERIAL is set, merge device-specific config
+if device_serial:
+    log(f"device serial: {device_serial}")
+    devices_dir = project_dir.parent / "devices"
+    device_dir = devices_dir / device_serial
+    device_json = device_dir / "device.json"
+
+    if device_dir.is_dir() and device_json.is_file():
+        log(f"loading device config: {device_json}")
+
+        # Load device config
+        with device_json.open("r") as f:
+            device_config = json.load(f)
+
+        # Load certificate files
+        cert_pem = (device_dir / "cert.pem").read_text()
+        private_key = (device_dir / "private_key.pem").read_text()
+        root_ca = (device_dir / "root_ca.pem").read_text()
+
+        # Merge device config into aws_iot section
+        if "aws_iot" not in config_data:
+            config_data["aws_iot"] = {}
+
+        config_data["aws_iot"]["enabled"] = True
+        config_data["aws_iot"]["thing_name"] = device_config["thing_name"]
+        config_data["aws_iot"]["log_topic"] = device_config["log_topic"]
+        config_data["aws_iot"]["cert_pem"] = cert_pem
+        config_data["aws_iot"]["private_key"] = private_key
+        config_data["aws_iot"]["root_ca"] = root_ca
+
+        log(f"  thing_name: {device_config['thing_name']}")
+        log(f"  log_topic: {device_config['log_topic']}")
+        log(f"  certificates loaded from {device_dir}")
+    else:
+        log(f"WARNING: DEVICE_SERIAL set but device config not found: {device_dir}")
+        log(f"Run: make provision to create device configuration")
 
 # re-serialize to ensure valid JSON
 config_json = json.dumps(config_data)

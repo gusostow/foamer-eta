@@ -149,8 +149,7 @@ impl Client {
                     let mut rng = rand::thread_rng();
                     messages.choose(&mut rng).map(|m| m.content.clone())
                 }
-            })
-            .and_then(|x| Some(lines(x, MAX_MESSAGE_WIDTH)));
+            }).map(|x| lines(x, MAX_MESSAGE_WIDTH));
 
         Ok(Departures { routes, message })
     }

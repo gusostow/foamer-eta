@@ -9,7 +9,7 @@ PIO = platformio
 PROFILE ?= dev
 export CONFIG_PROFILE = $(PROFILE)
 
-.PHONY: compile upload monitor clean compiledb embed
+.PHONY: compile upload monitor clean compiledb embed provision
 
 embed:
 	@echo "embedding config and splash for profile: $(PROFILE)"
@@ -19,14 +19,34 @@ compile: embed
 	@echo "building with profile: $(PROFILE)"
 	cd $(PROJECT_DIR) && $(PIO) run
 
-upload: embed
+# Provision device if needed (checks for cached config)
+provision:
+	@echo "checking device provisioning..."
+	@SERIAL=$$(cd $(PROJECT_DIR) && uv run python scripts/get-device-serial.py); \
+	if [ -z "$$SERIAL" ]; then \
+		echo "ERROR: Failed to read device USB serial number"; \
+		exit 1; \
+	fi; \
+	echo "device serial: $$SERIAL"; \
+	DEVICE_DIR="firmware/devices/$$SERIAL"; \
+	if [ ! -d "$$DEVICE_DIR" ]; then \
+		echo "device not provisioned, creating AWS IoT resources..."; \
+		cd $(PROJECT_DIR) && uv run python scripts/provision-device.py --serial "$$SERIAL" --profile "$(PROFILE)"; \
+	else \
+		echo "device already provisioned: $$DEVICE_DIR"; \
+	fi; \
+	export DEVICE_SERIAL=$$SERIAL
+
+upload: provision embed
 	@echo "building with profile: $(PROFILE)"
+	@SERIAL=$$(cd $(PROJECT_DIR) && uv run python scripts/get-device-serial.py); \
+	export DEVICE_SERIAL=$$SERIAL; \
 	cd $(PROJECT_DIR) && $(PIO) run -t upload
 
 monitor:
 	cd $(PROJECT_DIR) && $(PIO) device monitor
 
-upload-monitor: embed
+upload-monitor: provision embed
 	@echo "building with profile: $(PROFILE)"
 	cd $(PROJECT_DIR) && $(PIO) run -t upload -t monitor
 

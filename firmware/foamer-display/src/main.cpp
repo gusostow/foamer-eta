@@ -3,8 +3,10 @@
 #include "display.h"
 #include "network.h"
 #include "splash.h"
+#include "aws_iot.h"
 #include <Adafruit_GFX.h> // Adafruit graphics library (class-based)
 #include <ArduinoJson.h>  // JSON parsing library
+#include <time.h>         // For NTP time sync
 
 /* Display configuration constants */
 const char *ERROR_COLOR = "D70000";
@@ -269,14 +271,67 @@ void setup(void) {
   display->println("");
   display->setTextColor(hexToColor565(TRANSIT_COLOR));
   display->println(Config::getWifiSSID());
-  delay(5000);
+  delay(3000);
+
+  // Sync time with NTP (required for TLS certificate validation)
   display->fillScreen(0);
   display->setCursor(0, 0);
+  display->setTextColor(display->color565(255, 255, 255));
+  display->println("Syncing time...");
 
+  configTime(-6 * 3600, 0, "pool.ntp.org", "time.nist.gov");
+  time_t now = 0;
+  struct tm timeinfo;
+  int retry = 0;
+  while (now < 1000000000 && retry < 20) {
+    time(&now);
+    delay(500);
+    retry++;
+  }
+
+  if (now < 1000000000) {
+    display->setTextColor(hexToColor565(ERROR_COLOR));
+    display->println("NTP sync failed!");
+    delay(3000);
+  } else {
+    localtime_r(&now, &timeinfo);
+    display->setTextColor(hexToColor565(TRANSIT_COLOR));
+    display->print("Time synced:");
+    display->println(asctime(&timeinfo));
+    Serial.print("Current time: ");
+    Serial.println(asctime(&timeinfo));
+  }
+  delay(2000);
+
+  // Initialize AWS IoT if enabled
+  if (Config::isAwsIotEnabled()) {
+    display->fillScreen(0);
+    display->setCursor(0, 0);
+    display->setTextColor(display->color565(255, 255, 255));
+    display->println("Connecting to");
+    display->println("AWS IoT...");
+
+    if (setupAwsIot()) {
+      display->setTextColor(hexToColor565(TRANSIT_COLOR));
+      display->println("");
+      display->println("Connected!");
+    } else {
+      display->setTextColor(hexToColor565(ERROR_COLOR));
+      display->println("");
+      display->println("Failed");
+    }
+    delay(3000);
+  }
+
+  display->fillScreen(0);
+  display->setCursor(0, 0);
   display->setTextWrap(false);
 }
 
 void loop() {
+  // Maintain AWS IoT connection
+  maintainAwsIotConnection();
+
   // Fetch departures from API only at start of cycle
   if (currentRouteIndex == 0) {
     Serial.println("Fetching fresh data from API...");

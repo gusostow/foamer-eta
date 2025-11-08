@@ -14,5 +14,9 @@
   "display": {
       "page_ms": 10000,
       "message_interval_ms": 30000
+  },
+  "aws_iot": {
+      "enabled": false,
+      "endpoint": "xxxxxxxxxxxxx-ats.iot.us-east-1.amazonaws.com"
   }
 }

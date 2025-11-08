@@ -15,9 +15,9 @@ pub fn lines(s: String, max_width: usize) -> Vec<String> {
     for word in s.split_whitespace() {
         let word_len = word.chars().count();
         if word_len <= max_width {
-            if current.chars().count() + word_len + 1 <= max_width {
+            if current.chars().count() + word_len < max_width {
                 if current.chars().count() != 0 {
-                    current.push_str(" ");
+                    current.push(' ');
                 }
                 current.push_str(word);
             } else {
@@ -29,7 +29,7 @@ pub fn lines(s: String, max_width: usize) -> Vec<String> {
                 lines.push(current);
                 current = String::new();
             } else if !current.is_empty() {
-                current.push_str(" ");
+                current.push(' ');
             }
             let mut start: usize = 0;
             let mut stop: usize = max_width - current.chars().count();
@@ -47,7 +47,7 @@ pub fn lines(s: String, max_width: usize) -> Vec<String> {
     if !current.is_empty() {
         lines.push(current)
     }
-    return lines;
+    lines
 }
 
 #[cfg(test)]

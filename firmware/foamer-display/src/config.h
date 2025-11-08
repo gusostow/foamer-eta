@@ -25,6 +25,15 @@ public:
   static int getPageIntervalMs();
   static int getMessageIntervalMs();
 
+  // AWS IoT settings
+  static bool isAwsIotEnabled();
+  static const char *getAwsIotEndpoint();
+  static const char *getAwsIotThingName();
+  static const char *getAwsIotLogTopic();
+  static const char *getAwsIotCertPem();
+  static const char *getAwsIotPrivateKey();
+  static const char *getAwsIotRootCa();
+
 private:
   static JsonDocument doc;
   static bool initialized;

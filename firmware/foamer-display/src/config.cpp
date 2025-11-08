@@ -93,3 +93,61 @@ int Config::getMessageIntervalMs() {
   }
   return doc["display"]["message_interval_ms"].as<int>();
 }
+
+bool Config::isAwsIotEnabled() {
+  return doc["aws_iot"]["enabled"].as<bool>();
+}
+
+const char *Config::getAwsIotEndpoint() {
+  const char *value = doc["aws_iot"]["endpoint"];
+  if (!value && isAwsIotEnabled()) {
+    Serial.println("FATAL: Missing aws_iot.endpoint in config");
+    for (;;);
+  }
+  return value;
+}
+
+const char *Config::getAwsIotThingName() {
+  const char *value = doc["aws_iot"]["thing_name"];
+  if (!value && isAwsIotEnabled()) {
+    Serial.println("FATAL: Missing aws_iot.thing_name in config");
+    for (;;);
+  }
+  return value;
+}
+
+const char *Config::getAwsIotLogTopic() {
+  const char *value = doc["aws_iot"]["log_topic"];
+  if (!value && isAwsIotEnabled()) {
+    Serial.println("FATAL: Missing aws_iot.log_topic in config");
+    for (;;);
+  }
+  return value;
+}
+
+const char *Config::getAwsIotCertPem() {
+  const char *value = doc["aws_iot"]["cert_pem"];
+  if (!value && isAwsIotEnabled()) {
+    Serial.println("FATAL: Missing aws_iot.cert_pem in config");
+    for (;;);
+  }
+  return value;
+}
+
+const char *Config::getAwsIotPrivateKey() {
+  const char *value = doc["aws_iot"]["private_key"];
+  if (!value && isAwsIotEnabled()) {
+    Serial.println("FATAL: Missing aws_iot.private_key in config");
+    for (;;);
+  }
+  return value;
+}
+
+const char *Config::getAwsIotRootCa() {
+  const char *value = doc["aws_iot"]["root_ca"];
+  if (!value && isAwsIotEnabled()) {
+    Serial.println("FATAL: Missing aws_iot.root_ca in config");
+    for (;;);
+  }
+  return value;
+}
