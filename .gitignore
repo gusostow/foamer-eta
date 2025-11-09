@@ -38,3 +38,4 @@ compile_commands.json
 
 # CDK
 cdk.context.json
+.direnv
