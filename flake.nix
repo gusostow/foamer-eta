@@ -10,19 +10,14 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-
-        # Python environment with build dependencies
-        pythonEnv = pkgs.python3.withPackages (ps: with ps; [
-          pillow
-          pyserial
-        ]);
       in
       {
         devShells.default = pkgs.mkShell {
           buildInputs = [
             # Firmware build tools
             pkgs.platformio
-            pythonEnv
+            pkgs.uv
+            pkgs.python3
             pkgs.jq
             pkgs.gnumake
           ];
