@@ -36,6 +36,71 @@
             mkdir -p $out/bin
             cp "$exe" $out/bin/esptool.exe
           '';
+        # microsoft/uf2 conversion tooling, pinned to a commit for reproducibility
+        uf2conv = pkgs.fetchurl {
+          url = "https://raw.githubusercontent.com/microsoft/uf2/f3f9f1ea052c32d7a15e2633b54ad582d8cc7809/utils/uf2conv.py";
+          hash = "sha256-rTa6LWH7LqNxgyJiOSCIKB7uR0xgnfQUKtvuTqPCDyY=";
+        };
+
+        uf2families = pkgs.fetchurl {
+          url = "https://raw.githubusercontent.com/microsoft/uf2/f3f9f1ea052c32d7a15e2633b54ad582d8cc7809/utils/uf2families.json";
+          hash = "sha256-VWZS8QWsj4F4f/riz5mYF7MO7kqatVNrjCQxVyi2jKw=";
+        };
+
+        # ESP32-S3 UF2 family magic, used by TinyUF2 to pick the write target
+        esp32s3Family = "0xc47e5767";
+
+        makeUf2 = pkgs.writeShellApplication {
+          name = "make-uf2";
+          runtimeInputs = [
+            pkgs.coreutils
+            pkgs.python3
+          ];
+
+          text = ''
+            set -euo pipefail
+
+            BUILD="firmware/foamer-display/.pio/build/adafruit_matrixportal_esp32s3"
+            app="$BUILD/firmware.bin"
+
+            if [ ! -f "$app" ]; then
+              echo "firmware.bin not found at $app"
+              echo "build first, e.g. 'make compile PROFILE=prod'"
+              exit 1
+            fi
+
+            output="$(pwd)/foamer.uf2"
+            instructions="$(pwd)/INSTRUCTIONS.txt"
+
+            work="$(mktemp -d)"
+            trap 'rm -rf "$work"' EXIT
+
+            # uf2conv.py reads uf2families.json from its own directory, so co-locate them
+            cp ${uf2conv} "$work/uf2conv.py"
+            cp ${uf2families} "$work/uf2families.json"
+
+            # -b 0x0: TinyUF2 treats this as the start of the OTA app partition
+            python3 "$work/uf2conv.py" \
+              "$app" \
+              -b 0x0 \
+              -f ${esp32s3Family} \
+              -o "$output"
+
+            cat > "$instructions" <<'EOF'
+            Flashing the Foamer (MatrixPortal S3) - drag and drop, no drivers needed:
+
+            1. Plug the board into your PC with a USB-C DATA cable (not charge-only).
+            2. Double-tap the RESET button. A USB drive named MATRXS3BOOT appears.
+               (If nothing shows up, double-tap RESET again - timing is the only trick.)
+            3. Drag foamer.uf2 onto the MATRXS3BOOT drive.
+            4. It copies, the board reboots into the firmware, and the drive disappears. Done.
+            EOF
+
+            echo "created $output"
+            echo "created $instructions"
+          '';
+        };
+
         makeWindowsFlasher = pkgs.writeShellApplication {
           name = "make-windows-flasher";
           runtimeInputs = [
@@ -131,6 +196,7 @@ EOF
         };
 
         packages.make-windows-flasher = makeWindowsFlasher;
+        packages.make-uf2 = makeUf2;
       }
     );
 }
