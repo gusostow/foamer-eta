@@ -1,6 +1,7 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 
+#include "net_timeouts.h"
 #include <HTTPClient.h>
 #include <WiFi.h>
 #include <WiFiClientSecure.h>
@@ -31,6 +32,9 @@ bool setupWiFi(const char *ssid, const char *password) {
 WiFiClientSecure *createSecureClient() {
   WiFiClientSecure *client = new WiFiClientSecure();
   client->setInsecure(); // Skip certificate verification for simplicity
+  // bound connect/handshake so a dropping firewall can't hang the fetch
+  client->setTimeout(NET_TCP_TIMEOUT_S);
+  client->setHandshakeTimeout(NET_TLS_HANDSHAKE_TIMEOUT_S);
   return client;
 }
 

@@ -2,6 +2,7 @@
 #define AWS_IOT_H
 
 #include "config.h"
+#include "net_timeouts.h"
 #include <Arduino.h>
 #include <ArduinoJson.h>
 #include <PubSubClient.h>
@@ -15,6 +16,10 @@ const char* LOG_ERROR = "ERROR";
 
 // Global MQTT client pointer (defined at bottom of file)
 extern PubSubClient *mqttClient;
+
+// true once the initial AWS IoT connect succeeds. best effort: if the first
+// attempt fails we give up for the session and never block the loop again
+static bool awsIotActive = false;
 
 // Initialize AWS IoT connection
 // Returns true if enabled and initialized successfully
@@ -92,9 +97,17 @@ bool setupAwsIot() {
   wifiClient.setCertificate(Config::getAwsIotCertPem());
   wifiClient.setPrivateKey(Config::getAwsIotPrivateKey());
 
+  // bound TCP connect + TLS handshake (defaults are 30s / 120s), otherwise a
+  // firewall that drops port 8883 hangs here for up to two minutes
+  wifiClient.setTimeout(NET_TCP_TIMEOUT_S);
+  wifiClient.setHandshakeTimeout(NET_TLS_HANDSHAKE_TIMEOUT_S);
+
   // Create MQTT client (static so it persists)
   static PubSubClient client(wifiClient);
   mqttClient = &client;
+
+  // bound the MQTT CONNACK read too
+  mqttClient->setSocketTimeout(NET_MQTT_SOCKET_TIMEOUT_S);
 
   // Configure MQTT broker
   const char *endpoint = Config::getAwsIotEndpoint();
@@ -110,21 +123,35 @@ bool setupAwsIot() {
   Serial.print("AWS IoT endpoint: ");
   Serial.println(endpoint);
 
-  // Try initial connection
+  // Try initial connection. best effort: if it fails now, give up for the
+  // session rather than blocking the display loop with retries later
   if (connectToAwsIot()) {
+    awsIotActive = true;
     return true;
   } else {
-    Serial.println("Initial AWS IoT connection failed, will retry...");
+    Serial.println("Initial AWS IoT connection failed, giving up for session");
+    awsIotActive = false;
     return false;
   }
 }
 
 bool maintainAwsIotConnection() {
-  if (!Config::isAwsIotEnabled() || !mqttClient) {
+  // give up entirely if the initial connect never succeeded (best effort)
+  if (!Config::isAwsIotEnabled() || !mqttClient || !awsIotActive) {
     return false;
   }
 
   if (!mqttClient->connected()) {
+    // throttle reconnects so an unreachable broker doesn't block the display
+    // loop on every pass (maintain is called every ~100ms)
+    static unsigned long lastReconnectAttemptMs = 0;
+    unsigned long nowMs = millis();
+    if (lastReconnectAttemptMs != 0 &&
+        (nowMs - lastReconnectAttemptMs) < AWS_IOT_RECONNECT_COOLDOWN_MS) {
+      return false;
+    }
+    lastReconnectAttemptMs = nowMs;
+
     log(LOG_WARN, "AWS IoT disconnected, reconnecting");
     if (!connectToAwsIot()) {
       return false;

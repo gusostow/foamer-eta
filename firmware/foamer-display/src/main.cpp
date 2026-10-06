@@ -35,6 +35,10 @@ uint16_t hexToColor565(const char *hex) {
 bool fetchDepartures(JsonDocument &doc) {
   HTTPClient http;
 
+  // bound connect + read so a dropping firewall can't hang the fetch
+  http.setConnectTimeout(NET_HTTP_TIMEOUT_MS);
+  http.setTimeout(NET_HTTP_TIMEOUT_MS);
+
   String url = String(Config::getApiUrl()) +
                "/departures?lat=" + String(Config::getGeoLat()) +
                "&lon=" + String(Config::getGeoLon());
