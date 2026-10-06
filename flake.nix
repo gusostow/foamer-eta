@@ -61,18 +61,7 @@
               -f ${esp32s3Family} \
               -o "$output"
 
-            cat > "$instructions" <<'EOF'
-            Flashing the Foamer (MatrixPortal S3) - drag and drop, no drivers needed:
-
-            1. Plug the board into your PC with a USB-C DATA cable (not charge-only).
-            2. Double-tap the RESET button. A USB drive named MATRXS3BOOT appears.
-               (If nothing shows up, double-tap RESET again - timing is the only trick.)
-            3. Drag foamer.uf2 onto the MATRXS3BOOT drive.
-            4. It copies, the board reboots into the firmware, and the drive disappears. Done.
-            EOF
-
             echo "created $output"
-            echo "created $instructions"
           '';
         };
       in
